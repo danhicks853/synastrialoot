@@ -1,0 +1,13 @@
+{
+  "Lua.diagnostics.globals": [
+    "LibStub",
+    "SynastriaLootFrame",
+    "DEFAULT_CHAT_FRAME",
+    "GameTooltip",
+    "CreateFrame",
+    "UIParent",
+    "IsShiftKeyDown",
+    "ChatEdit_ChooseBoxForSend",
+    "GetItemInfo"
+  ]
+}
