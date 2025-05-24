@@ -21,15 +21,11 @@ function Minimap:Create()
                     SynastriaLoot_MainFrame:Show()
                     SynastriaLoot_MainFrame:RefreshLoot()
                 end
-            elseif button == "RightButton" then
-                if _G.SynastriaLoot_ZoneBrowser and _G.SynastriaLoot_ZoneBrowser.Show then
-                    _G.SynastriaLoot_ZoneBrowser:Show()
-                end
             end
         end,
         OnTooltipShow = function(tooltip)
             tooltip:AddLine(ADDON_NAME)
-            tooltip:AddLine("Left-click to open/close")
+            tooltip:AddLine("Left-click to open/close the loot frame.")
         end,
     })
     dbicon:Register(MINIMAP_BUTTON_NAME, dataobj, { hide = false })

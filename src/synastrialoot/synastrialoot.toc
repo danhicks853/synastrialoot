@@ -34,4 +34,3 @@ debug.lua
 main_frame.lua
 row.lua
 loottables.lua
-zone_browser.lua
