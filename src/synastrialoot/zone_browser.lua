@@ -78,8 +78,8 @@ function ZoneBrowser:Populate()
     if not content.rows then content.rows = {} end
     self:ClearRows()
 
-    -- Defensive: Check SLG and SLG.ZoneItems
-    if not SLG or not SLG.ZoneItems then
+    -- Defensive: Check Synastria_LootTableRegister and Synastria_Data
+    if not Synastria_LootTableRegister or not Synastria_LootTableRegister["Instances"] or not Synastria_Data then
         if content.noSLGMsg then
             content.noSLGMsg:Show()
         else
@@ -98,10 +98,9 @@ function ZoneBrowser:Populate()
     local zoneStats = {}
     local pending = 0
     local zoneNames = {}
-    for zoneName, zoneData in pairs(SLG.ZoneItems or {}) do
-        if type(zoneData) == "table" and zoneData.__order then
-            table.insert(zoneNames, zoneName)
-        end
+    -- Use Synastria_LootTableRegister["Instances"] for zone names
+    for zoneName, _ in pairs(Synastria_LootTableRegister and Synastria_LootTableRegister["Instances"] or {}) do
+        table.insert(zoneNames, zoneName)
     end
     pending = #zoneNames
     if pending == 0 then return end
@@ -181,34 +180,35 @@ end
 
 -- Returns: zoneEligible, zoneAttuned
 function ZoneBrowser:GetZoneItems(zoneName, callback)
-    if not SLG or not SLG.ZoneItems or not SLG.ZoneItems[zoneName] then callback(0,0); return end
-    local zoneData = SLG.ZoneItems[zoneName]
-    local allItemIDs = {}
-    for _, cat in ipairs(zoneData.__order or {}) do
-        local itemList = zoneData[cat]
-        if type(itemList) == "table" then
-            for _, itemID in ipairs(itemList) do
-                table.insert(allItemIDs, itemID)
-            end
-        end
-    end
-    if #allItemIDs == 0 then callback(0,0); return end
-    local zoneEligible, zoneAttuned = 0, 0
-    local pending = #allItemIDs
-    for _, itemID in ipairs(allItemIDs) do
-        GetItemInfoObject(itemID, function(item)
-            if item and item.CanAttune == 1 then
-                zoneEligible = zoneEligible + 1
-                if item.AttuneProgress and item.AttuneProgress >= 100 then
-                    zoneAttuned = zoneAttuned + 1
+    -- Use GetZoneLootData to get bosses/items for this zone
+    GetZoneLootData(function(zoneData)
+        if not zoneData or not zoneData.bosses then callback(0, 0); return end
+        local allItemIDs = {}
+        for _, boss in ipairs(zoneData.bosses) do
+            if boss.items then
+                for _, itemID in ipairs(boss.items) do
+                    table.insert(allItemIDs, itemID)
                 end
             end
-            pending = pending - 1
-            if pending == 0 then
-                callback(zoneEligible, zoneAttuned)
-            end
-        end)
-    end
+        end
+        if #allItemIDs == 0 then callback(0, 0); return end
+        local zoneEligible, zoneAttuned = 0, 0
+        local pending = #allItemIDs
+        for _, itemID in ipairs(allItemIDs) do
+            GetItemInfoObject(itemID, function(item)
+                if item and item.CanAttune == 1 then
+                    zoneEligible = zoneEligible + 1
+                    if item.AttuneProgress and item.AttuneProgress >= 100 then
+                        zoneAttuned = zoneAttuned + 1
+                    end
+                end
+                pending = pending - 1
+                if pending == 0 then
+                    callback(zoneEligible, zoneAttuned)
+                end
+            end)
+        end
+    end, zoneName)
 end
 
 function ZoneBrowser:GetZoneStats(zoneName, callback)

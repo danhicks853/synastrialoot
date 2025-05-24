@@ -31,25 +31,6 @@ local function GetTrackedItemSet()
     return tracked
 end
 
--- Handler: Called when a tracked item is looted
-local function OnTrackedItemLooted(itemID, link)
-    -- Mark as looted in your data/UI, e.g., update row status
-    if _G.SynastriaLoot_CurrentLootTable then
-        for _, row in ipairs(_G.SynastriaLoot_CurrentLootTable) do
-            if row.itemID == itemID then
-                row.status = "looted"
-            end
-        end
-    end
-    SynastriaLoot_Print("Looted tracked item: " .. (link or ("itemID " .. tostring(itemID))))
-    if SynastriaLoot_MainFrame and SynastriaLoot_MainFrame.frame and SynastriaLoot_MainFrame.frame:IsShown() then
-        SynastriaLoot_MainFrame:RefreshLoot()
-    end
-end
-
-
-
-
 ----------------------
 --- Util Functions ---
 ----------------------
