@@ -26,7 +26,7 @@ function SynastriaLoot_HideZoneBrowser()
 end
 
 function ZoneBrowser:CreateFrame()
-    browserFrame = CreateFrame("Frame", "SynastriaLoot_ZoneBrowserFrame", UIParent, "BackdropTemplate")
+    browserFrame = CreateFrame("Frame", "SynastriaLoot_ZoneBrowserFrame", UIParent)
     browserFrame:SetSize(ZONE_BROWSER_WIDTH, ZONE_BROWSER_HEIGHT)
     browserFrame:SetPoint("CENTER")
     browserFrame:SetFrameStrata("DIALOG")
