@@ -96,93 +96,106 @@ function ZoneBrowser:Populate()
 
     -- Gather zone data asynchronously
     local zoneStats = {}
-    local pending = 0
     local zoneNames = {}
     -- Use Synastria_LootTableRegister["Instances"] for zone names
     for zoneName, _ in pairs(Synastria_LootTableRegister and Synastria_LootTableRegister["Instances"] or {}) do
         table.insert(zoneNames, zoneName)
     end
-    pending = #zoneNames
-    if pending == 0 then return end
-    for _, zoneName in ipairs(zoneNames) do
+    if #zoneNames == 0 then return end
+    -- Show loading message
+    if not content.loadingMsg then
+        content.loadingMsg = content:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
+        content.loadingMsg:SetPoint("TOP", 0, -40)
+        content.loadingMsg:SetText("Loading zone statistics...")
+        content.loadingMsg:SetTextColor(1, 0.8, 0.2)
+    end
+    content.loadingMsg:Show()
+    ZoneBrowser:ClearRows()
+    local i = 1
+    local function processNextZone()
+        if i > #zoneNames then
+            -- All done, sort and update UI
+            table.sort(zoneStats, function(a, b) return a.percent > b.percent end)
+            local y = -ROW_PADDING
+            for idx, stats in ipairs(zoneStats) do
+                local row = content.rows[idx]
+                if not row then
+                    row = CreateFrame("Frame", nil, content)
+                    row:SetSize(ZONE_BROWSER_WIDTH-48, ROW_HEIGHT)
+                    row.bg = row:CreateTexture(nil, "BACKGROUND")
+                    row.bg:SetAllPoints()
+                    row.bg:SetColorTexture(0.2, 0.2, 0.3, (idx%2==0) and 0.3 or 0.15)
+                    row.zoneName = row:CreateFontString(nil, "OVERLAY", FONT)
+                    row.zoneName:SetPoint("LEFT", 8, 0)
+                    row.zoneName:SetWidth(170)
+                    row.zoneName:SetJustifyH("LEFT")
+                    row.progressBar = CreateFrame("StatusBar", nil, row)
+                    row.progressBar:SetPoint("LEFT", row.zoneName, "RIGHT", 10, 0)
+                    row.progressBar:SetSize(120, 18)
+                    row.progressBar:SetStatusBarTexture("Interface/TargetingFrame/UI-StatusBar")
+                    row.progressBar:GetStatusBarTexture():SetHorizTile(false)
+                    row.progressBar:SetMinMaxValues(0, 100)
+                    row.progressBar:SetValue(0)
+                    row.percentText = row:CreateFontString(nil, "OVERLAY", FONT)
+                    row.percentText:SetPoint("LEFT", row.progressBar, "RIGHT", 10, 0)
+                    row.percentText:SetWidth(60)
+                    row.percentText:SetJustifyH("LEFT")
+                    row.countText = row:CreateFontString(nil, "OVERLAY", FONT)
+                    row.countText:SetPoint("LEFT", row.percentText, "RIGHT", 10, 0)
+                    row.countText:SetWidth(80)
+                    row.countText:SetJustifyH("LEFT")
+                    row:SetScript("OnEnter", function(self)
+                        GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+                        GameTooltip:AddLine(stats.zoneName)
+                        GameTooltip:AddLine("Attuned: "..stats.zoneAttuned.."/"..stats.zoneEligible)
+                        GameTooltip:AddLine("Click to view details (future)", 0.7, 0.7, 0.7)
+                        GameTooltip:Show()
+                    end)
+                    row:SetScript("OnLeave", function() GameTooltip:Hide() end)
+                    row:SetScript("OnMouseUp", function() 
+                        -- Placeholder for future zone detail popup
+                    end)
+                    content.rows[idx] = row
+                end
+                row:Show()
+                row:SetPoint("TOPLEFT", 0, y)
+                row.zoneName:SetText(stats.zoneName)
+                row.progressBar:SetValue(stats.percent)
+                row.percentText:SetText(stats.percent.."%")
+                row.countText:SetText(stats.zoneAttuned.."/"..stats.zoneEligible)
+                if stats.percent == 100 then
+                    row.progressBar:SetStatusBarColor(0.2, 0.8, 0.2)
+                elseif stats.percent >= 50 then
+                    row.progressBar:SetStatusBarColor(0.8, 0.8, 0.2)
+                else
+                    row.progressBar:SetStatusBarColor(0.8, 0.3, 0.2)
+                end
+                y = y - (ROW_HEIGHT + ROW_PADDING)
+            end
+            content:SetHeight(-y + ROW_PADDING)
+            if content.loadingMsg then content.loadingMsg:Hide() end
+            return
+        end
+        local zoneName = zoneNames[i]
+        print("[ZoneBrowser] Processing zone", i, zoneName)
         ZoneBrowser:GetZoneStats(zoneName, function(stats)
             if stats then
                 table.insert(zoneStats, stats)
             end
-            pending = pending - 1
-            if pending == 0 then
-                -- Sort by attunement percent descending
-                table.sort(zoneStats, function(a, b) return a.percent > b.percent end)
-                -- Create/update rows
-                local y = -ROW_PADDING
-                for i, stats in ipairs(zoneStats) do
-                    local row = content.rows[i]
-                    if not row then
-                        row = CreateFrame("Frame", nil, content)
-                        row:SetSize(ZONE_BROWSER_WIDTH-48, ROW_HEIGHT)
-                        row.bg = row:CreateTexture(nil, "BACKGROUND")
-                        row.bg:SetAllPoints()
-                        row.bg:SetColorTexture(0.2, 0.2, 0.3, (i%2==0) and 0.3 or 0.15)
-                        row.zoneName = row:CreateFontString(nil, "OVERLAY", FONT)
-                        row.zoneName:SetPoint("LEFT", 8, 0)
-                        row.zoneName:SetWidth(170)
-                        row.zoneName:SetJustifyH("LEFT")
-                        row.progressBar = CreateFrame("StatusBar", nil, row)
-                        row.progressBar:SetPoint("LEFT", row.zoneName, "RIGHT", 10, 0)
-                        row.progressBar:SetSize(120, 18)
-                        row.progressBar:SetStatusBarTexture("Interface/TargetingFrame/UI-StatusBar")
-                        row.progressBar:GetStatusBarTexture():SetHorizTile(false)
-                        row.progressBar:SetMinMaxValues(0, 100)
-                        row.progressBar:SetValue(0)
-                        row.percentText = row:CreateFontString(nil, "OVERLAY", FONT)
-                        row.percentText:SetPoint("LEFT", row.progressBar, "RIGHT", 10, 0)
-                        row.percentText:SetWidth(60)
-                        row.percentText:SetJustifyH("LEFT")
-                        row.countText = row:CreateFontString(nil, "OVERLAY", FONT)
-                        row.countText:SetPoint("LEFT", row.percentText, "RIGHT", 10, 0)
-                        row.countText:SetWidth(80)
-                        row.countText:SetJustifyH("LEFT")
-                        row:SetScript("OnEnter", function(self)
-                            GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-                            GameTooltip:AddLine(stats.zoneName)
-                            GameTooltip:AddLine("Attuned: "..stats.zoneAttuned.."/"..stats.zoneEligible)
-                            GameTooltip:AddLine("Click to view details (future)", 0.7, 0.7, 0.7)
-                            GameTooltip:Show()
-                        end)
-                        row:SetScript("OnLeave", function() GameTooltip:Hide() end)
-                        row:SetScript("OnMouseUp", function() 
-                            -- Placeholder for future zone detail popup
-                        end)
-                        content.rows[i] = row
-                    end
-                    row:Show()
-                    row:SetPoint("TOPLEFT", 0, y)
-                    row.zoneName:SetText(stats.zoneName)
-                    row.progressBar:SetValue(stats.percent)
-                    row.percentText:SetText(stats.percent.."%")
-                    row.countText:SetText(stats.zoneAttuned.."/"..stats.zoneEligible)
-                    -- Color progress bar
-                    if stats.percent == 100 then
-                        row.progressBar:SetStatusBarColor(0.2, 0.8, 0.2)
-                    elseif stats.percent >= 50 then
-                        row.progressBar:SetStatusBarColor(0.8, 0.8, 0.2)
-                    else
-                        row.progressBar:SetStatusBarColor(0.8, 0.3, 0.2)
-                    end
-                    y = y - (ROW_HEIGHT + ROW_PADDING)
-                end
-                -- Set content height for scrolling
-                content:SetHeight(-y + ROW_PADDING)
-            end
+            i = i + 1
+            C_Timer.After(0, processNextZone)
         end)
     end
+    processNextZone()
+
 end
 
 -- Returns: zoneEligible, zoneAttuned
 function ZoneBrowser:GetZoneItems(zoneName, callback)
+    print("[ZoneBrowser:GetZoneItems] Start for zone:", zoneName)
     -- Use GetZoneLootData to get bosses/items for this zone
     GetZoneLootData(function(zoneData)
-        if not zoneData or not zoneData.bosses then callback(0, 0); return end
+        if not zoneData or not zoneData.bosses then print("[ZoneBrowser:GetZoneItems] No data for", zoneName); callback(0, 0); return end
         local allItemIDs = {}
         for _, boss in ipairs(zoneData.bosses) do
             if boss.items then
@@ -191,11 +204,13 @@ function ZoneBrowser:GetZoneItems(zoneName, callback)
                 end
             end
         end
+        print("[ZoneBrowser:GetZoneItems] ", zoneName, "total items:", #allItemIDs)
         if #allItemIDs == 0 then callback(0, 0); return end
         local zoneEligible, zoneAttuned = 0, 0
         local pending = #allItemIDs
         for _, itemID in ipairs(allItemIDs) do
             GetItemInfoObject(itemID, function(item)
+                print("[ZoneBrowser:GetZoneItems] Processing item", itemID, item and item.CanAttune, item and item.AttuneProgress)
                 if item and item.CanAttune == 1 then
                     zoneEligible = zoneEligible + 1
                     if item.AttuneProgress and item.AttuneProgress >= 100 then
@@ -204,6 +219,7 @@ function ZoneBrowser:GetZoneItems(zoneName, callback)
                 end
                 pending = pending - 1
                 if pending == 0 then
+                    print("[ZoneBrowser:GetZoneItems] Done for", zoneName, "Eligible:", zoneEligible, "Attuned:", zoneAttuned)
                     callback(zoneEligible, zoneAttuned)
                 end
             end)
