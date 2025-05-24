@@ -109,55 +109,25 @@ function ZoneBrowser:Populate()
             btn:SetSize(ZONE_BROWSER_WIDTH-48, ROW_HEIGHT)
             btn:SetScript("OnClick", function(self)
                 -- Placeholder for future zone detail popup
-            end
-        end
-        print("[ZoneBrowser:GetZoneItems] ", zoneName, "total items:", #allItemIDs)
-        if #allItemIDs == 0 then callback(0, 0); return end
-        local zoneEligible, zoneAttuned = 0, 0
-        local pending = #allItemIDs
-        for _, itemID in ipairs(allItemIDs) do
-            GetItemInfoObject(itemID, function(item)
-                print("[ZoneBrowser:GetZoneItems] Processing item", itemID, item and item.CanAttune, item and item.AttuneProgress)
-                if item and item.CanAttune == 1 then
-                    zoneEligible = zoneEligible + 1
-                    if item.AttuneProgress and item.AttuneProgress >= 100 then
-                        zoneAttuned = zoneAttuned + 1
-                    end
-                else
-                    if item then
-                        print("[ZoneBrowser:GetZoneItems] Unattunable or unknown item:", itemID, "table:", (item and (type(item) == "table") and table.concat({"Name:", item.Name, "Link:", item.ItemLink, "Type:", item.Type, "CanAttune:", tostring(item.CanAttune), "AttuneProgress:", tostring(item.AttuneProgress)}, ", ") or tostring(item)))
-                    end
-                end
-                pending = pending - 1
-                if pending == 0 then
-                    print("[ZoneBrowser:GetZoneItems] Done for", zoneName, "Eligible:", zoneEligible, "Attuned:", zoneAttuned)
-                    callback(zoneEligible, zoneAttuned)
-                end
             end)
         end
-    end, zoneName)
-end
-
-function ZoneBrowser:GetZoneStats(zoneName, callback)
-    self:GetZoneItems(zoneName, function(zoneEligible, zoneAttuned)
-        if not zoneEligible or zoneEligible == 0 then callback(nil); return end
-        local percent = math.floor(100 * (zoneAttuned or 0) / math.max(zoneEligible, 1))
-        callback({
-            zoneName = zoneName,
-            zoneAttuned = zoneAttuned or 0,
-            zoneEligible = zoneEligible or 0,
-            percent = percent,
-        })
-    end)
+        btn:SetText(zoneName)
+        btn:SetPoint("TOPLEFT", 0, y)
+        btn:Show()
+        content.rows[i] = btn
+        y = y - ROW_HEIGHT - ROW_PADDING
+    end
 end
 
 -- Optional: Hide browser on ESC
 local orig_Escape = _G["StaticPopup_EscapePressed"]
-hooksecurefunc("StaticPopup_EscapePressed", function()
-    if browserFrame and browserFrame:IsShown() then
-        browserFrame:Hide()
-    end
-end)
+if type(hooksecurefunc) == "function" then
+    hooksecurefunc("StaticPopup_EscapePressed", function()
+        if browserFrame and browserFrame:IsShown() then
+            browserFrame:Hide()
+        end
+    end)
+end
 
 -- Optional: Expose to global
 _G.SynastriaLoot_ShowZoneBrowser = SynastriaLoot_ShowZoneBrowser
