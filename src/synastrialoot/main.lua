@@ -36,14 +36,9 @@ end
 ----------------------
 function DumpTable(tbl, indent)
     indent = indent or 0
-    local indentStr = string.rep("  ", indent)
     for k, v in pairs(tbl) do
         if type(v) == "table" then
-            DEFAULT_CHAT_FRAME:AddMessage(indentStr .. tostring(k) .. " = {")
             DumpTable(v, indent + 1)
-            DEFAULT_CHAT_FRAME:AddMessage(indentStr .. "}")
-        else
-            DEFAULT_CHAT_FRAME:AddMessage(indentStr .. tostring(k) .. " = " .. tostring(v))
         end
     end
 end
@@ -296,8 +291,6 @@ end
 function BuildZoneLootTable(callback)
     GetZoneLootData(function(data)
         if not data or not data.bosses then
-            local zoneName = data and data.zoneText or "Unknown"
-            SynastriaLoot_Print("Zone Not Yet Implemented: " .. zoneName)
             callback(nil)
             return
         end
@@ -603,7 +596,6 @@ RegisterEvent("CHAT_MSG_LOOT", function(msg)
         -- Mark as looted in persistent table
         _G.SynastriaLoot_LootedItemIDs = _G.SynastriaLoot_LootedItemIDs or {}
         _G.SynastriaLoot_LootedItemIDs[itemID] = true
-        SynastriaLoot_Print("Looted tracked item: " .. (link or ("itemID " .. tostring(itemID))))
         if SynastriaLoot_MainFrame and SynastriaLoot_MainFrame.frame and SynastriaLoot_MainFrame.frame:IsShown() then
             SynastriaLoot_MainFrame:RefreshLoot()
         end
@@ -623,7 +615,6 @@ RegisterEvent("PLAYER_EQUIPMENT_CHANGED", function(slot, hasItem)
                 end
             end
         end
-        SynastriaLoot_Print("Equipped tracked item: " .. ("itemID " .. tostring(itemID)))
         if SynastriaLoot_MainFrame and SynastriaLoot_MainFrame.frame and SynastriaLoot_MainFrame.frame:IsShown() then
             SynastriaLoot_MainFrame:RefreshLoot()
         end
