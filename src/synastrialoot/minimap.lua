@@ -21,6 +21,10 @@ function Minimap:Create()
                     SynastriaLoot_MainFrame:Show()
                     SynastriaLoot_MainFrame:RefreshLoot()
                 end
+            elseif button == "RightButton" then
+                if _G.SynastriaLoot_ZoneBrowser and _G.SynastriaLoot_ZoneBrowser.Show then
+                    _G.SynastriaLoot_ZoneBrowser:Show()
+                end
             end
         end,
         OnTooltipShow = function(tooltip)

@@ -18,7 +18,7 @@ eventFrame:SetScript("OnEvent", function(self, event, ...)
     end
 end)
 
-local Items = {}
+Items = Items or {}
 
 -- Helper: Build a set of tracked itemIDs from global tracked list
 local function GetTrackedItemSet()
@@ -30,25 +30,6 @@ local function GetTrackedItemSet()
     end
     return tracked
 end
-
--- Handler: Called when a tracked item is looted
-local function OnTrackedItemLooted(itemID, link)
-    -- Mark as looted in your data/UI, e.g., update row status
-    if _G.SynastriaLoot_CurrentLootTable then
-        for _, row in ipairs(_G.SynastriaLoot_CurrentLootTable) do
-            if row.itemID == itemID then
-                row.status = "looted"
-            end
-        end
-    end
-    SynastriaLoot_Print("Looted tracked item: " .. (link or ("itemID " .. tostring(itemID))))
-    if SynastriaLoot_MainFrame and SynastriaLoot_MainFrame.frame and SynastriaLoot_MainFrame.frame:IsShown() then
-        SynastriaLoot_MainFrame:RefreshLoot()
-    end
-end
-
-
-
 
 ----------------------
 --- Util Functions ---
@@ -469,13 +450,7 @@ function Filter(items, filterFn)
     end
     return result
 end
-function CacheTooltip(itemID)
-    if not SynastriaLoot_CacheTooltip then
-        SynastriaLoot_CacheTooltip = CreateFrame("GameTooltip", "SynastriaLoot_CacheTooltip", UIParent, "GameTooltipTemplate")
-        SynastriaLoot_CacheTooltip:SetOwner(UIParent, "ANCHOR_NONE")
-    end
-    SynastriaLoot_CacheTooltip:SetHyperlink("item:" .. tostring(itemID))
-end
+
 function GetItemAttuneStats(itemID, itemLink)
     local canAttuneResult = (type(CanAttuneItemHelper) == "function") and CanAttuneItemHelper(itemID) or nil
     local canAttune = type(canAttuneResult) == "table" and canAttuneResult[1] or canAttuneResult
@@ -489,7 +464,9 @@ function GetItemAttuneStats(itemID, itemLink)
 end
 local _eventFrame, _pending
 function GetItemInfoObject(itemID, callback)
-    --CacheTooltip(itemID)
+    if not itemID or itemID == "" then
+    else
+    end
     local info = { GetItemInfoCustom(itemID) }
     if info[1] and info[1] ~= "" then
         info.Name              = info[1] or nil
@@ -542,6 +519,8 @@ function GetItemInfoObject(itemID, callback)
         GetItemInfo(itemID)
     end
 end
+Items = Items or {}
+Items.GetItemInfoObject = GetItemInfoObject
 ----------------------
 --- Event Handling ---
 ----------------------
