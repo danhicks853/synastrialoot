@@ -2,6 +2,8 @@
 
 SynastriaLoot is a World of Warcraft addon for Wrath of the Lich King (3.3.5) that provides advanced loot and attunement tracking for players. It is designed to help players and guilds efficiently manage loot tables, attunement requirements, and vendor lists across multiple zones and raid instances.
 
+Atlas loot is REQUIRED at this time.
+
 ## Features
 - Display loot tables for various zones, bosses, and vendors
 - Attunement tracking and eligibility filtering
