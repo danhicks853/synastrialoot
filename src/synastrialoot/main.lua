@@ -191,12 +191,9 @@ function GetZoneLootData(callback)
         zoneTextNorm = zoneTextNorm:gsub("^magister's terrace", "magisters' terrace")
         zoneTextNorm = zoneTextNorm:gsub("^the escape from durnholde", "old hillsbrad foothills")
         zoneTextNorm = zoneTextNorm:gsub("^violet hold", "the violet hold")
+        if zoneprops.Type == 'raid' then zoneTextNorm = zoneTextNorm:gsub("tempest keep", "the eye") end
         if string.find(diff, "Mythic") then
             zoneTextNorm = zoneTextNorm .. "+"
-        end
-        -- If instanceType is 'raid', normalize Tempest Keep to 'the eye' for zoneTextNorm
-        if zoneprops.Type == 'raid' then
-            zoneTextNorm = zoneTextNorm:gsub("tempest keep", "the eye")
         end
         -- Default: single-table lookup
         local firstExample = nil
