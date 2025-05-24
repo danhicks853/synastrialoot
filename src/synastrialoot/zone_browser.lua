@@ -108,7 +108,68 @@ function ZoneBrowser:Populate()
             btn = CreateFrame("Button", nil, content, "UIPanelButtonTemplate")
             btn:SetSize(ZONE_BROWSER_WIDTH-48, ROW_HEIGHT)
             btn:SetScript("OnClick", function(self)
-                -- Placeholder for future zone detail popup
+                -- On click, show remaining items to attune for this zone
+                if browserFrame.itemPopup and browserFrame.itemPopup:IsShown() then
+                    browserFrame.itemPopup:Hide()
+                end
+                -- Workaround: Set global for zone filtering, since BuildZoneLootTable only takes callback
+                _G.SynastriaLoot_ZoneBrowser_ZoneName = zoneName
+                BuildZoneLootTable(function(lootTable)
+                    if browserFrame.itemPopup then
+                        browserFrame.itemPopup:Hide()
+                    end
+                    local popup = browserFrame.itemPopup or CreateFrame("Frame", nil, browserFrame, "BackdropTemplate")
+                    popup:SetSize(340, 380)
+                    popup:SetPoint("CENTER", browserFrame, "CENTER")
+                    popup:SetFrameStrata("DIALOG")
+                    popup:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background", edgeFile = "Interface/Tooltips/UI-Tooltip-Border", tile = true, tileSize = 16, edgeSize = 16, insets = { left = 4, right = 4, top = 4, bottom = 4 }})
+                    popup:SetBackdropColor(0.1, 0.1, 0.2, 0.95)
+                    if not popup.title then
+                        popup.title = popup:CreateFontString(nil, "OVERLAY", "GameFontHighlightLarge")
+                        popup.title:SetPoint("TOP", 0, -10)
+                        popup.closeBtn = CreateFrame("Button", nil, popup, "UIPanelCloseButton")
+                        popup.closeBtn:SetPoint("TOPRIGHT", -4, -4)
+                        popup.closeBtn:SetScript("OnClick", function() popup:Hide() end)
+                        popup.scrollFrame = CreateFrame("ScrollFrame", nil, popup, "UIPanelScrollFrameTemplate")
+                        popup.scrollFrame:SetPoint("TOPLEFT", 12, -36)
+                        popup.scrollFrame:SetPoint("BOTTOMRIGHT", -28, 12)
+                        popup.content = CreateFrame("Frame", nil, popup)
+                        popup.content:SetSize(300, 1)
+                        popup.scrollFrame:SetScrollChild(popup.content)
+                    end
+                    popup.title:SetText("Items to Attune for "..zoneName)
+                    -- Remove previous
+                    for _, child in ipairs({popup.content:GetChildren()}) do child:Hide() end
+                    local y = 0
+                    local shown = 0
+                    for _, header in ipairs(lootTable or {}) do
+                        for _, row in ipairs(header.rows or {}) do
+                            local link = row.item and row.item.ItemLink or (row.item and row.item.Name) or ("ItemID: "..tostring(row.itemID))
+                            local fs = popup.content["item"..shown] or popup.content:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+                            fs:SetPoint("TOPLEFT", 0, -y)
+                            fs:SetWidth(280)
+                            fs:SetJustifyH("LEFT")
+                            fs:SetText(link)
+                            fs:Show()
+                            popup.content["item"..shown] = fs
+                            y = y + 18
+                            shown = shown + 1
+                        end
+                    end
+                    if shown == 0 then
+                        local fs = popup.content["noitems"] or popup.content:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+                        fs:SetPoint("TOPLEFT", 0, -y)
+                        fs:SetWidth(280)
+                        fs:SetJustifyH("LEFT")
+                        fs:SetText("All attuned! No items remain.")
+                        fs:Show()
+                        popup.content["noitems"] = fs
+                        y = y + 18
+                    end
+                    popup.content:SetHeight(y+10)
+                    popup:Show()
+                    browserFrame.itemPopup = popup
+                end)
             end)
         end
         btn:SetText(zoneName)
