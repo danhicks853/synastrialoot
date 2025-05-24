@@ -54,7 +54,7 @@ function ZoneBrowser:CreateFrame()
     closeBtn:SetScript("OnClick", SynastriaLoot_HideZoneBrowser)
 
     -- ScrollFrame
-    local scrollFrame = CreateFrame("ScrollFrame", nil, browserFrame, "UIPanelScrollFrameTemplate")
+    local scrollFrame = CreateFrame("ScrollFrame", "SynastriaLoot_ZoneBrowserScrollFrame", browserFrame, "UIPanelScrollFrameTemplate")
     scrollFrame:SetPoint("TOPLEFT", 16, -40)
     scrollFrame:SetPoint("BOTTOMRIGHT", -30, 16)
 
