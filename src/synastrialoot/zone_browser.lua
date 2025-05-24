@@ -216,6 +216,10 @@ function ZoneBrowser:GetZoneItems(zoneName, callback)
                     if item.AttuneProgress and item.AttuneProgress >= 100 then
                         zoneAttuned = zoneAttuned + 1
                     end
+                else
+                    if item then
+                        print("[ZoneBrowser:GetZoneItems] Unattunable or unknown item:", itemID, "table:", (item and (type(item) == "table") and table.concat({"Name:", item.Name, "Link:", item.ItemLink, "Type:", item.Type, "CanAttune:", tostring(item.CanAttune), "AttuneProgress:", tostring(item.AttuneProgress)}, ", ") or tostring(item)))
+                    end
                 end
                 pending = pending - 1
                 if pending == 0 then
