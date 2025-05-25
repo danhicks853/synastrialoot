@@ -313,8 +313,21 @@ end)
                 local frameHeight = scrollFrame:GetHeight()
                 local scrollMax = math.max(0, contentHeight - frameHeight)
                 scrollBar:SetMinMaxValues(0, scrollMax)
+                -- Reset scroll to top only when entering a new zone
+                MainFrame.lastZoneName = MainFrame.lastZoneName or nil
+                local currentZone = GetRealZoneText and GetRealZoneText() or GetZoneText()
+                if MainFrame.lastZoneName ~= currentZone then
+                    savedPos = 0
+                end
+                MainFrame.lastZoneName = currentZone
                 if not savedPos then savedPos = 0 end
+                if savedPos > scrollMax then savedPos = scrollMax end
                 frame.scrollFrame:SetVerticalScroll(savedPos)
+                -- Robustly reset scroll position again on the next frame (fixes timing/layout issues)
+                frame.scrollFrame:SetScript("OnUpdate", function(self)
+                    self:SetVerticalScroll(savedPos)
+                    self:SetScript("OnUpdate", nil)
+                end)
             end)
         end
 
