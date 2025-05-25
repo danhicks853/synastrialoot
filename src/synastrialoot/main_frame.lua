@@ -140,9 +140,9 @@ function MainFrame:Create()
         local Row = _G.SynastriaLoot_Row
 
         function MainFrame:RefreshLoot()
-            -- Always reset scroll to top when refreshing loot
-            if frame and frame.scrollFrame then
-                frame.scrollFrame:SetVerticalScroll(0)
+            local savedPos = 0
+            if frame.scrollFrame then
+                savedPos = frame.scrollFrame:GetVerticalScroll()
             end
             local content = self.frame and self.frame.content
             if not content then return end
@@ -313,6 +313,7 @@ end)
                 local frameHeight = scrollFrame:GetHeight()
                 local scrollMax = math.max(0, contentHeight - frameHeight)
                 scrollBar:SetMinMaxValues(0, scrollMax)
+                if not savedPos then savedPos = 0 end
                 frame.scrollFrame:SetVerticalScroll(savedPos)
             end)
         end
