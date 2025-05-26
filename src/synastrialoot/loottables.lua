@@ -782,21 +782,14 @@ frame:SetScript("OnEvent", function(self, event, addonName)
 
 				---- Raids
 
-				["BlackTempleStart"] = "BlackTemple",
-				["BlackTempleBasement"] = "BlackTemple",
-				["BlackTempleTop"] = "BlackTemple",
 				["BlackTemple"] = {
-					["BlackTempleStart"] = {
+					["Bosses"] = {
 						{ "BlackTempleHighWarlordNajentus", 1 },
 						{ "BlackTempleSupremus",            2 },
 						{ "BlackTempleShadeOfAkama",        3 },
-					},
-					["BlackTempleBasement"] = {
 						{ "BlackTempleTeronGorefiend",   1 },
 						{ "BlackTempleGurtoggBloodboil", 2 },
 						{ "BlackTempleReliquaryOfSouls", 3 },
-					},
-					["BlackTempleTop"] = {
 						{ "BlackTempleMotherShahraz",      1 },
 						{ "BlackTempleTheIllidariCouncil", 2 },
 						{ "BlackTempleIllidanStormrage",   3 },
