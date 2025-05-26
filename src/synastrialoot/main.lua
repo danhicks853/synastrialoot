@@ -186,6 +186,7 @@ function GetZoneLootData(callback)
         zoneTextNorm = zoneTextNorm:gsub("^magister's terrace", "magisters' terrace")
         zoneTextNorm = zoneTextNorm:gsub("^the escape from durnholde", "old hillsbrad foothills")
         zoneTextNorm = zoneTextNorm:gsub("^violet hold", "the violet hold")
+        zoneTextNorm = zoneTextNorm:gsub("^stormwind stockade", "the stockade")
         if zoneprops.Type == 'raid' then zoneTextNorm = zoneTextNorm:gsub("tempest keep", "the eye") end
         if string.find(diff, "Mythic") then
             zoneTextNorm = zoneTextNorm .. "+"
