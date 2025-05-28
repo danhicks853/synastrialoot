@@ -32,6 +32,17 @@ frame:SetScript("OnEvent", function(self, event, addonName)
 				----------------------
 				--- Custom Data ---
 				----------------------
+				["Terokkar Forest"] = {
+					["Bosses"] = {
+						{ "Darkscreecher Akkarai", 1 },
+						{ "Gezzarak the Huntress", 2 },
+						{ "Vakkiz the Windrager", 3 },
+						{ "Terokk", 4 },
+						{ "Talonpriest Ishaal", 5 },
+						{ "Hazzik's Package", 6 },
+					},
+					["Info"] = { "Terokkar Forest", "VendorArmor", mapname = "Terokkar Forest" },
+				},
 				["Eastern Plaguelands"] = {
 					["Bosses"] = {
 						{ "Quartermaster Miranda Breechlock", 1 },
@@ -254,6 +265,7 @@ frame:SetScript("OnEvent", function(self, event, addonName)
 					},
 					["Info"] = { BabbleZone["Silithus"], "VendorArmor", mapname = "Silithus" },
 				},
+
 				-----------------------
 				--- WotLK Instances ---
 				---------------------------
