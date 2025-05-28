@@ -243,17 +243,19 @@ frame:SetScript("OnEvent", function(self, event, addonName)
 				},
 				["Netherstorm"] = {
 					["Bosses"] = {
-						{ "Armbreaker Huffaz", 1 },
-						{ "Fel Tinkerer Zortan", 2 },
-						{ "Forgosh", 3 },
-						{ "Gul'bor", 4 },
-						{ "Malevus the Mad", 5 },
-						{ "Porfus the Gem Gorger", 6 },
-						{ "Wrathbringer Laz-Tarash", 7 },
-						{ "Bashir Landing Statis Chambers", 8 },
-						{ "Netherstorm", 9 },
+						{ "Statis Chambers", 1 },
+						{ "Netherstorm", 2 },
 					},
 					["Info"] = { BabbleZone["Netherstorm"], "VendorArmor", mapname = "Netherstorm" },
+				},
+				["Silithus"] = {
+					["Bosses"] = {
+						{ "Prince Skaldrenox", 1 },
+						{ "High Marshal Whirlaxis", 2 },
+						{ "Lord Skwol", 3 },
+						{ "Baron Kazum", 4 },
+					},
+					["Info"] = { BabbleZone["Silithus"], "VendorArmor", mapname = "Silithus" },
 				},
 				-----------------------
 				--- WotLK Instances ---
