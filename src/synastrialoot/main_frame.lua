@@ -213,7 +213,7 @@ function MainFrame:Create()
                             headerBtn.text:SetDrawLayer("OVERLAY", 7)
                             headerBtn.text:SetParent(headerBtn)
                             headerBtn:SetFrameStrata("MEDIUM")
-                            headerBtn.text:SetPoint("LEFT", 8, 0)
+                            headerBtn.text:SetPoint("LEFT", 28, 0) -- Make space for collapse button
                             headerBtn:EnableMouse(true)
                             headerBtn:RegisterForClicks("AnyUp")
                             headerBtn.bg = headerBtn:CreateTexture(nil, "BACKGROUND")
@@ -236,17 +236,37 @@ function MainFrame:Create()
                         if headerText == nil then
                             headerText = "Boss " .. tostring(hIdx)
                         end
+                        -- Create or reuse collapse button to the left of header text
+                        if not headerBtn.collapseBtn then
+                            local collapseBtn = CreateFrame("Button", nil, headerBtn)
+                            collapseBtn:SetSize(20, 20)
+                            collapseBtn:SetPoint("LEFT", headerBtn, "LEFT", 0, 0)
+                            collapseBtn.text = collapseBtn:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
+                            collapseBtn.text:SetAllPoints()
+                            collapseBtn:SetFrameStrata("HIGH")
+                            collapseBtn:SetScript("OnClick", function(self)
+                                MainFrame:ToggleHeader(headerBtn, hIdx)
+                            end)
+                            collapseBtn:SetScript("OnEnter", function(self)
+                                self:GetParent().bg:SetTexture(0.4, 0.65, 1, 0.5)
+                            end)
+                            collapseBtn:SetScript("OnLeave", function(self)
+                                self:GetParent().bg:SetTexture(nil)
+                            end)
+                            headerBtn.collapseBtn = collapseBtn
+                        end
+                        local collapseBtn = headerBtn.collapseBtn
                         local collapsed = MainFrame._collapsedHeaders[hIdx]
-                        local prefix = collapsed and "+ " or "- "
-                        headerBtn.text:SetText(prefix .. tostring(headerText))
+                        collapseBtn.text:SetText(collapsed and "+" or "–")
+                        collapseBtn:Show()
+                        headerBtn.text:SetText(tostring(headerText))
                         headerBtn:SetScript("OnClick", function(self)
-    -- Send .findnpc NAME to chat, stripping prefix
-    local headerName = tostring(headerText):gsub("^[-+]%s*", ""):gsub("%s*%([Rr]are%)$", "")
-    if headerName and headerName ~= "" then
-        SendChatMessage(".findnpc " .. headerName, "SAY")
-    end
-    MainFrame:ToggleHeader(self, hIdx)
-end)
+                            -- Only send .findnpc NAME to chat; do not collapse/expand
+                            local headerName = tostring(headerText):gsub("^[-+]%s*", ""):gsub("%s*%([Rr]are%)$", "")
+                            if headerName and headerName ~= "" then
+                                SendChatMessage(".findnpc " .. headerName, "SAY")
+                            end
+                        end)
                         headerBtn:Show()
                         headerIdx = headerIdx + 1
                         yOffset = yOffset - 24
