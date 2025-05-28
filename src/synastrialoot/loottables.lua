@@ -32,6 +32,12 @@ frame:SetScript("OnEvent", function(self, event, addonName)
 				----------------------
 				--- Custom Data ---
 				----------------------
+				["Eastern Plaguelands"] = {
+					["Bosses"] = {
+						{ "Quartermaster Miranda Breechlock", 1 },
+					},
+					["Info"] = { "Eastern Plaguelands", "VendorArmor", mapname = "Eastern Plaguelands" },
+				},
 				["Ghostlands"] = {
 					["Bosses"] = {
 						{ "Provisioner Vredigar", 1 },
@@ -237,7 +243,15 @@ frame:SetScript("OnEvent", function(self, event, addonName)
 				},
 				["Netherstorm"] = {
 					["Bosses"] = {
-						{ "Netherstorm", 1 },
+						{ "Armbreaker Huffaz", 1 },
+						{ "Fel Tinkerer Zortan", 2 },
+						{ "Forgosh", 3 },
+						{ "Gul'bor", 4 },
+						{ "Malevus the Mad", 5 },
+						{ "Porfus the Gem Gorger", 6 },
+						{ "Wrathbringer Laz-Tarash", 7 },
+						{ "Bashir Landing Statis Chambers", 8 },
+						{ "Netherstorm", 9 },
 					},
 					["Info"] = { BabbleZone["Netherstorm"], "VendorArmor", mapname = "Netherstorm" },
 				},

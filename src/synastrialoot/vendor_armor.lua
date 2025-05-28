@@ -238,6 +238,201 @@ Synastria_Data["Netherstorm"] = {
         instance = "Netherstorm",
     },
 };
+
+Synastria_Data["Armbreaker Huffaz"] = {
+    ["Normal"] = {
+        {
+            { 1, 31943, "", "=q3=Ethereum Band", "=ds=#s13#", "", "10.7%"};
+            { 3, 31939, "", "=q3=Dark Cloak", "=ds=#s4#", "", "1.36%"};
+            { 4, 31938, "", "=q3=Enigmatic Cloak", "=ds=#s4#", "", "0.4%"};
+            { 5, 31936, "", "=q3=Fiery Cloak", "=ds=#s4#", "", "0.36%"};
+            { 6, 31935, "", "=q3=Frigid Cloak", "=ds=#s4#", "", "1.1%"};
+            { 7, 31937, "", "=q3=Living Cloak", "=ds=#s4#", "", "0.6%"};
+            { 9, 31957, "", "=q2=Ethereum Prisoner I.D. Tag", "=ds=#m3#", "", "100%"};
+            { 18, 31928, "", "=q3=Dark Band", "=ds=#s13#", "", "0.7%"};
+            { 19, 31929, "", "=q3=Enigmatic Band", "=ds=#s13#", "", "0.8%"};
+            { 20, 31925, "", "=q3=Fiery Band", "=ds=#s13#", "", "0.5%"};
+            { 21, 31926, "", "=q3=Frigid Band", "=ds=#s13#", "", "1.0%"};
+            { 22, 31927, "", "=q3=Living Band", "=ds=#s13#", "", "1.3%"};
+        };
+    };
+    info = {
+        name = BabbleBoss["Armbreaker Huffaz"],
+        module = moduleName,
+        instance = "Netherstorm",
+    },
+};
+
+Synastria_Data["Fel Tinkerer Zortan"] = {
+    ["Normal"] = {
+        {
+            { 1, 31573, "", "=q3=Mistshroud Boots", "=ds=#s12#, #a3#", "", "9.7%"};
+            { 3, 31939, "", "=q3=Dark Cloak", "=ds=#s4#", "", "0.94%"};
+            { 4, 31938, "", "=q3=Enigmatic Cloak", "=ds=#s4#", "", "1.0%"};
+            { 5, 31936, "", "=q3=Fiery Cloak", "=ds=#s4#", "", "0.94%"};
+            { 6, 31935, "", "=q3=Frigid Cloak", "=ds=#s4#", "", "0.4%"};
+            { 7, 31937, "", "=q3=Living Cloak", "=ds=#s4#", "", "0.7%"};
+            { 9, 31957, "", "=q2=Ethereum Prisoner I.D. Tag", "=ds=#m3#", "", "100%"};
+            { 18, 31928, "", "=q3=Dark Band", "=ds=#s13#", "", "1.0%"};
+            { 19, 31929, "", "=q3=Enigmatic Band", "=ds=#s13#", "", "1.3%"};
+            { 20, 31925, "", "=q3=Fiery Band", "=ds=#s13#", "", "1.2%"};
+            { 21, 31926, "", "=q3=Frigid Band", "=ds=#s13#", "", "1.0%"};
+            { 22, 31927, "", "=q3=Living Band", "=ds=#s13#", "", "1.2%"};
+        };
+    };
+    info = {
+        name = BabbleBoss["Fel Tinkerer Zortan"],
+        module = moduleName,
+        instance = "Netherstorm",
+    },
+};
+
+Synastria_Data["Forgosh"] = {
+    ["Normal"] = {
+        {
+            { 1, 31565, "", "=q3=Skystalker's Boots", "=ds=#s12#, #a2#", "", "8.5%"};
+            { 3, 31939, "", "=q3=Dark Cloak", "=ds=#s4#", "", "2.63%"};
+            { 4, 31938, "", "=q3=Enigmatic Cloak", "=ds=#s4#", "", "0.29%"};
+            { 5, 31936, "", "=q3=Fiery Cloak", "=ds=#s4#", "", "0.9%"};
+            { 6, 31935, "", "=q3=Frigid Cloak", "=ds=#s4#", "", "0.7%"};
+            { 7, 31937, "", "=q3=Living Cloak", "=ds=#s4#", "", "1.0%"};
+            { 9, 31957, "", "=q2=Ethereum Prisoner I.D. Tag", "=ds=#m3#", "", "100%"};
+            { 18, 31928, "", "=q3=Dark Band", "=ds=#s13#", "", "0.9%"};
+            { 19, 31929, "", "=q3=Enigmatic Band", "=ds=#s13#", "", "1.9%"};
+            { 20, 31925, "", "=q3=Fiery Band", "=ds=#s13#", "", "0.5%"};
+            { 21, 31926, "", "=q3=Frigid Band", "=ds=#s13#", "", "1.0%"};
+            { 22, 31927, "", "=q3=Living Band", "=ds=#s13#", "", "0.7%"};
+        };
+    };
+    info = {
+        name = BabbleBoss["Forgosh"],
+        module = moduleName,
+        instance = "Netherstorm",
+    },
+};
+
+Synastria_Data["Gul'bor"] = {
+    ["Normal"] = {
+        {
+            { 1, 31940, "", "=q3=Ethereum Torque", "=ds=#s2#", "", "9.5%"};
+            { 3, 31939, "", "=q3=Dark Cloak", "=ds=#s4#", "", "0.66%"};
+            { 4, 31938, "", "=q3=Enigmatic Cloak", "=ds=#s4#", "", "0.66%"};
+            { 5, 31936, "", "=q3=Fiery Cloak", "=ds=#s4#", "", "1.1%"};
+            { 6, 31935, "", "=q3=Frigid Cloak", "=ds=#s4#", "", "1.1%"};
+            { 7, 31937, "", "=q3=Living Cloak", "=ds=#s4#", "", "0.8%"};
+            { 9, 31957, "", "=q2=Ethereum Prisoner I.D. Tag", "=ds=#m3#", "", "100%"};
+            { 18, 31928, "", "=q3=Dark Band", "=ds=#s13#", "", "0.7%"};
+            { 19, 31929, "", "=q3=Enigmatic Band", "=ds=#s13#", "", "0.9%"};
+            { 20, 31925, "", "=q3=Fiery Band", "=ds=#s13#", "", "0.8%"};
+            { 21, 31926, "", "=q3=Frigid Band", "=ds=#s13#", "", "0.8%"};
+            { 22, 31927, "", "=q3=Living Band", "=ds=#s13#", "", "2.0%"};
+        };
+    };
+    info = {
+        name = BabbleBoss["Gul'bor"],
+        module = moduleName,
+        instance = "Netherstorm",
+    },
+};
+
+Synastria_Data["Malevus the Mad"] = {
+    ["Normal"] = {
+        {
+            { 1, 31581, "", "=q3=Slatesteel Boots", "=ds=#s12#, #a4#", "", "10.5%"};
+            { 3, 31939, "", "=q3=Dark Cloak", "=ds=#s4#", "", "2.46%"};
+            { 4, 31938, "", "=q3=Enigmatic Cloak", "=ds=#s4#", "", "0.70%"};
+            { 5, 31936, "", "=q3=Fiery Cloak", "=ds=#s4#", "", "1.5%"};
+            { 6, 31935, "", "=q3=Frigid Cloak", "=ds=#s4#", "", "0.7%"};
+            { 7, 31937, "", "=q3=Living Cloak", "=ds=#s4#", "", "1.3%"};
+            { 9, 31957, "", "=q2=Ethereum Prisoner I.D. Tag", "=ds=#m3#", "", "100%"};
+            { 18, 31928, "", "=q3=Dark Band", "=ds=#s13#", "", "0.5%"};
+            { 19, 31929, "", "=q3=Enigmatic Band", "=ds=#s13#", "", "0.8%"};
+            { 20, 31925, "", "=q3=Fiery Band", "=ds=#s13#", "", "1.75%"};
+            { 21, 31926, "", "=q3=Frigid Band", "=ds=#s13#", "", "0.6%"};
+            { 22, 31927, "", "=q3=Living Band", "=ds=#s13#", "", "1.8%"};
+        };
+    };
+    info = {
+        name = BabbleBoss["Malevus the Mad"],
+        module = moduleName,
+        instance = "Netherstorm",
+    },
+};
+
+Synastria_Data["Porfus the Gem Gorger"] = {
+    ["Normal"] = {
+        {
+            { 1, 31557, "", "=q3=Windchanneller's Boots", "=ds=#s12#, #a1#", "", "7.9%"};
+            { 3, 31939, "", "=q3=Dark Cloak", "=ds=#s4#", "", "1.89%"};
+            { 4, 31938, "", "=q3=Enigmatic Cloak", "=ds=#s4#", "", "0.81%"};
+            { 5, 31936, "", "=q3=Fiery Cloak", "=ds=#s4#", "", "1.0%"};
+            { 6, 31935, "", "=q3=Frigid Cloak", "=ds=#s4#", "", "0.7%"};
+            { 7, 31937, "", "=q3=Living Cloak", "=ds=#s4#", "", "1.1%"};
+            { 9, 31957, "", "=q2=Ethereum Prisoner I.D. Tag", "=ds=#m3#", "", "100%"};
+            { 18, 31928, "", "=q3=Dark Band", "=ds=#s13#", "", "0.7%"};
+            { 19, 31929, "", "=q3=Enigmatic Band", "=ds=#s13#", "", "0.6%"};
+            { 20, 31925, "", "=q3=Fiery Band", "=ds=#s13#", "", "1.8%"};
+            { 21, 31926, "", "=q3=Frigid Band", "=ds=#s13#", "", "1.0%"};
+            { 22, 31927, "", "=q3=Living Band", "=ds=#s13#", "", "1.1%"};
+        };
+    };
+    info = {
+        name = BabbleBoss["Porfus the Gem Gorger"],
+        module = moduleName,
+        instance = "Netherstorm",
+    },
+};
+
+Synastria_Data["Wrathbringer Laz-Tarash"] = {
+    ["Normal"] = {
+        {
+            { 1, 32520, "", "=q3=Manaforged Sphere", "=ds=#s15#", "", "10.4%"};
+            { 3, 31939, "", "=q3=Dark Cloak", "=ds=#s4#", "", "1.06%"};
+            { 4, 31938, "", "=q3=Enigmatic Cloak", "=ds=#s4#", "", "1.06%"};
+            { 5, 31936, "", "=q3=Fiery Cloak", "=ds=#s4#", "", "0.8%"};
+            { 6, 31935, "", "=q3=Frigid Cloak", "=ds=#s4#", "", "1.5%"};
+            { 7, 31937, "", "=q3=Living Cloak", "=ds=#s4#", "", "0.3%"};
+            { 9, 31957, "", "=q2=Ethereum Prisoner I.D. Tag", "=ds=#m3#", "", "100%"};
+            { 18, 31928, "", "=q3=Dark Band", "=ds=#s13#", "", "0.7%"};
+            { 19, 31929, "", "=q3=Enigmatic Band", "=ds=#s13#", "", "0.7%"};
+            { 20, 31925, "", "=q3=Fiery Band", "=ds=#s13#", "", "1.2%"};
+            { 21, 31926, "", "=q3=Frigid Band", "=ds=#s13#", "", "1.1%"};
+            { 22, 31927, "", "=q3=Living Band", "=ds=#s13#", "", "1.1%"};
+        };
+    };
+    info = {
+        name = BabbleBoss["Wrathbringer Laz-tarash"],
+        module = moduleName,
+        instance = "Netherstorm",
+    },
+};
+
+Synastria_Data["Bashir Stasis Chambers"] = {
+    ["Normal"] = {
+        {
+            { 1, 0, "INV_Box_01", "=q6="..AL["Trelopades"], ""};
+            { 2, 32522, "", "=q3=Demonic Bulwark", "=ds=#w8#", "", ""};
+            { 3, 31941, "", "=q2=Mark of the Nexus-King", "=ds=#m3#", "", ""};
+            { 5, 0, "INV_Box_01", "=q6="..AL["King Dorfbruiser"], ""};
+            { 6, 31577, "", "=q3=Slatesteel Shoulders", "=ds=#s3#, #a4#", "", ""};
+            { 7, 31941, "", "=q2=Mark of the Nexus-King", "=ds=#m3#", "", ""};
+            { 9, 0, "INV_Box_01", "=q6="..AL["Gorgolon the All-seeing"], ""};
+            { 10, 31569, "", "=q3=Mistshroud Shoulders", "=ds=#s3#, #a3#", "", ""};
+            { 11, 31941, "", "=q2=Mark of the Nexus-King", "=ds=#m3#", "", ""};
+            { 16, 0, "INV_Box_01", "=q6="..AL["Matron Li-sahar"], ""};
+            { 17, 31553, "", "=q3=Windchanneller's Mantle", "=ds=#s3#, #a1#", "", ""};
+            { 18, 31941, "", "=q2=Mark of the Nexus-King", "=ds=#m3#", "", ""};
+            { 20, 0, "INV_Box_01", "=q6="..AL["Solus the Eternal"], ""};
+            { 21, 31561, "", "=q3=Skystalker's Shoulders", "=ds=#s3#, #a2#", "", ""};
+            { 22, 31941, "", "=q2=Mark of the Nexus-King", "=ds=#m3#", "", ""};
+        };
+    };
+    info = {
+        name = BabbleBoss["Bashir Stasis Chambers"],
+        module = moduleName,
+        instance = "Netherstorm",
+    },
+};
 Synastria_Data["Provisioner Vredigar"] = {
     ["Normal"] = {
         {
@@ -261,5 +456,51 @@ Synastria_Data["Provisioner Vredigar"] = {
         name = BabbleBoss["Provisioner Vredigar"],
         module = moduleName,
         instance = "Ghostlands",
+    },
+};
+Synastria_Data["Quartermaster Miranda Breechlock"] = {
+    ["Normal"] = {
+        {
+            { 1, 227813, "", "=q4=Drinkable Stratholme Holy Water", "=ds=#s2#", "", "18%" }, -- Drinkable Stratholme Holy Water
+            { 2, 227814, "", "=q4=Radiant Girdle of the Dawn", "=ds=#s2#", "", "18%" }, -- Radiant Girdle of the Dawn
+            { 3, 227815, "", "=q4=Fine Dawn Treaders", "=ds=#s2#", "", "18%" }, -- Fine Dawn Treaders
+            { 4, 227816, "", "=q4=Argent Elite Boots", "=ds=#s2#", "", "18%" }, -- Argent Elite Boots
+            { 5, 227817, "", "=q4=Radiant Gloves of the Dawn", "=ds=#s2#", "", "18%" }, -- Radiant Gloves of the Dawn
+            { 6, 227818, "", "=q4=Glowing Mantle of the Dawn", "=ds=#s2#", "", "18%" }, -- Glowing Mantle of the Dawn
+            { 7, 227819, "", "=q4=Blessed Flame Mantle of the Dawn", "=ds=#s2#", "", "18%" }, -- Blessed Flame Mantle of the Dawn
+            { 8, 227859, "", "=q4=Shimmering Dawnbringer Shoulders", "=ds=#s2#", "", "18%" }, -- Shimmering Dawnbringer Shoulders
+            { 9, 227888, "", "=q4=Argent Elite Shoulders", "=ds=#s2#", "", "18%" }, -- Argent Elite Shoulders
+            { 10, 233197, "", "=q4=Argent Training Manual", "=ds=#s2#", "", "18%" }, -- Argent Training Manual
+            { 11, 233197, "", "=q4=Argent Training Manual", "=ds=#s2#", "", "18%" }, -- Argent Training Manual (duplicate)
+            { 12, 233198, "", "=q4=Horn of the Dawn", "=ds=#s2#", "", "18%" }, -- Horn of the Dawn
+            { 13, 233198, "", "=q4=Horn of the Dawn", "=ds=#s2#", "", "18%" }, -- Horn of the Dawn (duplicate)
+            { 14, 12698, "", "=q4=Plans: Dawnbringer Shoulders", "=ds=#s2#", "", "18%" }, -- Plans: Dawnbringer Shoulders
+            { 15, 12844, "", "=q4=Argent Dawn Valor Token", "=ds=#s2#", "", "18%" }, -- Argent Dawn Valor Token
+            { 16, 13482, "", "=q4=Recipe: Transmute Air to Fire", "=ds=#s2#", "", "18%" }, -- Recipe: Transmute Air to Fire
+            { 17, 13724, "", "=q4=Enriched Manna Biscuit", "=ds=#s2#", "", "18%" }, -- Enriched Manna Biscuit
+            { 18, 13810, "", "=q4=Blessed Sunfruit", "=ds=#s2#", "", "18%" }, -- Blessed Sunfruit
+            { 19, 13813, "", "=q4=Blessed Sunfruit Juice", "=ds=#s2#", "", "18%" }, -- Blessed Sunfruit Juice
+            { 20, 18169, "", "=q4=Flame Mantle of the Dawn", "=ds=#s2#", "", "18%" }, -- Flame Mantle of the Dawn
+            { 21, 18170, "", "=q4=Frost Mantle of the Dawn", "=ds=#s2#", "", "18%" }, -- Frost Mantle of the Dawn
+            { 22, 18171, "", "=q4=Arcane Mantle of the Dawn", "=ds=#s2#", "", "18%" }, -- Arcane Mantle of the Dawn
+            { 23, 18172, "", "=q4=Nature Mantle of the Dawn", "=ds=#s2#", "", "18%" }, -- Nature Mantle of the Dawn
+            { 24, 18173, "", "=q4=Shadow Mantle of the Dawn", "=ds=#s2#", "", "18%" }, -- Shadow Mantle of the Dawn
+            { 25, 18182, "", "=q4=Chromatic Mantle of the Dawn", "=ds=#s2#", "", "18%" }, -- Chromatic Mantle of the Dawn
+            { 26, 19203, "", "=q4=Plans: Girdle of the Dawn", "=ds=#s2#", "", "18%" }, -- Plans: Girdle of the Dawn
+            { 27, 19205, "", "=q4=Plans: Gloves of the Dawn", "=ds=#s2#", "", "18%" }, -- Plans: Gloves of the Dawn
+            { 28, 19216, "", "=q4=Pattern: Argent Boots", "=ds=#s2#", "", "18%" }, -- Pattern: Argent Boots
+            { 29, 19217, "", "=q4=Pattern: Argent Shoulders", "=ds=#s2#", "", "18%" }, -- Pattern: Argent Shoulders
+            { 30, 19328, "", "=q4=Pattern: Dawn Treaders", "=ds=#s2#", "", "18%" }, -- Pattern: Dawn Treaders
+            { 31, 19329, "", "=q4=Pattern: Golden Mantle of the Dawn", "=ds=#s2#", "", "18%" }, -- Pattern: Golden Mantle of the Dawn
+            { 32, 19442, "", "=q4=Formula: Powerful Anti-Venom", "=ds=#s2#", "", "18%" }, -- Formula: Powerful Anti-Venom
+            { 33, 19446, "", "=q4=Formula: Enchant Bracer - Mana Regeneration", "=ds=#s2#", "", "18%" }, -- Formula: Enchant Bracer - Mana Regeneration
+            { 34, 19447, "", "=q4=Formula: Enchant Bracer - Healing", "=ds=#s2#", "", "18%" }, -- Formula: Enchant Bracer - Healing
+            { 35, 22014, "", "=q4=Hallowed Brazier", "=ds=#s2#", "", "18%" } -- Hallowed Brazier
+        }
+    },
+    info = {
+        name = BabbleBoss["Quartermaster Miranda Breechlock"],
+        module = moduleName,
+        instance = "Eastern Plaguelands",
     },
 };
