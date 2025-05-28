@@ -263,6 +263,60 @@ Synastria_Data["Stasis Chambers"] = {
         instance = "Netherstorm",
     },
 };
+
+Synastria_Data["Abyssal Council"] = {
+    ["Normal"] = {
+        {
+            { 1, 0, "INV_Box_01", "=q6="..AL["The Duke of Cynders"], "=q1=#j19#"};
+            { 2, 20665, "", "=q3=Abyssal Leather Leggings", "=ds=#s11#, #a2#", "", "22.50%"};
+            { 3, 20666, "", "=q3=Hardened Steel Warhammer", "=ds=#h3#, #w6#", "", "30.47%"};
+            { 4, 20514, "", "=q3=Abyssal Signet", "=ds=#m3#", "", "100%"};
+            { 5, 20664, "", "=q2=Abyssal Cloth Sash", "=ds=#s10#, #a1#", "", "27.08%"};
+            { 6, 21989, "", "=q1=Cinder of Cynders", "=ds=#m3#", "", "100%"};
+            { 8, 0, "INV_Box_01", "=q6="..AL["The Duke of Fathoms"], "=q1=#j20#"};
+            { 9, 20668, "", "=q3=Abyssal Mail Legguards", "=ds=#s11#, #a3#", "", "22.40%"};
+            { 10, 20669, "", "=q3=Darkstone Claymore", "=ds=#h2#, #w10#", "", "29.62%"};
+            { 11, 20514, "", "=q3=Abyssal Signet", "=ds=#m3#", "", "100%"};
+            { 12, 20667, "", "=q2=Abyssal Leather Belt", "=ds=#s10#, #a2#", "", "29.04%"};
+            { 16, 0, "INV_Box_01", "=q6="..AL["The Duke of Zephyrs"], "=q1=#j21#"};
+            { 17, 20674, "", "=q3=Abyssal Cloth Pants", "=ds=#s11#, #a1#", "", "21.83%"};
+            { 18, 20675, "", "=q3=Soulrender", "=ds=#h1#, #w1#", "", "29.73%"};
+            { 19, 20514, "", "=q3=Abyssal Signet", "=ds=#m3#", "", "100%"};
+            { 20, 20673, "", "=q2=Abyssal Plate Girdle", "=ds=#s10#, #a4#", "", "27.11%"};
+            { 23, 0, "INV_Box_01", "=q6="..AL["The Duke of Shards"], "=q1=#j22#"};
+            { 24, 20671, "", "=q3=Abyssal Plate Legplates", "=ds=#s11#, #a4#", "", "22.63%"};
+            { 25, 20672, "", "=q3=Sparkling Crystal Wand", "=ds=#w12#", "", "28.90%"};
+            { 26, 20514, "", "=q3=Abyssal Signet", "=ds=#m3#", "", "100%"};
+            { 27, 20670, "", "=q2=Abyssal Mail Clutch", "=ds=#s10#, #a3#", "", "28.16%"};
+            { 1, 0, "INV_Box_01", "=q6="..AL["Crimson Templar"], "=q1=#j19#"};
+            { 2, 20657, "", "=q3=Crystal Tipped Stiletto", "=ds=#h1#, #w4#", "", "2.31%"};
+            { 3, 20655, "", "=q2=Abyssal Cloth Handwraps", "=ds=#s9#, #a1#", "", "13.03%"};
+            { 4, 20656, "", "=q2=Abyssal Mail Sabatons", "=ds=#s12#, #a3#", "", "12.89%"};
+            { 5, 20513, "", "=q2=Abyssal Crest", "=ds=#m3#", "", "100%"};
+            { 7, 0, "INV_Box_01", "=q6="..AL["Azure Templar"], "=q1=#j20#"};
+            { 8, 20654, "", "=q3=Amethyst War Staff", "=ds=#w9#", "", "2.38%"};
+            { 9, 20652, "", "=q2=Abyssal Cloth Slippers", "=ds=#s12#, #a1#", "", "12.94%"};
+            { 10, 20653, "", "=q2=Abyssal Plate Gauntlets", "=ds=#s9#, #a4#", "", "13.61%"};
+            { 11, 20513, "", "=q2=Abyssal Crest", "=ds=#m3#", "", "100%"};
+            { 16, 0, "INV_Box_01", "=q6="..AL["Hoary Templar"], "=q1=#j21#"};
+            { 17, 20660, "", "=q3=Stonecutting Glaive", "=ds=#w7#", "", "2.22%"};
+            { 18, 20658, "", "=q2=Abyssal Leather Boots", "=ds=#s12#, #a2#", "", "13.16%"};
+            { 19, 20659, "", "=q2=Abyssal Mail Handguards", "=ds=#s9#, #a3#", "", "12.64%"};
+            { 20, 20513, "", "=q2=Abyssal Crest", "=ds=#m3#", "", "100%"};
+            { 22, 0, "INV_Box_01", "=q6="..AL["Earthen Templar"], "=q1=#j22#"};
+            { 23, 20663, "", "=q3=Deep Strike Bow", "=ds=#w2#", "", "2.55%"};
+            { 24, 20661, "", "=q2=Abyssal Leather Gloves", "=ds=#s9#, #a2#", "", "13.16%"};
+            { 25, 20662, "", "=q2=Abyssal Plate Greaves", "=ds=#s12#, #a4#", "", "12.93%"};
+            { 26, 20513, "", "=q2=Abyssal Crest", "=ds=#m3#", "", "100%"};
+        };
+    },
+    info = {
+        name = BabbleBoss["Abyssal Council"],
+        module = moduleName,
+        instance = "Silithus",
+    },
+}
+
 Synastria_Data["Provisioner Vredigar"] = {
     ["Normal"] = {
         {

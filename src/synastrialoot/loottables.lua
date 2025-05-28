@@ -250,10 +250,7 @@ frame:SetScript("OnEvent", function(self, event, addonName)
 				},
 				["Silithus"] = {
 					["Bosses"] = {
-						{ "Prince Skaldrenox", 1 },
-						{ "High Marshal Whirlaxis", 2 },
-						{ "Lord Skwol", 3 },
-						{ "Baron Kazum", 4 },
+						{ "Abyssal Council", 1 },
 					},
 					["Info"] = { BabbleZone["Silithus"], "VendorArmor", mapname = "Silithus" },
 				},
