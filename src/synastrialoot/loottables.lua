@@ -32,6 +32,12 @@ frame:SetScript("OnEvent", function(self, event, addonName)
 				----------------------
 				--- Custom Data ---
 				----------------------
+				["Ghostlands"] = {
+					["Bosses"] = {
+						{ "Ghostlands", 1 },
+					},
+					["Info"] = { "Ghostlands", "VendorArmor", mapname = "Ghostlands" },
+				},
 				["Azshara"] = {
 					["Bosses"] = {
 						{ "Azuregos", 1 },
@@ -2345,11 +2351,6 @@ frame:SetScript("OnEvent", function(self, event, addonName)
 					["Info"] = { AL["ilvl 245"] .. " - " .. AL["Rewards"], "SynastriaWotLK" },
 				},
 			},
-		}
-
-		Synastria_LootTableRegister["Instances"]["EmptyPage"] = {
-			["Bosses"] = { { "EmptyPage" } },
-			["Info"] = { "EmptyPage" },
 		}
 
 		Synastria_Data["EmptyPage"] = {

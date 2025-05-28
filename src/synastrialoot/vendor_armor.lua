@@ -238,3 +238,28 @@ Synastria_Data["Netherstorm"] = {
         instance = "Netherstorm",
     },
 };
+Synastria_Data["Ghostlands"] = {
+    ["Normal"] = {
+        {
+            { 1, 22985, "", "=q4=Suncrown Breastplate", "=ds=#s2#", "", "18%" }, -- Suncrown Breastplate
+            { 2, 22986, "", "=q4=Apothecary's Robe", "=ds=#s2#", "", "18%" }, -- Apothecary's Robe
+            { 3, 22987, "", "=q4=Deathstalker's Vest", "=ds=#s2#", "", "18%" }, -- Deathstalker's Vest
+            { 4, 22990, "", "=q4=Tranquillien Champion's Cloak", "=ds=#s2#", "", "18%" }, -- Tranquillien Champion's Cloak
+            { 5, 22991, "", "=q4=Apprentice Boots", "=ds=#s2#", "", "18%" }, -- Apprentice Boots
+            { 6, 22992, "", "=q4=Bogwalker Boots", "=ds=#s2#", "", "18%" }, -- Bogwalker Boots
+            { 7, 22993, "", "=q4=Volunteer's Greaves", "=ds=#s2#", "", "18%" }, -- Volunteer's Greaves
+            { 8, 28155, "", "=q4=Apothecary's Waistband", "=ds=#s2#", "", "18%" }, -- Apothecary's Waistband
+            { 9, 28158, "", "=q4=Batskin Belt", "=ds=#s2#", "", "18%" }, -- Batskin Belt
+            { 10, 28162, "", "=q4=Tranquillien Defender's Girdle", "=ds=#s2#", "", "18%" }, -- Tranquillien Defender's Girdle
+            { 11, 28164, "", "=q4=Tranquillien Flamberge", "=ds=#s2#", "", "18%" }, -- Tranquillien Flamberge
+            { 12, 132571, "", "=q4=Woodrunner's Footpads", "=ds=#s2#", "", "18%" }, -- Woodrunner's Footpads
+            { 13, 132572, "", "=q4=Deathstalker's Hauberk", "=ds=#s2#", "", "18%" }, -- Deathstalker's Hauberk
+            { 14, 132573, "", "=q4=Tranquillen Pathfinder's Cinch", "=ds=#s2#", "", "18%" } -- Tranquillen Pathfinder's Cinch
+        }
+    },
+    info = {
+        name = BabbleBoss["Ghostlands"],
+        module = moduleName,
+        instance = "Ghostlands",
+    },
+};
