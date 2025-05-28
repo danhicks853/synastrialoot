@@ -238,7 +238,7 @@ Synastria_Data["Netherstorm"] = {
         instance = "Netherstorm",
     },
 };
-Synastria_Data["Ghostlands"] = {
+Synastria_Data["Provisioner Vredigar"] = {
     ["Normal"] = {
         {
             { 1, 22985, "", "=q4=Suncrown Breastplate", "=ds=#s2#", "", "18%" }, -- Suncrown Breastplate
@@ -258,7 +258,7 @@ Synastria_Data["Ghostlands"] = {
         }
     },
     info = {
-        name = BabbleBoss["Ghostlands"],
+        name = BabbleBoss["Provisioner Vredigar"],
         module = moduleName,
         instance = "Ghostlands",
     },

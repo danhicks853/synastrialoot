@@ -34,7 +34,7 @@ frame:SetScript("OnEvent", function(self, event, addonName)
 				----------------------
 				["Ghostlands"] = {
 					["Bosses"] = {
-						{ "Ghostlands", 1 },
+						{ "Provisioner Vredigar", 1 },
 					},
 					["Info"] = { "Ghostlands", "VendorArmor", mapname = "Ghostlands" },
 				},
