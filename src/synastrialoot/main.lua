@@ -226,26 +226,28 @@ function GetZoneLootData(callback)
             local bossKey = bossInfo[1]
             local bossData = Synastria_Data[bossKey]
             local items = {}
-            if string.find(diff, "Heroic") then
-                if bossData and bossData["Heroic"] then
-                    for _, group in ipairs(bossData["Heroic"]) do
-                        for _, itemEntry in ipairs(group) do
-                            if itemEntry[2] then
-                                table.insert(items, itemEntry[2])
-                            end
-                        end
-                    end
-                end
+            local lootKey
+            
+            if diff == "25ManHeroic" or diff == "25Man Heroic" or diff == "25 Player (Heroic)" then
+                lootKey = "25ManHeroic"
+            elseif diff == "25Man" then
+                lootKey = "25Man"
+            elseif diff == "Heroic" then
+                lootKey = "Heroic"
+            elseif diff == "Normal" then
+                lootKey = "Normal"
             elseif string.find(diff, "Mythic") then
-                if bossData and bossData["Mythic"] then
-                    for _, group in ipairs(bossData["Mythic"]) do
-                        for _, itemEntry in ipairs(group) do
-                            if itemEntry[2] then
-                                table.insert(items, itemEntry[2])
-                            end
+                lootKey = "Mythic"
+            end
+            if bossData and lootKey and bossData[lootKey] then
+                for _, group in ipairs(bossData[lootKey]) do
+                    for _, itemEntry in ipairs(group) do
+                        if itemEntry[2] then
+                            table.insert(items, itemEntry[2])
                         end
                     end
                 end
+
             elseif diff == "25Man" then
                 if bossData and bossData["25Man"] then
                     for _, group in ipairs(bossData["25Man"]) do
@@ -256,9 +258,10 @@ function GetZoneLootData(callback)
                         end
                     end
                 end
-            elseif string.find(diff, "25Man Heroic") then
-                if bossData and bossData["25Man Heroic"] then
-                    for _, group in ipairs(bossData["25Man Heroic"]) do
+            elseif diff == "25Man Heroic" or diff == "25ManHeroic" or string.find(diff, "25Man Heroic") or string.find(diff, "25ManHeroic") then
+                local heroicLoot = bossData["25Man Heroic"] or bossData["25ManHeroic"]
+                if bossData and heroicLoot then
+                    for _, group in ipairs(heroicLoot) do
                         for _, itemEntry in ipairs(group) do
                             if itemEntry[2] then
                                 table.insert(items, itemEntry[2])
@@ -266,7 +269,6 @@ function GetZoneLootData(callback)
                         end
                     end
                 end
-            else
                 if bossData and bossData["Normal"] then
                     for _, group in ipairs(bossData["Normal"]) do
                         for _, itemEntry in ipairs(group) do

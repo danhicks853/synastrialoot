@@ -549,20 +549,19 @@ frame:SetScript("OnEvent", function(self, event, addonName)
 					},
 				},
 
-				["TrialOfTheCrusader"] = {
+				["Trial Of The Crusader"] = {
 					["Bosses"] = {
-						{ "TrialOftheCrusaderNorthrendBeasts",  1 },
-						{ "TrialOftheCrusaderLordJaraxxus",     2 },
-						{ "TrialOftheCrusaderFactionChampions", 3 },
-						{ "TrialOftheCrusaderTwinValkyr",       4 },
-						{ "TrialOftheCrusaderAnubarak",         5 },
-						{ "TrialOftheCrusaderTribute",          6 },
-						{ "TrialOftheCrusaderPatterns",         7 },
+						{ "TheBeastsOfNorthrend",  1 },
+						{ "LordJaraxxus",     		  2 },
+						{ "FactionChampions", 		  3 },
+						{ "TheTwinValkyr",         4 },
+						{ "Anubarak",         		  5 },
+						{ "Tribute",          		  6 },
 					},
 					["Info"] = {
 						BabbleZone["Trial of the Crusader"],
 						"SynastriaWotLK",
-						mapname = "TheArgentColiseum",
+						mapname = "TrialOfTheCrusader",
 						raid = true,
 					},
 				},

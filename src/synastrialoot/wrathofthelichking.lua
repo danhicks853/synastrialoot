@@ -5223,7 +5223,7 @@ Synastria_Data["TrialOfTheChampionTheBlackKnight"] = {
 --- Trial of the Crusader ---
 -----------------------------
 
-Synastria_Data["TrialOftheCrusaderNorthrendBeasts"] = {
+Synastria_Data["TheBeastsOfNorthrend"] = {
 	["Normal"] = {
 		{
 			{ 1,  47853, "", "=q4=Acidmaw Treads",                  "=ds=#s12#, #a2#", "", "8.3%" },
@@ -5238,8 +5238,6 @@ Synastria_Data["TrialOftheCrusaderNorthrendBeasts"] = {
 			{ 10, 47857, "", "=q4=Pauldrons of the Glacial Wilds",  "=ds=#s3#, #a2#",  "", "8.3%" },
 			{ 11, 47860, "", "=q4=Pauldrons of the Spirit Walker",  "=ds=#s3#, #a3#",  "", "8.3%" },
 			{ 12, 47856, "", "=q4=Scepter of Imprisoned Souls",     "=ds=#w12#",       "", "8.3%" },
-		},
-		{
 			{ 1,  47608, "", "=q4=Acidmaw Boots",                       "=ds=#s12#, #a2#", "", "8.3%" },
 			{ 2,  47610, "", "=q4=Armbands of the Northern Stalker",    "=ds=#s8#, #a3#",  "", "8.3%" },
 			{ 3,  47615, "", "=q4=Belt of the Frozen Reach",            "=ds=#s10#, #a4#", "", "8.3%" },
@@ -5270,8 +5268,6 @@ Synastria_Data["TrialOftheCrusaderNorthrendBeasts"] = {
 			{ 11, 47999, "", "=q4=Pauldrons of the Spirit Walker",  "=ds=#s3#, #a3#",  "", "8.3%" },
 			{ 12, 47995, "", "=q4=Scepter of Imprisoned Souls",     "=ds=#w12#",       "", "8.3%" },
 			{ 16, 47556, "", "=q2=Crusader Orb",                    "=ds=#e6#",        "", "100%" },
-		},
-		{
 			{ 1,  47919, "", "=q4=Acidmaw Boots",                       "=ds=#s12#, #a2#", "", "8.3%" },
 			{ 2,  47916, "", "=q4=Armbands of the Northern Stalker",    "=ds=#s8#, #a3#",  "", "8.3%" },
 			{ 3,  47924, "", "=q4=Belt of the Frozen Reach",            "=ds=#s10#, #a4#", "", "8.3%" },
@@ -5306,8 +5302,6 @@ Synastria_Data["TrialOftheCrusaderNorthrendBeasts"] = {
 			{ 15, 47255, "", "=q4=Stygian Bladebreaker",                "=ds=#h1#, #w4#",  "", "6.7%" },
 			{ 16, 47242, "", "=q4=Trophy of the Crusade",               "=ds=#m42# #e15#", "", "100%" },
 			{ 18, 47556, "", "=q2=Crusader Orb",                        "=ds=#e6#",        "", "100%" },
-		},
-		{
 			{ 1,  46959, "", "=q4=Band of the Violent Temperment",         "=ds=#s13#",       "", "6.7%" },
 			{ 2,  46990, "", "=q4=Belt of the Ice Burrower",               "=ds=#s10#, #a3#", "", "6.7%" },
 			{ 3,  46979, "", "=q4=Blade of Tarasque",                      "=ds=#h3#, #w4#",  "", "6.7%" },
@@ -5327,55 +5321,53 @@ Synastria_Data["TrialOftheCrusaderNorthrendBeasts"] = {
 			{ 18, 47556, "", "=q2=Crusader Orb",                           "=ds=#e6#",        "", "100%" },
 		},
 	},
-	["25ManHeroic"] = {
+	["25Man Heroic"] = {
 		{
-			{ 1,  47422, "", "=q4=Barb of Tarasque",                    "=ds=#h3#, #w4#",  "", "6.7%" },
-			{ 2,  47419, "", "=q4=Belt of the Tenebrous Mist",          "=ds=#s10#, #a1#", "", "6.7%" },
-			{ 3,  47426, "", "=q4=Binding of the Ice Burrower",         "=ds=#s10#, #a3#", "", "6.7%" },
-			{ 4,  47414, "", "=q4=Boneshatter Vambraces",               "=ds=#s8#, #a4#",  "", "6.7%" },
-			{ 5,  47423, "", "=q4=Boots of the Harsh Winter",           "=ds=#s12#, #a2#", "", "6.7%" },
-			{ 6,  47418, "", "=q4=Cloak of the Untamed Predator",       "=ds=#s4#",        "", "6.7%" },
-			{ 7,  47412, "", "=q4=Cuirass of Cruel Intent",             "=ds=#s5#, #a3#",  "", "6.7%" },
-			{ 8,  47417, "", "=q4=Drape of the Refreshing Winds",       "=ds=#s4#",        "", "6.7%" },
-			{ 9,  47425, "", "=q4=Flowing Robes of Ascent",             "=ds=#s5#, #a1#",  "", "6.7%" },
-			{ 10, 47421, "", "=q4=Forlorn Barrier",                     "=ds=#w8#",        "", "6.7%" },
-			{ 11, 47415, "", "=q4=Hauberk of the Towering Monstrosity", "=ds=#s5#, #a4#",  "", "6.7%" },
-			{ 12, 47420, "", "=q4=Legwraps of the Broken Beast",        "=ds=#s11#, #a2#", "", "6.7%" },
-			{ 13, 47413, "", "=q4=Ring of the Violent Temperament",     "=ds=#s13#",       "", "6.7%" },
-			{ 14, 47424, "", "=q4=Sabatons of the Courageous",          "=ds=#s12#, #a4#", "", "6.7%" },
-			{ 15, 47416, "", "=q4=Stygian Bladebreaker",                "=ds=#h1#, #w4#",  "", "6.7%" },
-			{ 16, 47242, "", "=q4=Trophy of the Crusade",               "=ds=#m42# #e15#", "", "100%" },
-			{ 18, 47556, "", "=q2=Crusader Orb",                        "=ds=#e6#",        "", "100%" },
-		},
-		{
-			{ 1,  46966, "", "=q4=Band of the Violent Temperment",         "=ds=#s13#",       "", "6.7%" },
-			{ 2,  46991, "", "=q4=Belt of the Ice Burrower",               "=ds=#s10#, #a3#", "", "6.7%" },
-			{ 3,  46980, "", "=q4=Blade of Tarasque",                      "=ds=#h3#, #w4#",  "", "6.7%" },
-			{ 4,  46967, "", "=q4=Boneshatter Armplates",                  "=ds=#s8#, #a4#",  "", "6.7%" },
-			{ 5,  46986, "", "=q4=Boots of the Courageous",                "=ds=#s12#, #a4#", "", "6.7%" },
-			{ 6,  46989, "", "=q4=Boots of the Unrelenting Storm",         "=ds=#s12#, #a2#", "", "6.7%" },
-			{ 7,  46965, "", "=q4=Breastplate of Cruel Intent",            "=ds=#s5#, #a3#",  "", "6.7%" },
-			{ 8,  46968, "", "=q4=Chestplate of the Towering Monstrosity", "=ds=#s5#, #a4#",  "", "6.7%" },
-			{ 9,  46973, "", "=q4=Cord of the Tenebrous Mist",             "=ds=#s10#, #a1#", "", "6.7%" },
-			{ 10, 46964, "", "=q4=Crystal Plated Vanguard",                "=ds=#w8#",        "", "6.7%" },
-			{ 11, 46971, "", "=q4=Drape of the Untamed Predator",          "=ds=#s4#",        "", "6.7%" },
-			{ 12, 46993, "", "=q4=Flowing Vestments of Ascent",            "=ds=#s5#, #a1#",  "", "6.7%" },
-			{ 13, 46975, "", "=q4=Leggings of the Broken Beast",           "=ds=#s11#, #a2#", "", "6.7%" },
-			{ 14, 46977, "", "=q4=Shawl of the Refreshing Winds",          "=ds=#s4#",        "", "6.7%" },
-			{ 15, 46969, "", "=q4=Steel Bladebreaker",                     "=ds=#h1#, #w4#",  "", "6.7%" },
-			{ 16, 47242, "", "=q4=Trophy of the Crusade",                  "=ds=#m42# #e15#", "", "100%" },
-			{ 18, 47556, "", "=q2=Crusader Orb",                           "=ds=#e6#",        "", "100%" },
-		},
-	},
+			{ 1, 47422, "", "=q4=Barb of Tarasque", "=ds=#h3#, #w4#", "", "6.7%"};
+			{ 2, 47419, "", "=q4=Belt of the Tenebrous Mist", "=ds=#s10#, #a1#", "", "6.7%"};
+			{ 3, 47426, "", "=q4=Binding of the Ice Burrower", "=ds=#s10#, #a3#", "", "6.7%"};
+			{ 4, 47414, "", "=q4=Boneshatter Vambraces", "=ds=#s8#, #a4#", "", "6.7%"};
+			{ 5, 47423, "", "=q4=Boots of the Harsh Winter", "=ds=#s12#, #a2#", "", "6.7%"};
+			{ 6, 47418, "", "=q4=Cloak of the Untamed Predator", "=ds=#s4#", "", "6.7%"};
+			{ 7, 47412, "", "=q4=Cuirass of Cruel Intent", "=ds=#s5#, #a3#", "", "6.7%"};
+			{ 8, 47417, "", "=q4=Drape of the Refreshing Winds", "=ds=#s4#", "", "6.7%"};
+			{ 9, 47425, "", "=q4=Flowing Robes of Ascent", "=ds=#s5#, #a1#", "", "6.7%"};
+			{ 10, 47421, "", "=q4=Forlorn Barrier", "=ds=#w8#", "", "6.7%"};
+			{ 11, 47415, "", "=q4=Hauberk of the Towering Monstrosity", "=ds=#s5#, #a4#", "", "6.7%"};
+			{ 12, 47420, "", "=q4=Legwraps of the Broken Beast", "=ds=#s11#, #a2#", "", "6.7%"};
+			{ 13, 47413, "", "=q4=Ring of the Violent Temperament", "=ds=#s13#", "", "6.7%"};
+			{ 14, 47424, "", "=q4=Sabatons of the Courageous", "=ds=#s12#, #a4#", "", "6.7%"};
+			{ 15, 47416, "", "=q4=Stygian Bladebreaker", "=ds=#h1#, #w4#", "", "6.7%"};
+			{ 16, 47242, "", "=q4=Trophy of the Crusade", "=ds=#m42# #e15#", "", "100%"};
+			{ 18, 47556, "", "=q2=Crusader Orb", "=ds=#e6#", "", "100%"};
+			{ 19, 46966, "", "=q4=Band of the Violent Temperment", "=ds=#s13#", "", "6.7%"};
+			{ 20, 46991, "", "=q4=Belt of the Ice Burrower", "=ds=#s10#, #a3#", "", "6.7%"};
+			{ 21, 46980, "", "=q4=Blade of Tarasque", "=ds=#h3#, #w4#", "", "6.7%"};
+			{ 22, 46967, "", "=q4=Boneshatter Armplates", "=ds=#s8#, #a4#", "", "6.7%"};
+			{ 23, 46986, "", "=q4=Boots of the Courageous", "=ds=#s12#, #a4#", "", "6.7%"};
+			{ 24, 46989, "", "=q4=Boots of the Unrelenting Storm", "=ds=#s12#, #a2#", "", "6.7%"};
+			{ 25, 46965, "", "=q4=Breastplate of Cruel Intent", "=ds=#s5#, #a3#", "", "6.7%"};
+			{ 26, 46968, "", "=q4=Chestplate of the Towering Monstrosity", "=ds=#s5#, #a4#", "", "6.7%"};
+			{ 27, 46973, "", "=q4=Cord of the Tenebrous Mist", "=ds=#s10#, #a1#", "", "6.7%"};
+			{ 28, 46964, "", "=q4=Crystal Plated Vanguard", "=ds=#w8#", "", "6.7%"};
+			{ 29, 46971, "", "=q4=Drape of the Untamed Predator", "=ds=#s4#", "", "6.7%"};
+			{ 30, 46993, "", "=q4=Flowing Vestments of Ascent", "=ds=#s5#, #a1#", "", "6.7%"};
+			{ 31, 46975, "", "=q4=Leggings of the Broken Beast", "=ds=#s11#, #a2#", "", "6.7%"};
+			{ 32, 46977, "", "=q4=Shawl of the Refreshing Winds", "=ds=#s4#", "", "6.7%"};
+			{ 33, 46969, "", "=q4=Steel Bladebreaker", "=ds=#h1#, #w4#", "", "6.7%"};
+			{ 34, 47242, "", "=q4=Trophy of the Crusade", "=ds=#m42# #e15#", "", "100%"};
+			{ 36, 47556, "", "=q2=Crusader Orb", "=ds=#e6#", "", "100%"};
+		};
+	};
 	info = {
-		name = BabbleBoss["The Beasts of Northrend"],
+		name = BabbleBoss["TheBeastsOfNorthrend"],
 		module = moduleName,
-		instance = "TrialOfTheCrusader",
+		instance = "TrialoftheCrusader",
 	},
 }
 
-Synastria_Data["TrialOftheCrusaderLordJaraxxus"] = {
-	["Normal`"] = {
+Synastria_Data["LordJaraxxus"] = {
+	["Normal"] = {
 		{
 			{ 1,  47869, "", "=q4=Armplates of the Nether Lord",      "=ds=#s8#, #a4#",  "", "7.7%" },
 			{ 2,  47863, "", "=q4=Belt of the Bloodhoof Emissary",    "=ds=#s10#, #a2#", "", "7.7%" },
@@ -5390,8 +5382,6 @@ Synastria_Data["TrialOftheCrusaderLordJaraxxus"] = {
 			{ 11, 47868, "", "=q4=Planestalker Band",                 "=ds=#s13#",       "", "7.7%" },
 			{ 12, 49236, "", "=q4=Sabatons of Tortured Space",        "=ds=#s12#, #a3#", "", "7.7%" },
 			{ 13, 47867, "", "=q4=Warsong Poacher's Greaves",         "=ds=#s12#, #a3#", "", "7.7%" },
-		},
-		{
 			{ 1,  47619, "", "=q4=Amulet of Binding Elements",        "=ds=#s2#",        "", "7.7%" },
 			{ 2,  47680, "", "=q4=Armguards of the Nether Lord",      "=ds=#s8#, #a4#",  "", "7.7%" },
 			{ 3,  47669, "", "=q4=Belt of the Winter Solstice",       "=ds=#s10#, #a2#", "", "7.7%" },
@@ -5423,8 +5413,6 @@ Synastria_Data["TrialOftheCrusaderLordJaraxxus"] = {
 			{ 12, 49237, "", "=q4=Sabatons of Tortured Space",        "=ds=#s12#, #a3#", "", "7.7%" },
 			{ 13, 48006, "", "=q4=Warsong Poacher's Greaves",         "=ds=#s12#, #a3#", "", "7.7%" },
 			{ 16, 47556, "", "=q2=Crusader Orb",                      "=ds=#e6#",        "", "100%" },
-		},
-		{
 			{ 1,  47930, "", "=q4=Amulet of Binding Elements",        "=ds=#s2#",        "", "7.7%" },
 			{ 2,  47935, "", "=q4=Armguards of the Nether Lord",      "=ds=#s8#, #a4#",  "", "7.7%" },
 			{ 3,  47929, "", "=q4=Belt of the Winter Solstice",       "=ds=#s10#, #a2#", "", "7.7%" },
@@ -5460,8 +5448,6 @@ Synastria_Data["TrialOftheCrusaderLordJaraxxus"] = {
 			{ 15, 47280, "", "=q4=Wristwraps of Cloudy Omen",        "=ds=#s8#, #a3#",  "", "6.7%" },
 			{ 16, 47242, "", "=q4=Trophy of the Crusade",            "=ds=#m42# #e15#", "", "100%" },
 			{ 18, 47556, "", "=q2=Crusader Orb",                     "=ds=#e6#",        "", "100%" },
-		},
-		{
 			{ 1,  46999, "", "=q4=Bloodbath Belt",                   "=ds=#s10#, #a4#", "", "6.7%" },
 			{ 2,  47056, "", "=q4=Bracers of Cloudy Omen",           "=ds=#s8#, #a3#",  "", "6.7%" },
 			{ 3,  47055, "", "=q4=Bracers of the Autumn Willow",     "=ds=#s8#, #a2#",  "", "6.7%" },
@@ -5500,8 +5486,6 @@ Synastria_Data["TrialOftheCrusaderLordJaraxxus"] = {
 			{ 15, 47441, "", "=q4=Wristwraps of Cloudy Omen",        "=ds=#s8#, #a3#",  "", "6.7%" },
 			{ 16, 47242, "", "=q4=Trophy of the Crusade",            "=ds=#m42# #e15#", "", "100%" },
 			{ 18, 47556, "", "=q2=Crusader Orb",                     "=ds=#e6#",        "", "100%" },
-		},
-		{
 			{ 1,  47002, "", "=q4=Bloodbath Belt",                   "=ds=#s10#, #a4#", "", "6.7%" },
 			{ 2,  47068, "", "=q4=Bracers of Cloudy Omen",           "=ds=#s8#, #a3#",  "", "6.7%" },
 			{ 3,  47066, "", "=q4=Bracers of the Autumn Willow",     "=ds=#s8#, #a2#",  "", "6.7%" },
@@ -5522,13 +5506,13 @@ Synastria_Data["TrialOftheCrusaderLordJaraxxus"] = {
 		},
 	},
 	info = {
-		name = BabbleBoss["Lord Jaraxxus"],
+		name = BabbleBoss["LordJaraxxus"],
 		module = moduleName,
-		instance = "TrialOfTheCrusader",
+		instance = "TrialoftheCrusader",
 	},
 }
 
-Synastria_Data["TrialOftheCrusaderFactionChampions"] = {
+Synastria_Data["FactionChampions"] = {
 	["Normal"] = {
 		{
 			{ 1,  47880, "", "=q4=Binding Stone",                  "=ds=#s14#",       "", "10%" },
@@ -5541,8 +5525,6 @@ Synastria_Data["TrialOftheCrusaderFactionChampions"] = {
 			{ 8,  47873, "", "=q4=Sunreaver Magus' Sandals",       "=ds=#s12#, #a1#", "", "10%" },
 			{ 9,  47875, "", "=q4=Sunreaver Ranger's Helm",        "=ds=#s1#, #a3#",  "", "10%" },
 			{ 10, 47881, "", "=q4=Vengeance of the Forsaken",      "=ds=#s14#",       "", "10%" },
-		},
-		{
 			{ 1,  47728, "", "=q4=Binding Light",                    "=ds=#s14#",       "", "10%" },
 			{ 2,  47724, "", "=q4=Blade of the Silver Disciple",     "=ds=#h3#, #w4#",  "", "10%" },
 			{ 3,  47717, "", "=q4=Faceplate of the Silver Champion", "=ds=#s1#, #a4#",  "", "10%" },
@@ -5568,8 +5550,6 @@ Synastria_Data["TrialOftheCrusaderFactionChampions"] = {
 			{ 9,  48014, "", "=q4=Sunreaver Ranger's Helm",        "=ds=#s1#, #a3#",  "", "10%" },
 			{ 10, 48020, "", "=q4=Vengeance of the Forsaken",      "=ds=#s14#",       "", "10%" },
 			{ 16, 47556, "", "=q2=Crusader Orb",                   "=ds=#e6#",        "", "100%" },
-		},
-		{
 			{ 1,  47947, "", "=q4=Binding Light",                    "=ds=#s14#",       "", "10%" },
 			{ 2,  47941, "", "=q4=Blade of the Silver Disciple",     "=ds=#h3#, #w4#",  "", "10%" },
 			{ 3,  47943, "", "=q4=Faceplate of the Silver Champion", "=ds=#s1#, #a4#",  "", "10%" },
@@ -5602,8 +5582,6 @@ Synastria_Data["TrialOftheCrusaderFactionChampions"] = {
 			{ 15, 47291, "", "=q4=Shroud of Displacement",            "=ds=#s4#",        "", "6.7%" },
 			{ 16, 47242, "", "=q4=Trophy of the Crusade",             "=ds=#m42# #e15#", "", "100%" },
 			{ 18, 47556, "", "=q2=Crusader Orb",                      "=ds=#e6#",        "", "100%" },
-		},
-		{
 			{ 1,  47079, "", "=q4=Bastion of Purity",                     "=ds=#w8#",        "", "6.7%" },
 			{ 2,  47092, "", "=q4=Boots of the Mourning Widow",           "=ds=#s12#, #a1#", "", "6.7%" },
 			{ 3,  47090, "", "=q4=Boots of Tremoring Earth",              "=ds=#s12#, #a3#", "", "6.7%" },
@@ -5642,8 +5620,6 @@ Synastria_Data["TrialOftheCrusaderFactionChampions"] = {
 			{ 15, 47452, "", "=q4=Shroud of Displacement",            "=ds=#s4#",        "", "6.7%" },
 			{ 16, 47242, "", "=q4=Trophy of the Crusade",             "=ds=#m42# #e15#", "", "100%" },
 			{ 18, 47556, "", "=q2=Crusader Orb",                      "=ds=#e6#",        "", "100%" },
-		},
-		{
 			{ 1,  47085, "", "=q4=Bastion of Purity",                     "=ds=#w8#",        "", "6.7%" },
 			{ 2,  47097, "", "=q4=Boots of the Mourning Widow",           "=ds=#s12#, #a1#", "", "6.7%" },
 			{ 3,  47099, "", "=q4=Boots of Tremoring Earth",              "=ds=#s12#, #a3#", "", "6.7%" },
@@ -5664,13 +5640,13 @@ Synastria_Data["TrialOftheCrusaderFactionChampions"] = {
 		},
 	},
 	info = {
-		name = BabbleBoss["Faction Champions"],
+		name = BabbleBoss["FactionChampions"],
 		module = moduleName,
-		instance = "TrialOfTheCrusader",
+		instance = "TrialoftheCrusader",
 	},
 }
 
-Synastria_Data["TrialOftheCrusaderTwinValkyr"] = {
+Synastria_Data["TheTwinValkyr"] = {
 	["Normal"] = {
 		{
 			{ 1,  47888, "", "=q4=Band of the Twin Val'kyr",        "=ds=#s13#",       "", "16.7%" },
@@ -5686,8 +5662,6 @@ Synastria_Data["TrialOftheCrusaderTwinValkyr"] = {
 			{ 11, 47889, "", "=q4=Looming Shadow Wraps",            "=ds=#s9#, #a1#",  "", "14.3%" },
 			{ 12, 49232, "", "=q4=Sandals of the Grieving Soul",    "=ds=#s12#, #a1#", "", "14.3%" },
 			{ 13, 47893, "", "=q4=Sen'jin Ritualist Gloves",        "=ds=#s9#, #a3#",  "", "14.3%" },
-		},
-		{
 			{ 1,  47739, "", "=q4=Armor of Shifting Shadows",        "=ds=#s5#, #a2#",  "", "16.7%" },
 			{ 2,  47736, "", "=q4=Icefall Blade",                    "=ds=#h1#, #w4#",  "", "16.7%" },
 			{ 3,  47700, "", "=q4=Loop of the Twin Val'kyr",         "=ds=#s13#",       "", "16.7%" },
@@ -5719,8 +5693,6 @@ Synastria_Data["TrialOftheCrusaderTwinValkyr"] = {
 			{ 12, 49233, "", "=q4=Sandals of the Grieving Soul",    "=ds=#s12#, #a1#", "", "14.3%" },
 			{ 13, 48038, "", "=q4=Sen'jin Ritualist Gloves",        "=ds=#s9#, #a3#",  "", "14.3%" },
 			{ 16, 47556, "", "=q2=Crusader Orb",                    "=ds=#e6#",        "", "100%" },
-		},
-		{
 			{ 1,  47954, "", "=q4=Armor of Shifting Shadows",        "=ds=#s5#, #a2#",  "", "16.7%" },
 			{ 2,  47953, "", "=q4=Icefall Blade",                    "=ds=#h1#, #w4#",  "", "16.7%" },
 			{ 3,  47955, "", "=q4=Loop of the Twin Val'kyr",         "=ds=#s13#",       "", "16.7%" },
@@ -5756,8 +5728,6 @@ Synastria_Data["TrialOftheCrusaderTwinValkyr"] = {
 			{ 15, 47302, "", "=q4=Twin's Pact",                   "=ds=#w9#",        "", "10%" },
 			{ 16, 47242, "", "=q4=Trophy of the Crusade",         "=ds=#m42# #e15#", "", "100%" },
 			{ 18, 47556, "", "=q2=Crusader Orb",                  "=ds=#e6#",        "", "100%" },
-		},
-		{
 			{ 1,  47141, "", "=q4=Bindings of Dark Essence",       "=ds=#s8#, #a1#",  "", "20%" },
 			{ 2,  47142, "", "=q4=Breastplate of the Frozen Lake", "=ds=#s5#, #a4#",  "", "20%" },
 			{ 3,  47138, "", "=q4=Chalice of Searing Light",       "=ds=#s15#",       "", "20%" },
@@ -5796,8 +5766,6 @@ Synastria_Data["TrialOftheCrusaderTwinValkyr"] = {
 			{ 15, 47463, "", "=q4=Twin's Pact",                   "=ds=#w9#",        "", "10%" },
 			{ 16, 47242, "", "=q4=Trophy of the Crusade",         "=ds=#m42# #e15#", "", "100%" },
 			{ 18, 47556, "", "=q2=Crusader Orb",                  "=ds=#e6#",        "", "100%" },
-		},
-		{
 			{ 1,  47143, "", "=q4=Bindings of Dark Essence",       "=ds=#s8#, #a1#",  "", "20%" },
 			{ 2,  47147, "", "=q4=Breastplate of the Frozen Lake", "=ds=#s5#, #a4#",  "", "20%" },
 			{ 3,  47146, "", "=q4=Chalice of Searing Light",       "=ds=#s15#",       "", "20%" },
@@ -5818,13 +5786,13 @@ Synastria_Data["TrialOftheCrusaderTwinValkyr"] = {
 		},
 	},
 	info = {
-		name = BabbleBoss["The Twin Val'kyr"],
+		name = BabbleBoss["TheTwinValkyr"],
 		module = moduleName,
-		instance = "TrialOfTheCrusader",
+		instance = "TrialoftheCrusader",
 	},
 }
 
-Synastria_Data["TrialOftheCrusaderAnubarak"] = {
+Synastria_Data["Anubarak"] = {
 	["Normal"] = {
 		{
 			{ 1,  47910, "", "=q4=Aegis of the Coliseum",           "=ds=#w8#",        "", "5.6%" },
@@ -5845,8 +5813,6 @@ Synastria_Data["TrialOftheCrusaderAnubarak"] = {
 			{ 16, 47904, "", "=q4=Shoulderpads of the Snow Bandit", "=ds=#s3#, #a2#",  "", "5.6%" },
 			{ 17, 47896, "", "=q4=Stoneskin Chestplate",            "=ds=#s5#, #a4#",  "", "5.6%" },
 			{ 18, 47908, "", "=q4=Sunwalker Legguards",             "=ds=#s11#, #a4#", "", "5.6%" },
-		},
-		{
 			{ 1,  47809, "", "=q4=Argent Resolve",                   "=ds=#h3#, #w6#",  "", "5.6%" },
 			{ 2,  47741, "", "=q4=Baelgun's Heavy Crossbow",         "=ds=#w3#",        "", "5.6%" },
 			{ 3,  47835, "", "=q4=Bulwark of the Royal Guard",       "=ds=#w8#",        "", "5.6%" },
@@ -5888,8 +5854,6 @@ Synastria_Data["TrialOftheCrusaderAnubarak"] = {
 			{ 17, 48041, "", "=q4=Stoneskin Chestplate",                   "=ds=#s5#, #a4#",  "", "5.6%" },
 			{ 18, 48053, "", "=q4=Sunwalker Legguards",                    "=ds=#s11#, #a4#", "", "5.6%" },
 			{ 20, 47556, "", "=q2=Crusader Orb",                           "=ds=#e6#",        "", "100%" },
-		},
-		{
 			{ 1,  47962, "", "=q4=Argent Resolve",                   "=ds=#h3#, #w6#",  "", "5.6%" },
 			{ 2,  47975, "", "=q4=Baelgun's Heavy Crossbow",         "=ds=#w3#",        "", "5.6%" },
 			{ 3,  47978, "", "=q4=Bulwark of the Royal Guard",       "=ds=#w8#",        "", "5.6%" },
@@ -5935,8 +5899,6 @@ Synastria_Data["TrialOftheCrusaderAnubarak"] = {
 			{ 20, 47311, "", "=q4=Waistguard of Deathly Dominion",  "=ds=#s10#, #a3#", "", "5%" },
 			{ 22, 47242, "", "=q4=Trophy of the Crusade",           "=ds=#m42# #e15#", "", "100%" },
 			{ 24, 47556, "", "=q2=Crusader Orb",                    "=ds=#e6#",        "", "100%" },
-		},
-		{
 			{ 1,  47233, "", "=q4=Archon Glaive",                   "=ds=#w7#",        "", "5%" },
 			{ 2,  47203, "", "=q4=Armbands of the Ashen Saint",     "=ds=#s8#, #a1#",  "", "5%" },
 			{ 3,  47054, "", "=q4=Band of Deplorable Violence",     "=ds=#s13#",       "", "5%" },
@@ -5985,8 +5947,6 @@ Synastria_Data["TrialOftheCrusaderAnubarak"] = {
 			{ 20, 47472, "", "=q4=Waistguard of Deathly Dominion",  "=ds=#s10#, #a3#", "", "5%" },
 			{ 22, 47242, "", "=q4=Trophy of the Crusade",           "=ds=#m42# #e15#", "", "100%" },
 			{ 24, 47556, "", "=q2=Crusader Orb",                    "=ds=#e6#",        "", "100%" },
-		},
-		{
 			{ 1,  47239, "", "=q4=Archon Glaive",                   "=ds=#w7#",        "", "5%" },
 			{ 2,  47208, "", "=q4=Armbands of the Ashen Saint",     "=ds=#s8#, #a1#",  "", "5%" },
 			{ 3,  47237, "", "=q4=Band of Deplorable Violence",     "=ds=#s13#",       "", "5%" },
@@ -6012,19 +5972,17 @@ Synastria_Data["TrialOftheCrusaderAnubarak"] = {
 		},
 	},
 	info = {
-		name = BabbleBoss["Anub'arak"],
+		name = BabbleBoss["Anubarak"],
 		module = moduleName,
-		instance = "TrialOfTheCrusader",
+		instance = "TrialoftheCrusader",
 	},
 }
 
-Synastria_Data["TrialOftheCrusaderTribute"] = {
+Synastria_Data["Tribute"] = {
 	["Heroic"] = {
 		{
-			{ 1,  0,     "INV_Box_01", "=q6=" .. AL["Bonus Loot"],              "#ACHIEVEMENTID:3918#" }, -- Call of the Grand Crusade
 			{ 2,  47242, "",           "=q4=Trophy of the Crusade",             "=ds=#m42# #e15# =q1=(x2)", "", "100%" },
 			{ 4,  47556, "",           "=q2=Crusader Orb",                      "=ds=#e6#",                 "", "100%" },
-			{ 6,  0,     "INV_Box_01", "=q6=" .. AL["Bonus Loot"],              "#ACHIEVEMENTID:3808#" }, -- A Tribute To Skill
 			{ 7,  48705, "",           "=q4=Attrition",                         "=ds=#w9#",                 "", "14.3%" },
 			{ 8,  48699, "",           "=q4=Blood and Glory",                   "=ds=#h1#, #w6#",           "", "14.3%" },
 			{ 9,  48697, "",           "=q4=Frenzystrike Longbow",              "=ds=#w2#",                 "", "14.3%" },
@@ -6032,21 +5990,15 @@ Synastria_Data["TrialOftheCrusaderTribute"] = {
 			{ 11, 48695, "",           "=q4=Mor'kosh, the Bloodreaver",         "=ds=#h2#, #w1#",           "", "14.3%" },
 			{ 12, 48701, "",           "=q4=Spellharvest",                      "=ds=#h3#, #w10#",          "", "14.3%" },
 			{ 13, 48703, "",           "=q4=The Facebreaker",                   "=ds=#h3#, #w13#",          "", "14.3%" },
-			{ 16, 0,     "INV_Box_01", "=q6=" .. AL["Bonus Loot"],              "#ACHIEVEMENTID:3809#" }, -- A Tribute to Mad Skill
 			{ 17, 47242, "",           "=q4=Trophy of the Crusade",             "=ds=#m42# #e15# =q1=(x2)", "", "100%" },
-			{ 19, 0,     "INV_Box_01", "=q6=" .. AL["Bonus Loot"],              "#ACHIEVEMENTID:3810#" }, -- A Tribute to Insanity
 			{ 20, 48668, "",           "=q4=Cloak of Serrated Blades",          "=ds=#s4#",                 "", "20%" },
 			{ 21, 48669, "",           "=q4=Cloak of the Triumphant Combatant", "=ds=#s4#",                 "", "20%" },
 			{ 22, 48670, "",           "=q4=Cloak of the Unflinching Guardian", "=ds=#s4#",                 "", "20%" },
 			{ 23, 48666, "",           "=q4=Drape of the Sunreavers",           "=ds=#s4#",                 "", "20%" },
 			{ 24, 48667, "",           "=q4=Shawl of the Devout Crusader",      "=ds=#s4#",                 "", "20%" },
 			{ 26, 49046, "",           "=q4=Swift Horde Wolf",                  "=ds=#e12# =ec1=#m6#",      "", "100%" },
-		},
-		{
-			{ 1,  0,     "INV_Box_01", "=q6=" .. AL["Bonus Loot"],              "#ACHIEVEMENTID:3918#" }, -- Call of the Grand Crusade
 			{ 2,  47242, "",           "=q4=Trophy of the Crusade",             "=ds=#m42# #e15# =q1=(x2)", "", "100%" },
 			{ 4,  47556, "",           "=q2=Crusader Orb",                      "=ds=#e6#",                 "", "100%" },
-			{ 6,  0,     "INV_Box_01", "=q6=" .. AL["Bonus Loot"],              "#ACHIEVEMENTID:3808#" }, -- A Tribute To Skill
 			{ 7,  48709, "",           "=q4=Heartcrusher",                      "=ds=#h3#, #w6#",           "", "14.3%" },
 			{ 8,  48714, "",           "=q4=Honor of the Fallen",               "=ds=#h1#, #w6#",           "", "14.3%" },
 			{ 9,  48713, "",           "=q4=Lothar's Edge",                     "=ds=#h2#, #w1#",           "", "14.3%" },
@@ -6054,9 +6006,7 @@ Synastria_Data["TrialOftheCrusaderTribute"] = {
 			{ 11, 48711, "",           "=q4=Rhok'shalla, the Shadow's Bane",    "=ds=#w2#",                 "", "14.3%" },
 			{ 12, 48708, "",           "=q4=Spellstorm Blade",                  "=ds=#h3#, #w10#",          "", "14.3%" },
 			{ 13, 48712, "",           "=q4=The Spinebreaker",                  "=ds=#h3#, #w13#",          "", "14.3%" },
-			{ 16, 0,     "INV_Box_01", "=q6=" .. AL["Bonus Loot"],              "#ACHIEVEMENTID:3809#" }, -- A Tribute to Mad Skill
 			{ 17, 47242, "",           "=q4=Trophy of the Crusade",             "=ds=#m42# #e15# =q1=(x2)", "", "100%" },
-			{ 19, 0,     "INV_Box_01", "=q6=" .. AL["Bonus Loot"],              "#ACHIEVEMENTID:3810#" }, -- A Tribute to Insanity
 			{ 20, 48673, "",           "=q4=Cloak of the Silver Covenant",      "=ds=#s4#",                 "", "20%" },
 			{ 21, 48675, "",           "=q4=Cloak of the Unmoving Guardian",    "=ds=#s4#",                 "", "20%" },
 			{ 22, 48674, "",           "=q4=Cloak of the Victorious Combatant", "=ds=#s4#",                 "", "20%" },
@@ -6067,12 +6017,10 @@ Synastria_Data["TrialOftheCrusaderTribute"] = {
 	},
 	["25ManHeroic"] = {
 		{
-			{ 1,  0,     "INV_Box_01", "=q6=" .. AL["Bonus Loot"],            "#ACHIEVEMENTID:3812#" }, -- Call of the Grand Crusade
 			{ 2,  47557, "",           "=q4=Regalia of the Grand Conqueror",  "=ds=#m42# #e15#",     "", "33.3%" },
 			{ 3,  47558, "",           "=q4=Regalia of the Grand Protector",  "=ds=#m42# #e15#",     "", "33.3%" },
 			{ 4,  47559, "",           "=q4=Regalia of the Grand Vanquisher", "=ds=#m42# #e15#",     "", "33.3%" },
 			{ 6,  47556, "",           "=q2=Crusader Orb",                    "=ds=#e6#",            "", "100%" },
-			{ 8,  0,     "INV_Box_01", "=q6=" .. AL["Bonus Loot"],            "#ACHIEVEMENTID:3817#" }, -- A Tribute To Skill
 			{ 9,  47528, "",           "=q4=Cudgel of the Damned",            "=ds=#h1#, #w6#",      "", "14.3%" },
 			{ 10, 47523, "",           "=q4=Fezzik's Autocannon",             "=ds=#w5#",            "", "14.3%" },
 			{ 11, 47516, "",           "=q4=Fleshrender",                     "=ds=#h2#, #w10#",     "", "14.3%" },
@@ -6080,24 +6028,18 @@ Synastria_Data["TrialOftheCrusaderTribute"] = {
 			{ 13, 47518, "",           "=q4=Mortalis",                        "=ds=#h3#, #w10#",     "", "14.3%" },
 			{ 14, 47513, "",           "=q4=Ogrim's Deflector",               "=ds=#h1#, #w10#",     "", "14.3%" },
 			{ 15, 47525, "",           "=q4=Sufferance",                      "=ds=#w9#",            "", "14.3%" },
-			{ 16, 0,     "INV_Box_01", "=q6=" .. AL["Bonus Loot"],            "#ACHIEVEMENTID:3818#" }, -- A Tribute to Mad Skill
 			{ 17, 47557, "",           "=q4=Regalia of the Grand Conqueror",  "=ds=#m42# #e15#",     "", "33.3%" },
 			{ 18, 47558, "",           "=q4=Regalia of the Grand Protector",  "=ds=#m42# #e15#",     "", "33.3%" },
 			{ 19, 47559, "",           "=q4=Regalia of the Grand Vanquisher", "=ds=#m42# #e15#",     "", "33.3%" },
-			{ 21, 0,     "INV_Box_01", "=q6=" .. AL["Bonus Loot"],            "#ACHIEVEMENTID:3819#" }, -- A Tribute to Insanity
 			{ 22, 47551, "",           "=q4=Aethas' Intensity",               "=ds=#s4#",            "", "20%" },
 			{ 23, 47550, "",           "=q4=Cairne's Endurance",              "=ds=#s4#",            "", "20%" },
 			{ 24, 47548, "",           "=q4=Garrosh's Rage",                  "=ds=#s4#",            "", "20%" },
 			{ 25, 47554, "",           "=q4=Lady Liadrin's Conviction",       "=ds=#s4#",            "", "20%" },
 			{ 26, 47546, "",           "=q4=Sylvanas' Cunning",               "=ds=#s4#",            "", "20%" },
-		},
-		{
-			{ 1,  0,     "INV_Box_01", "=q6=" .. AL["Bonus Loot"],            "#ACHIEVEMENTID:3812#" }, -- Call of the Grand Crusade
 			{ 2,  47557, "",           "=q4=Regalia of the Grand Conqueror",  "=ds=#m42# #e15#",     "", "33.3%" },
 			{ 3,  47558, "",           "=q4=Regalia of the Grand Protector",  "=ds=#m42# #e15#",     "", "33.3%" },
 			{ 4,  47559, "",           "=q4=Regalia of the Grand Vanquisher", "=ds=#m42# #e15#",     "", "33.3%" },
 			{ 6,  47556, "",           "=q2=Crusader Orb",                    "=ds=#e6#",            "", "100%" },
-			{ 8,  0,     "INV_Box_01", "=q6=" .. AL["Bonus Loot"],            "#ACHIEVEMENTID:3817#" }, -- A Tribute To Skill
 			{ 9,  47517, "",           "=q4=Blade of the Unbroken Covenant",  "=ds=#h3#, #w10#",     "", "14.3%" },
 			{ 10, 47521, "",           "=q4=BRK-1000",                        "=ds=#w5#",            "", "14.3%" },
 			{ 11, 47519, "",           "=q4=Catastrophe",                     "=ds=#h2#, #w6#",      "", "14.3%" },
@@ -6105,11 +6047,9 @@ Synastria_Data["TrialOftheCrusaderTribute"] = {
 			{ 13, 47515, "",           "=q4=Decimation",                      "=ds=#h2#, #w10#",     "", "14.3%" },
 			{ 14, 47526, "",           "=q4=Remorseless",                     "=ds=#h1#, #w6#",      "", "14.3%" },
 			{ 15, 47506, "",           "=q4=Silverwing Defender",             "=ds=#h1#, #w10#",     "", "14.3%" },
-			{ 16, 0,     "INV_Box_01", "=q6=" .. AL["Bonus Loot"],            "#ACHIEVEMENTID:3818#" }, -- A Tribute to Mad Skill
 			{ 17, 47557, "",           "=q4=Regalia of the Grand Conqueror",  "=ds=#m42# #e15#",     "", "33.3%" },
 			{ 18, 47558, "",           "=q4=Regalia of the Grand Protector",  "=ds=#m42# #e15#",     "", "33.3%" },
 			{ 19, 47559, "",           "=q4=Regalia of the Grand Vanquisher", "=ds=#m42# #e15#",     "", "33.3%" },
-			{ 21, 0,     "INV_Box_01", "=q6=" .. AL["Bonus Loot"],            "#ACHIEVEMENTID:3819#" }, -- A Tribute to Insanity
 			{ 22, 47553, "",           "=q4=Bolvar's Devotion",               "=ds=#s4#",            "", "20%" },
 			{ 23, 47552, "",           "=q4=Jaina's Radiance",                "=ds=#s4#",            "", "20%" },
 			{ 24, 47549, "",           "=q4=Magni's Resolution",              "=ds=#s4#",            "", "20%" },
@@ -6118,9 +6058,9 @@ Synastria_Data["TrialOftheCrusaderTribute"] = {
 		},
 	},
 	info = {
-		name = AL["Tribute Run"],
+		name = BabbleBoss["Tribute"],
 		module = moduleName,
-		instance = "TrialOfTheCrusader",
+		instance = "TrialoftheCrusader",
 	},
 }
 
