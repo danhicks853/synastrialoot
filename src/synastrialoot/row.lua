@@ -58,21 +58,21 @@ end
 function Row:SetData(row, data)
     row.data = data
     local text = data.text or ""
-    if data.status == "looted" then
-        row.text:SetText(text .. " - Looted!")
-        row.text:SetTextColor(0, 1, 0, 1) -- green
-        row:Show()
-    elseif data.status == "equipped" then
-        row.text:SetText(text .. " - Attuning")
+    local attuneProgress = data.attuneProgress or 0
+    local percent = math.floor(attuneProgress + 0.5) .. "%"
+    local showText = text .. " (" .. percent .. ")"
+
+    -- Color logic
+    if attuneProgress > 0 then
         row.text:SetTextColor(1, 1, 0, 1) -- yellow
-        row:Show()
-    elseif data.status == "attuned" then
-        row:Hide()
+    elseif data.status == "looted" then
+        row.text:SetTextColor(0, 1, 0, 1) -- green
     else
-        row.text:SetText(text)
         row.text:SetTextColor(1, 1, 1, 1) -- white
-        row:Show()
     end
+
+    row.text:SetText(showText)
+    row:Show()
     row.text:SetAlpha(1)
 end
 

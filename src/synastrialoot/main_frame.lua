@@ -276,19 +276,19 @@ function MainFrame:Create()
                                 local itemID = row.itemID
                                 -- Attunement check MUST be first and skip row if attuned
                                 local isAttuned = false
-                                if Items and Items.GetItemAttuneStats then
-                                    local attune = Items:GetItemAttuneStats(itemID, row.item and row.item.Link)
-                                    if attune and attune.AttuneProgress and attune.AttuneProgress >= 1 then
-                                        isAttuned = true
-                                    end
+                                local attuneProgress = (row.item and row.item.AttuneProgress) or 0
+                                local isAttuned = false
+                                if attuneProgress >= 100 then
+                                    isAttuned = true
                                 end
                                 if not isAttuned then
                                     local status = nil
-                                    if row.looted or (_G.SynastriaLoot_LootedItemIDs and _G.SynastriaLoot_LootedItemIDs[itemID]) then
+                                    local equipped = _G.SynastriaLoot_EquippedItems and _G.SynastriaLoot_EquippedItems[itemID]
+                                    -- Only show as 'equipped' if equipped and attuneProgress < 100
+                                    if equipped and attuneProgress < 100 then
+                                        status = "equipped"
+                                    elseif row.looted or (_G.SynastriaLoot_LootedItemIDs and _G.SynastriaLoot_LootedItemIDs[itemID]) then
                                         status = "looted"
-                                    end
-                                    if _G.SynastriaLoot_EquippedItems and _G.SynastriaLoot_EquippedItems[itemID] then
-                                        status = "Attuning"
                                     end
                                     -- Get or create row
                                     local itemRow = MainFrame.rowPool[rowIdx]
@@ -301,7 +301,7 @@ function MainFrame:Create()
                                     itemRow:SetPoint("RIGHT", content, "RIGHT", 0, 0)
                                     local itemText = (row.item and row.item.Name) or row.itemID or "?"
                                     itemText = tostring(itemText)
-                                    Row:SetData(itemRow, { text = itemText, itemID = itemID, status = status })
+                                    Row:SetData(itemRow, { text = itemText, itemID = itemID, status = status, attuneProgress = attuneProgress })
                                     if itemRow.SetHeight then itemRow:SetHeight(20) end
                                     itemRow:Show()
                                     rowIdx = rowIdx + 1
