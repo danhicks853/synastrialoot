@@ -421,18 +421,14 @@ function PlayerHasBuff(buffName, delayMs, callback)
     return false
 end
 function GetZoneProperties(callback)
-    local raidDifficultyIdMap = {
+    local difficultyMap = {
         [1] = "Normal",
         [2] = "25Man",
         [3] = "Heroic",
         [4] = "25Man Heroic",
     }
     local name, instanceType, difficultyID, difficultyName = GetInstanceInfo()
-    if instanceType == "raid" then
-        difficultyName = raidDifficultyIdMap[difficultyID]
-    else
-        difficultyName = difficultyName or tostring(difficultyID) or "unknown"
-    end
+    difficultyName = difficultyMap[difficultyID] or difficultyName or tostring(difficultyID) or "unknown"
     local zoneType = instanceType
     if zoneType == nil or zoneType:lower() == "none" then
         zoneType = "outdoor"

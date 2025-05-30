@@ -175,6 +175,19 @@ function MainFrame:Create()
                     return
                 end
                 if MainFrame.zoneNotImplementedMsg then MainFrame.zoneNotImplementedMsg:Hide() end
+                -- Count attuned and total attunable items in this zone
+                local totalAttunable, attunedCount = 0, 0
+                for _, header in ipairs(lootTable) do
+                    for _, row in ipairs(header.rows or {}) do
+                        local attuneProgress = (row.item and row.item.AttuneProgress) or 0
+                        if attuneProgress >= 0 then
+                            totalAttunable = totalAttunable + 1
+                        end
+                        if attuneProgress >= 100 then
+                            attunedCount = attunedCount + 1
+                        end
+                    end
+                end
                 -- Set instance name label using client API (GetRealZoneText or GetInstanceInfo)
                 if frame.instanceLabel then
                     local instanceName = ""
@@ -184,10 +197,14 @@ function MainFrame:Create()
                         local name = GetInstanceInfo()
                         if name then instanceName = name end
                     end
+                    local progressText = ""
+                    if totalAttunable > 0 then
+                        progressText = string.format(" |cffffcc00%d/%d attuned|r", attunedCount, totalAttunable)
+                    end
                     if instanceName and instanceName ~= "" then
-                        frame.instanceLabel:SetText(instanceName)
+                        frame.instanceLabel:SetText(instanceName .. progressText)
                     else
-                        frame.instanceLabel:SetText("")
+                        frame.instanceLabel:SetText(progressText)
                     end
                 end
                 -- Populate loot table UI
