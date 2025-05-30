@@ -17,7 +17,9 @@ function Minimap:Create()
         icon = ICON_PATH,
         OnClick = function(self, button)
             if button == "LeftButton" then
-                if SynastriaLoot_MainFrame and SynastriaLoot_MainFrame.Show then
+                if SynastriaLoot_MainFrame and SynastriaLoot_MainFrame.frame and SynastriaLoot_MainFrame.frame:IsShown() then
+                    SynastriaLoot_MainFrame:Hide()
+                elseif SynastriaLoot_MainFrame and SynastriaLoot_MainFrame.Show then
                     SynastriaLoot_MainFrame:Show()
                     SynastriaLoot_MainFrame:RefreshLoot()
                 end

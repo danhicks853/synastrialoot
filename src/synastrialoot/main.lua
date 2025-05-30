@@ -291,6 +291,18 @@ end
 function SynastriaLoot_Print(msg)
     DEFAULT_CHAT_FRAME:AddMessage("|cff00ff00[SynastriaLoot]|r " .. tostring(msg))
 end
+
+-- Slash command to toggle the main window
+SLASH_SYNASTRIALOOT1 = '/slg'
+SlashCmdList["SYNASTRIALOOT"] = function()
+    if SynastriaLoot_MainFrame and SynastriaLoot_MainFrame.frame and SynastriaLoot_MainFrame.frame:IsShown() then
+        SynastriaLoot_MainFrame:Hide()
+    else
+        if SynastriaLoot_MainFrame then
+            SynastriaLoot_MainFrame:Show()
+        end
+    end
+end
 function BuildZoneLootTable(callback)
     GetZoneLootData(function(data)
         if not data or not data.bosses then
