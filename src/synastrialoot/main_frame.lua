@@ -369,6 +369,12 @@ function MainFrame:Show()
     self:RefreshLoot()
 end
 
+function MainFrame:ShowIfAllowed()
+    if not _G.SynastriaLoot_ManuallyClosed then
+        self:Show()
+    end
+end
+
 function MainFrame:Hide()
     if self.frame then self.frame:Hide() end
 end

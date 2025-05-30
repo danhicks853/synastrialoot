@@ -18,8 +18,10 @@ function Minimap:Create()
         OnClick = function(self, button)
             if button == "LeftButton" then
                 if SynastriaLoot_MainFrame and SynastriaLoot_MainFrame.frame and SynastriaLoot_MainFrame.frame:IsShown() then
+                    _G.SynastriaLoot_ManuallyClosed = true
                     SynastriaLoot_MainFrame:Hide()
                 elseif SynastriaLoot_MainFrame and SynastriaLoot_MainFrame.Show then
+                    _G.SynastriaLoot_ManuallyClosed = false
                     SynastriaLoot_MainFrame:Show()
                     SynastriaLoot_MainFrame:RefreshLoot()
                 end

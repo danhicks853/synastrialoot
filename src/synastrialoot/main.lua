@@ -292,13 +292,20 @@ function SynastriaLoot_Print(msg)
     DEFAULT_CHAT_FRAME:AddMessage("|cff00ff00[SynastriaLoot]|r " .. tostring(msg))
 end
 
+-- Track if the user manually closed the window
+if _G.SynastriaLoot_ManuallyClosed == nil then
+    _G.SynastriaLoot_ManuallyClosed = false
+end
+
 -- Slash command to toggle the main window
 SLASH_SYNASTRIALOOT1 = '/slg'
 SlashCmdList["SYNASTRIALOOT"] = function()
     if SynastriaLoot_MainFrame and SynastriaLoot_MainFrame.frame and SynastriaLoot_MainFrame.frame:IsShown() then
+        _G.SynastriaLoot_ManuallyClosed = true
         SynastriaLoot_MainFrame:Hide()
     else
         if SynastriaLoot_MainFrame then
+            _G.SynastriaLoot_ManuallyClosed = false
             SynastriaLoot_MainFrame:Show()
         end
     end
@@ -594,6 +601,9 @@ RegisterEvent("PLAYER_EQUIPMENT_CHANGED", function(slot, hasItem)
     if SynastriaLoot_MainFrame and SynastriaLoot_MainFrame.frame and SynastriaLoot_MainFrame.frame:IsShown() then
         SynastriaLoot_MainFrame:RefreshLoot()
     end
+    -- If you want to auto-show the window on this event, use ShowIfAllowed instead of Show
+    -- Example:
+    -- if SynastriaLoot_MainFrame then SynastriaLoot_MainFrame:ShowIfAllowed() end
 end)
 
 -- Register CHAT_MSG_LOOT event handler for tracked item looting
