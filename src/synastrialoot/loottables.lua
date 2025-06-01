@@ -369,7 +369,7 @@ frame:SetScript("OnEvent", function(self, event, addonName)
 					["Info"] = { BabbleZone["The Nexus"], "SynastriaWotLK", mapname = "TheNexus" },
 				},
 
-				["TheOculus"] = {
+				["The Oculus"] = {
 					["Bosses"] = {
 						{ "TheOculusDrakosTheInterrogator", 1 },
 						{ "TheOculusVarosCloudstrider",     2 },
@@ -377,7 +377,7 @@ frame:SetScript("OnEvent", function(self, event, addonName)
 						{ "TheOculusLeyGuardianEregos",     4 },
 						{ "TheOculusTrash",                 5 },
 					},
-					["Info"] = { BabbleZone["The Oculus"], "SynastriaWotLK", mapname = "Nexus80" },
+					["Info"] = { BabbleZone["The Oculus"], "SynastriaWotLK", mapname = "The Oculus" },
 				},
 
 				["TrialOfTheChampion"] = {
@@ -464,17 +464,6 @@ frame:SetScript("OnEvent", function(self, event, addonName)
 						{ "IcecrownCitadelSindragosa",           11 },
 						{ "IcecrownCitadelTheLichKing",          12 },
 						{ "IcecrownCitadelTrash",                13 },
-						{ "TheAshenVerdict",                     14 },
-						{ "T10 - Death Knight",                  15 },
-						{ "T10 - Warrior",                       16 },
-						{ "T10 - Hunter",                        17 },
-						{ "T10 - Warlock",                       18 },
-						{ "T10 - Paladin",                       19 },
-						{ "T10 - Priest",                        20 },
-						{ "T10 - Rogue",                         21 },
-						{ "T10 - Mage",                          22 },
-						{ "T10 - Shaman",                        23 },
-						{ "T10 - Druid",                         24 },
 					},
 					["Info"] = {
 						BabbleZone["Icecrown Citadel"],

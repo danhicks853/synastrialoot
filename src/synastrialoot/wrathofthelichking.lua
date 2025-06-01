@@ -1530,7 +1530,7 @@ Synastria_Data["TheOculusDrakosTheInterrogator"] = {
 	info = {
 		name = BabbleBoss["Drakos the Interrogator"],
 		module = moduleName,
-		instance = "TheOculus",
+		instance = "The Oculus",
 	},
 };
 

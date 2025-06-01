@@ -176,18 +176,8 @@ function MainFrame:Create()
                 end
                 if MainFrame.zoneNotImplementedMsg then MainFrame.zoneNotImplementedMsg:Hide() end
                 -- Count attuned and total attunable items in this zone
-                local totalAttunable, attunedCount = 0, 0
-                for _, header in ipairs(lootTable) do
-                    for _, row in ipairs(header.rows or {}) do
-                        local attuneProgress = (row.item and row.item.AttuneProgress) or 0
-                        if attuneProgress >= 0 then
-                            totalAttunable = totalAttunable + 1
-                        end
-                        if attuneProgress >= 100 then
-                            attunedCount = attunedCount + 1
-                        end
-                    end
-                end
+                local attunedCount = lootTable._attunedCount or 0
+                local totalAttunable = lootTable._totalAttunable or 0
                 -- Set instance name label using client API (GetRealZoneText or GetInstanceInfo)
                 if frame.instanceLabel then
                     local instanceName = ""
@@ -199,10 +189,15 @@ function MainFrame:Create()
                     end
                     local progressText = ""
                     if totalAttunable > 0 then
-                        progressText = string.format(" |cffffcc00%d/%d attuned|r", attunedCount, totalAttunable)
+                        local percent = attunedCount / totalAttunable
+                        local r = math.floor(255 * (1 - percent))
+                        local g = math.floor(255 * percent)
+                        local b = 0
+                        local color = string.format("%02x%02x%02x", r, g, b)
+                        progressText = string.format(" |cff%s%d/%d|r", color, attunedCount, totalAttunable)
                     end
                     if instanceName and instanceName ~= "" then
-                        frame.instanceLabel:SetText(instanceName .. progressText)
+                        frame.instanceLabel:SetText(instanceName .. "    " .. progressText)
                     else
                         frame.instanceLabel:SetText(progressText)
                     end

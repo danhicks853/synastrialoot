@@ -232,7 +232,7 @@ function GetZoneLootData(callback)
                 lootKey = "25ManHeroic"
             elseif diff == "25Man" then
                 lootKey = "25Man"
-            elseif diff == "Heroic" then
+            elseif diff == "Heroic" or diff == "5Man Heroic" or diff == "5 Player (Heroic)" then
                 lootKey = "Heroic"
             elseif diff == "Normal" then
                 lootKey = "Normal"
@@ -247,7 +247,6 @@ function GetZoneLootData(callback)
                         end
                     end
                 end
-
             elseif diff == "25Man" then
                 if bossData and bossData["25Man"] then
                     for _, group in ipairs(bossData["25Man"]) do
@@ -284,7 +283,7 @@ function GetZoneLootData(callback)
                 items = items
             })
         end
-
+        print("difficulty: " .. diff .. " for " .. zoneText .. " with " .. #result.bosses .. " bosses")
         callback(result)
     end)
 end
@@ -336,6 +335,21 @@ function BuildZoneLootTable(callback)
         local function tryFinish()
             if pending == 0 and not finished then
                 finished = true
+                -- Count total attunable and attuned items before filtering
+                local totalAttunable = 0
+                local attunedCount = 0
+                for _, headerEntry in ipairs(lootTable) do
+                    for _, row in ipairs(headerEntry.rows) do
+                        if row.item.CanAttune == 1 then
+                            totalAttunable = totalAttunable + 1
+                            if row.item.AttuneProgress >= 100 then
+                                attunedCount = attunedCount + 1
+                            end
+                        end
+                    end
+                end
+                lootTable._totalAttunable = totalAttunable
+                lootTable._attunedCount = attunedCount
                 for _, headerEntry in ipairs(lootTable) do
                     local filteredRows = {}
                     for _, row in ipairs(headerEntry.rows) do
@@ -421,14 +435,26 @@ function PlayerHasBuff(buffName, delayMs, callback)
     return false
 end
 function GetZoneProperties(callback)
-    local difficultyMap = {
-        [1] = "Normal",
-        [2] = "25Man",
-        [3] = "Heroic",
-        [4] = "25Man Heroic",
-    }
     local name, instanceType, difficultyID, difficultyName = GetInstanceInfo()
-    difficultyName = difficultyMap[difficultyID] or difficultyName or tostring(difficultyID) or "unknown"
+    local difficultyKey
+    if instanceType == "party" then
+        if difficultyID == 1 then
+            difficultyKey = "Normal"
+        elseif difficultyID == 2 then
+            difficultyKey = "Heroic"
+        end
+    elseif instanceType == "raid" then
+        if difficultyID == 1 then
+            difficultyKey = "Normal"
+        elseif difficultyID == 2 then
+            difficultyKey = "25Man"
+        elseif difficultyID == 3 then
+            difficultyKey = "Heroic"
+        elseif difficultyID == 4 then
+            difficultyKey = "25Man Heroic"
+        end
+    end
+    difficultyKey = difficultyKey or difficultyName or tostring(difficultyID) or "unknown"
     local zoneType = instanceType
     if zoneType == nil or zoneType:lower() == "none" then
         zoneType = "outdoor"
@@ -441,11 +467,11 @@ function GetZoneProperties(callback)
     end
     PlayerHasBuff("Mythic Dungeon", 200, function(hasBuff)
         if hasBuff then
-            difficultyName = "5 Player (Mythic)"
+            difficultyKey = "5 Player (Mythic)"
         end
         callback({
             zoneText = zoneText,
-            difficulty = difficultyName,
+            difficulty = difficultyKey,
             Type = zoneType
         })
     end)
