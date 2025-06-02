@@ -283,7 +283,6 @@ function GetZoneLootData(callback)
                 items = items
             })
         end
-        print("difficulty: " .. diff .. " for " .. zoneText .. " with " .. #result.bosses .. " bosses")
         callback(result)
     end)
 end
@@ -458,6 +457,11 @@ function GetZoneProperties(callback)
     local zoneType = instanceType
     if zoneType == nil or zoneType:lower() == "none" then
         zoneType = "outdoor"
+    end
+    if zoneType == "outdoor" then
+        difficultyKey = "Normal"
+    else
+        difficultyKey = difficultyKey or difficultyName or tostring(difficultyID) or "unknown"
     end
     local zoneText
     if zoneType ~= "outdoor" and zoneType ~= "none" then
