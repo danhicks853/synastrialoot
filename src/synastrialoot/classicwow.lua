@@ -4940,7 +4940,7 @@ Synastria_Data["DeadminesRhahkZor"] = {
 	info = {
 		name = BabbleBoss["Rhahk'Zor"],
 		module = moduleName,
-		instance = "TheDeadminesEaI",
+		instance = "The Deadmines",
 	},
 };
 
@@ -4955,7 +4955,7 @@ Synastria_Data["DeadminesSneedsShredder"] = {
 	info = {
 		name = BabbleBoss["Sneed's Shredder"],
 		module = moduleName,
-		instance = "TheDeadminesEaI",
+		instance = "The Deadmines",
 	},
 };
 
@@ -4969,7 +4969,7 @@ Synastria_Data["DeadminesSneed"] = {
 	info = {
 		name = BabbleBoss["Sneed"],
 		module = moduleName,
-		instance = "TheDeadminesEaI",
+		instance = "The Deadmines",
 	},
 };
 
@@ -4983,7 +4983,7 @@ Synastria_Data["DeadminesGilnid"] = {
 	info = {
 		name = BabbleBoss["Gilnid"],
 		module = moduleName,
-		instance = "TheDeadminesEaI",
+		instance = "The Deadmines",
 	},
 };
 
@@ -4998,7 +4998,7 @@ Synastria_Data["DeadminesMrSmite"] = {
 	info = {
 		name = BabbleBoss["Mr. Smite"],
 		module = moduleName,
-		instance = "TheDeadminesEaI",
+		instance = "The Deadmines",
 	},
 };
 
@@ -5012,7 +5012,7 @@ Synastria_Data["DeadminesCookie"] = {
 	info = {
 		name = BabbleBoss["Cookie"],
 		module = moduleName,
-		instance = "TheDeadminesEaI",
+		instance = "The Deadmines",
 	},
 };
 
@@ -5027,7 +5027,7 @@ Synastria_Data["DeadminesCaptainGreenskin"] = {
 	info = {
 		name = BabbleBoss["Captain Greenskin"],
 		module = moduleName,
-		instance = "TheDeadminesEaI",
+		instance = "The Deadmines",
 	},
 };
 
@@ -5045,7 +5045,7 @@ Synastria_Data["DeadminesVanCleef"] = {
 	info = {
 		name = BabbleBoss["Edwin VanCleef"],
 		module = moduleName,
-		instance = "TheDeadminesEaI",
+		instance = "The Deadmines",
 	},
 };
 
@@ -5059,7 +5059,7 @@ Synastria_Data["DeadminesMinerJohnson"] = {
 	info = {
 		name = BabbleBoss["Miner Johnson"] .. " (" .. AL["Rare"] .. ")",
 		module = moduleName,
-		instance = "TheDeadminesEaI",
+		instance = "The Deadmines",
 	},
 };
 
@@ -5082,7 +5082,7 @@ Synastria_Data["DeadminesTrash"] = {
 	info = {
 		name = AL["Trash Mobs"],
 		module = moduleName,
-		instance = "TheDeadminesEaI",
+		instance = "The Deadmines",
 	},
 };
 

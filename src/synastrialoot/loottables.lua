@@ -1473,7 +1473,7 @@ frame:SetScript("OnEvent", function(self, event, addonName)
 					["Info"] = { "[60] " .. BabbleZone["Scholomance"], "SynastriaClassicWoW", mapname = "Scholomance" },
 				},
 
-				["TheDeadmines"] = {
+				["The Deadmines"] = {
 					["Bosses"] = {
 						{ "DeadminesTrash",            1, hide = true },
 						{ "DeadminesRhahkZor",         2 },
@@ -1490,7 +1490,7 @@ frame:SetScript("OnEvent", function(self, event, addonName)
 					["Info"] = {
 						"[19] " .. BabbleZone["The Deadmines"],
 						"SynastriaClassicWoW",
-						mapname = "TheDeadmines",
+						mapname = "The Deadmines",
 					},
 				},
 

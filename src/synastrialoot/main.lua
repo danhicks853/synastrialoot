@@ -66,6 +66,7 @@ function GetZoneLootData(callback)
             return norm
         end
         local zoneTextNorm = normalizeZoneName(zoneText)
+        print(zoneTextNorm)
         local internalKey = nil
         local scarletMonasteryWings = {
             SMGraveyard = true,
@@ -187,6 +188,7 @@ function GetZoneLootData(callback)
         zoneTextNorm = zoneTextNorm:gsub("^the escape from durnholde", "old hillsbrad foothills")
         zoneTextNorm = zoneTextNorm:gsub("^violet hold", "the violet hold")
         zoneTextNorm = zoneTextNorm:gsub("^stormwind stockade", "the stockade")
+        zoneTextNorm = zoneTextNorm:gsub("^deadmines", "the deadmines")
         if zoneprops.Type == 'raid' then zoneTextNorm = zoneTextNorm:gsub("tempest keep", "the eye") end
         if string.find(diff, "Mythic") then
             zoneTextNorm = zoneTextNorm .. "+"
