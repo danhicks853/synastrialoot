@@ -1388,8 +1388,17 @@ Synastria_Data["TheCullingOfStratholmeTrash"] = {
 			{ 17, 43951, "",           "=q4=Reins of the Bronze Drake",            "=ds=#e27#",           "", "100%" },
 		}
 	},
+	["Heroic"] = {
+		{
+			{ 1,  37115, "",           "=q3=Crusader's Square Pauldrons",          "=ds=#s3#, #a4#",      "", "~1.6%" },
+			{ 2,  37116, "",           "=q3=Epaulets of Market Row",               "=ds=#s3#, #a3#",      "", "~1.45%" },
+			{ 3,  37117, "",           "=q3=King's Square Bracers",                "=ds=#s8#, #a2#",      "", "~1.7%" },
+			{ 16, 0,     "inv_box_04", "=q6=" .. BabbleBoss["Infinite Corruptor"], "#ACHIEVEMENTID:1817#" },
+			{ 17, 43951, "",           "=q4=Reins of the Bronze Drake",            "=ds=#e27#",           "", "100%" },
+		}
+	},
 	info = {
-		name = AL["Trash Mobs"],
+		name = BabbleBoss["Trash Mobs"],
 		module = moduleName,
 		instance = "CoTCullingOfStratholme",
 	},
@@ -1518,8 +1527,17 @@ Synastria_Data["UtgardePinnacleTrash"] = {
 			{ 5, 37587, "", "=q3=Ymirjar Physician's Robe",     "=ds=#s5#, #a2#",  "", "0.1%" },
 		},
 	},
+	["Heroic"] = {
+		{
+			{ 1, 37590, "", "=q3=Bands of Fading Light",        "=ds=#s8#, #a4#",  "", "0.1%" },
+			{ 2, 37068, "", "=q3=Berserker's Sabatons",         "=ds=#s12#, #a4#", "", "~1.245%" },
+			{ 3, 37069, "", "=q3=Dragonflayer Seer's Bindings", "=ds=#s8#, #a3#",  "", "~1.295%" },
+			{ 4, 37070, "", "=q3=Tundra Wolf Boots",            "=ds=#s12#, #a2#", "", "~1.045%" },
+			{ 5, 37587, "", "=q3=Ymirjar Physician's Robe",     "=ds=#s5#, #a2#",  "", "0.1%" },
+		},
+	},
 	info = {
-		name = AL["Trash Mobs"],
+		name = BabbleBoss["Trash Mobs"],
 		module = moduleName,
 		instance = "UtgardePinnacle",
 	},
@@ -1651,8 +1669,18 @@ Synastria_Data["TheOculusTrash"] = {
 			{ 6, 36976, "", "=q3=Ring-Lord's Leggings",      "=ds=#s11#, #a1#", "", "~1.55%" },
 		},
 	},
+	["Heroic"] = {
+		{
+			{ 1, 37365, "", "=q3=Bands of the Sky Ring",     "=ds=#s8#, #a3#",  "", "0.1%" },
+			{ 2, 36977, "", "=q3=Bindings of the Construct", "=ds=#s8#, #a4#",  "", "~1.8%" },
+			{ 3, 37366, "", "=q3=Drake-Champion's Bracers",  "=ds=#s8#, #a2#",  "", "0.1%" },
+			{ 4, 37364, "", "=q3=Frostbridge Orb",           "=ds=#s15#",       "", "0.1%" },
+			{ 5, 36978, "", "=q3=Ley-Whelphide Belt",        "=ds=#s10#, #a2#", "", "~1.35%" },
+			{ 6, 36976, "", "=q3=Ring-Lord's Leggings",      "=ds=#s11#, #a1#", "", "~1.55%" },
+		}
+	},
 	info = {
-		name = AL["Trash Mobs"],
+		name = BabbleBoss["Trash Mobs"],
 		module = moduleName,
 		instance = "TheOculus",
 	},
