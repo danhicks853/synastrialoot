@@ -314,8 +314,15 @@ Synastria_Data["TheNexusTrash"] = {
 			{ 3, 37364, "", "=q3=Frostbridge Orb",          "=ds=#s15#",      "", "0.1%" },
 		},
 	},
+	["Heroic"] = {
+		{
+			{ 1, 37365, "", "=q3=Bands of the Sky Ring",    "=ds=#s8#, #a3#", "", "0.1%" },
+			{ 2, 37366, "", "=q3=Drake-Champion's Bracers", "=ds=#s8#, #a2#", "", "0.1%" },
+			{ 3, 37364, "", "=q3=Frostbridge Orb",          "=ds=#s15#",      "", "0.1%" },
+		}
+	},
 	info = {
-		name = AL["Trash Mobs"],
+		name = BabbleBoss["Trash Mobs"],
 		module = moduleName,
 		instance = "TheNexus",
 	},
