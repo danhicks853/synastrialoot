@@ -1251,8 +1251,18 @@ Synastria_Data["HallsOfLightningTrash"] = {
 			{ 6, 37000, "", "=q3=Storming Vortex Bracers",           "=ds=#s8#, #a2#",  "", "~1.6%" },
 		},
 	},
+	["Heroic"] = {
+		{
+			{ 1, 37858, "", "=q3=Awakened Handguards",               "=ds=#s9#, #a2#",  "", "0.1%" },
+			{ 2, 36999, "", "=q3=Boots of the Terrestrial Guardian", "=ds=#s12#, #a3#", "", "~1.9%" },
+			{ 3, 37857, "", "=q3=Helm of the Lightning Halls",       "=ds=#s1#, #a3#",  "", "0.1%" },
+			{ 4, 37856, "", "=q3=Librarian's Paper Cutter",          "=ds=#h1#, #w4#",  "", "0.1%" },
+			{ 5, 36997, "", "=q3=Sash of the Hardened Watcher",      "=ds=#s10#, #a1#", "", "~1.6%" },
+			{ 6, 37000, "", "=q3=Storming Vortex Bracers",           "=ds=#s8#, #a2#",  "", "~1.6%" },
+		},
+	},
 	info = {
-		name = AL["Trash Mobs"],
+		name = BabbleBoss["HallsOfLightningTrash"],
 		module = moduleName,
 		instance = "UlduarHallsofLightning",
 	},
