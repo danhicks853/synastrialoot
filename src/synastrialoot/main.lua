@@ -66,7 +66,6 @@ function GetZoneLootData(callback)
             return norm
         end
         local zoneTextNorm = normalizeZoneName(zoneText)
-        print(zoneTextNorm)
         local internalKey = nil
         local scarletMonasteryWings = {
             SMGraveyard = true,
