@@ -986,8 +986,17 @@ Synastria_Data["GundrakTrash"] = {
 			{ 5, 35594, "", "=q3=Snowmelt Silken Cinch",     "=ds=#s10#, #a1#", "", "~4.05%" },
 		},
 	},
+	["Heroic"] = {
+		{
+			{ 1, 37648, "", "=q3=Belt of Tasseled Lanterns", "=ds=#s10#, #a3#", "", "0.1%" },
+			{ 2, 37646, "", "=q3=Burning Skull Pendant",     "=ds=#s2#",        "", "0.1%" },
+			{ 3, 37647, "", "=q3=Cloak of Bloodied Waters",  "=ds=#s4#",        "", "0.1%" },
+			{ 4, 35593, "", "=q3=Steel Bear Trap Bracers",   "=ds=#s8#, #a4#",  "", "~1.75%" },
+			{ 5, 35594, "", "=q3=Snowmelt Silken Cinch",     "=ds=#s10#, #a1#", "", "~4.05%" },
+		},
+	},
 	info = {
-		name = AL["Trash Mobs"],
+		name = BabbleBoss["Gundrak Trash"],
 		module = moduleName,
 		instance = "Gundrak",
 	},
