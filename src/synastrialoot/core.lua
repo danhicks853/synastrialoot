@@ -1,0 +1,390 @@
+-- Simplified core.lua for SynastriaLoot2
+local addonName, ns = ...
+local SL = _G[addonName] or {}
+_G[addonName] = SL
+
+local Utils = LibStub and LibStub:GetLibrary("SynastriaLoot2-Utils", true)
+SL.Utils = Utils
+
+local ROW_HEIGHT = 24
+local HEADER_HEIGHT = 18
+SL.headerStates = SL.headerStates or {}
+local lastZone = nil
+-- Filter mode: 1 = All, 2 = Single-source, 3 = Multi-source
+local filterMode = 1
+local FILTER_LABELS = { "All", "1 Src", "Multi" }
+
+-- Forward declaration so inner closures can reference it before definition
+local populateLootList
+
+-- --------------------------------------------------------------
+-- Main frame creator
+-- --------------------------------------------------------------
+local function CreateMainFrame()
+    -- Tooltip-style frame backdrop (3.3.5-compatible)
+    local frame = CreateFrame("Frame", "SLFrameMain", UIParent)
+    frame:SetSize(350, 500)
+    frame:SetPoint("CENTER")
+    frame:SetFrameStrata("HIGH")
+    frame:SetBackdrop({
+        bgFile   = "Interface\\Tooltips\\UI-Tooltip-Background",
+        edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
+        tile = true, tileSize = 16, edgeSize = 16,
+        insets = { left = 4, right = 4, top = 4, bottom = 4 }
+    })
+    frame:SetBackdropColor(0, 0, 0, 0.85)
+
+    -- Draggable & resizable
+    frame:SetMovable(true)
+    frame:SetResizable(true)
+    frame:EnableMouse(true)
+    frame:RegisterForDrag("LeftButton")
+    frame:SetScript("OnDragStart", frame.StartMoving)
+    frame:SetScript("OnDragStop",  frame.StopMovingOrSizing)
+    frame:SetMinResize(250, 200)
+
+    -- Resize handle (bottom-right)
+    local resizeBtn = CreateFrame("Button", nil, frame)
+    resizeBtn:SetSize(16, 16)
+    resizeBtn:SetPoint("BOTTOMRIGHT", -2, 2)
+    resizeBtn:SetNormalTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Up")
+    resizeBtn:SetHighlightTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Highlight")
+    resizeBtn:SetPushedTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Down")
+
+    resizeBtn:SetScript("OnMouseDown", function(self)
+        self:GetParent():StartSizing("BOTTOMRIGHT")
+    end)
+    resizeBtn:SetScript("OnMouseUp", function(self)
+        local p = self:GetParent()
+        p:StopMovingOrSizing()
+        if p.scrollChild and p.scrollFrame then
+            p.scrollChild:SetWidth(p.scrollFrame:GetWidth() - 8)
+        end
+    end)
+ 
+    -- Keep scroll child width in sync when frame is resized programmatically
+    frame:SetScript("OnSizeChanged", function(self)
+        if self.scrollChild and self.scrollFrame then
+            self.scrollChild:SetWidth(self.scrollFrame:GetWidth() - 8)
+        end
+    end)
+
+    -- Title displays current zone name
+    local title = frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    title:SetPoint("TOP", 0, -8)
+    title:SetText(GetZoneText() or "SynastriaLoot2")
+    frame.title = title
+
+    -- Close button
+    local closeBtn = CreateFrame("Button", nil, frame, "UIPanelCloseButton")
+    closeBtn:SetPoint("TOPRIGHT", 0, 0)
+
+    -- Filter toggle button
+    local filterBtn = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
+    filterBtn:SetSize(60, 18)
+    filterBtn:SetPoint("TOPLEFT", frame, "TOPLEFT", 6, -24)
+    filterBtn:SetText(FILTER_LABELS[filterMode])
+
+    filterBtn:SetScript("OnClick", function()
+        filterMode = filterMode % 3 + 1 -- cycle 1->2->3->1
+        filterBtn:SetText(FILTER_LABELS[filterMode])
+        if frame.scrollChild then
+            populateLootList(frame.scrollChild, frame.scrollFrame)
+            frame.scrollFrame:SetVerticalScroll(0) -- jump to top so change is visible immediately
+        end
+    end)
+
+    frame.filterButton = filterBtn
+
+    -- Scroll frame + child
+    local sf = CreateFrame("ScrollFrame", "SLScrollFrame", frame, "UIPanelScrollFrameTemplate")
+    sf:SetPoint("TOPLEFT", 10, -50)
+    sf:SetPoint("BOTTOMRIGHT", -30, 10)
+
+    local sc = CreateFrame("Frame", "SLScrollChild", sf)
+    sc:SetPoint("TOPLEFT")
+    sc:SetSize(1, 1) -- will resize after population
+    sf:SetScrollChild(sc)
+
+    frame.scrollFrame = sf
+    frame.scrollChild = sc
+
+    return frame
+end
+
+-- --------------------------------------------------------------
+-- Utility functions
+-- --------------------------------------------------------------
+local function clearLootList(parent)
+    -- Remove item row frames
+    for _, child in ipairs({ parent:GetChildren() }) do
+        child:Hide()
+        child:SetParent(nil)
+    end
+
+    -- Hide FontStrings / textures (headers, etc.) attached directly to the scroll child.
+    -- Do NOT call SetParent(nil) on these regions because textures and fontstrings
+    -- must always have a valid parent (Lua error otherwise).
+    for _, region in ipairs({ parent:GetRegions() }) do
+        if region and region.Hide then
+            region:Hide()
+        end
+    end
+end
+
+populateLootList = function(parent, scrollFrame)
+    clearLootList(parent)
+
+    -- Ensure the scroll child has the same width as the scroll frame minus padding
+    parent:SetWidth(scrollFrame:GetWidth() - 8)
+
+    local items = ItemLocGetAllItemsInZone(-1, 1, 0, 0, 1) or {}
+
+    -- Prepare grouping tables
+    local grouped = {}
+    local ungrouped = {}
+    local craftingItems = {}
+
+    for _, itemID in ipairs(items) do
+        local srcCount = ItemLocGetSourceCount and ItemLocGetSourceCount(itemID) or 0
+
+        -- Determine if item should be skipped (fully attuned)
+        local skip = false
+        local stats = GetItemAttuneStats and GetItemAttuneStats(itemID)
+        if stats and stats.AttuneProgress and (stats.AttuneProgress >= 1 or stats.AttuneProgress >= 100) then
+            skip = true
+        end
+
+        -- Determine if item matches current filter
+        local include = (filterMode == 1) or (filterMode == 2 and srcCount == 1) or (filterMode == 3 and srcCount > 1)
+
+        if (not skip) and include then
+
+            -- Check for crafting source
+            local isCraft = false
+            if srcCount > 0 and ns.ItemLocAPI and ns.ItemLocAPI.GetSourceAt then
+                local PROF_TYPE = ns.ItemLocAPI.SOURCE_TYPES and ns.ItemLocAPI.SOURCE_TYPES.PROFESSION or 7
+                for s = 1, srcCount do
+                    local srcType, _, _, _, _, srcName = ns.ItemLocAPI:GetSourceAt(itemID, s)
+                    -- If API not loaded yet, fall back to direct global
+                    if not srcType then
+                        srcType, _, _, _, _, srcName = ItemLocGetSourceAt(itemID, s)
+                    end
+                    -- SourceType == PROFESSION / CRAFTING
+                    if srcType == PROF_TYPE then
+                        isCraft = true
+                        break
+                    end
+                    -- Fallback textual detection
+                    if srcName and string.find(srcName, "Craft", 1, true) then
+                        isCraft = true
+                        break
+                    end
+                end
+            elseif srcCount > 0 then
+                -- Fallback loop using global API directly
+                for s = 1, srcCount do
+                    local srcType, _, _, _, _, srcName = ItemLocGetSourceAt(itemID, s)
+                    if srcType == 7 then -- PROFESSION
+                        isCraft = true
+                        break
+                    end
+                    if srcName and string.find(srcName, "Craft", 1, true) then
+                        isCraft = true
+                        break
+                    end
+                end
+            end
+
+            if isCraft then
+                table.insert(craftingItems, itemID)
+            elseif srcCount == 1 then
+                local _, _, _, _, _, objName = ItemLocGetSourceAt(itemID, 1)
+                objName = objName or "Unknown"
+                grouped[objName] = grouped[objName] or {}
+                table.insert(grouped[objName], itemID)
+            else
+                table.insert(ungrouped, itemID)
+            end
+        end
+    end
+
+    -- Helper to add a collapsible header frame with icon
+    local function addHeader(name, y)
+        local hdr = CreateFrame("Frame", nil, parent)
+        hdr:SetPoint("TOPLEFT", parent, "TOPLEFT", 0, -y)
+        hdr:SetPoint("RIGHT", parent, "RIGHT", -4, 0)
+        hdr:SetHeight(HEADER_HEIGHT)
+        hdr.sourceName = name
+
+        -- Icon button (plus/minus)
+        local iconBtn = CreateFrame("Button", nil, hdr)
+        iconBtn:SetSize(12, 12)
+        iconBtn:SetPoint("LEFT", 4, 0)
+        hdr.IconBtn = iconBtn
+
+        local iconTex = iconBtn:CreateTexture(nil, "ARTWORK")
+        iconTex:SetAllPoints()
+        hdr.IconTex = iconTex
+
+        -- Label button (covers remaining area)
+        local labelBtn = CreateFrame("Button", nil, hdr)
+        labelBtn:SetPoint("LEFT", iconBtn, "RIGHT", 4, 0)
+        labelBtn:SetPoint("RIGHT", hdr, "RIGHT", 0, 0)
+        labelBtn:SetHeight(HEADER_HEIGHT)
+
+        local labelFS = labelBtn:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+        labelFS:SetAllPoints(labelBtn)
+        labelFS:SetTextColor(1, 0.82, 0)
+        labelFS:SetJustifyH("LEFT")
+        labelFS:SetText(name)
+
+        -- Update icon based on collapse state
+        local function refreshIcon()
+            if SL.headerStates[name] then
+                iconTex:SetTexture("Interface\\Buttons\\UI-PlusButton-UP")
+            else
+                iconTex:SetTexture("Interface\\Buttons\\UI-MinusButton-UP")
+            end
+        end
+        refreshIcon()
+
+        iconBtn:SetScript("OnClick", function()
+            SL.headerStates[name] = not SL.headerStates[name]
+            refreshIcon()
+            SL.ReloadList()
+        end)
+
+        labelBtn:SetScript("OnClick", function()
+            -- Send .findnpc command to chat
+            if SendChatMessage then
+                SendChatMessage(".findnpc " .. name, "SAY")
+            else
+                ChatFrame_OpenChat(".findnpc " .. name)
+            end
+        end)
+
+        -- Prevent highlight visuals
+        iconBtn:SetHighlightTexture(nil)
+        labelBtn:SetHighlightTexture(nil)
+
+        return HEADER_HEIGHT + 2
+    end
+
+    local yOffset = 0
+
+    -- Sorted headers
+    local headers = {}
+    for name in pairs(grouped) do table.insert(headers, name) end
+    table.sort(headers)
+
+    for _, name in ipairs(headers) do
+        yOffset = yOffset + addHeader(name, yOffset)
+
+        if not SL.headerStates[name] then -- only show rows if expanded
+            for _, itemID in ipairs(grouped[name]) do
+                local row = ns.ItemRow:Create(parent, itemID)
+                row:SetPoint("TOPLEFT", parent, "TOPLEFT", 4, -yOffset)
+                row:SetPoint("RIGHT", parent, "RIGHT", -4, 0)
+                row:SetHeight(ROW_HEIGHT)
+                yOffset = yOffset + ROW_HEIGHT + 2
+            end
+        end
+    end
+
+    -- Crafting header
+    if #craftingItems > 0 then
+        yOffset = yOffset + addHeader("Crafting", yOffset)
+        if not SL.headerStates["Crafting"] then
+            for _, itemID in ipairs(craftingItems) do
+                local row = ns.ItemRow:Create(parent, itemID)
+                row:SetPoint("TOPLEFT", parent, "TOPLEFT", 4, -yOffset)
+                row:SetPoint("RIGHT", parent, "RIGHT", -4, 0)
+                row:SetHeight(ROW_HEIGHT)
+                yOffset = yOffset + ROW_HEIGHT + 2
+            end
+        end
+    end
+
+    -- Header for multi-source or remaining items
+    if #ungrouped > 0 and (filterMode == 1 or filterMode == 3) then
+        yOffset = yOffset + addHeader("Other Items", yOffset)
+        if not SL.headerStates["Other Items"] then
+            for _, itemID in ipairs(ungrouped) do
+                local row = ns.ItemRow:Create(parent, itemID)
+                row:SetPoint("TOPLEFT", parent, "TOPLEFT", 4, -yOffset)
+                row:SetPoint("RIGHT", parent, "RIGHT", -4, 0)
+                row:SetHeight(ROW_HEIGHT)
+                yOffset = yOffset + ROW_HEIGHT + 2
+            end
+        end
+    end
+
+    -- Ensure scroll child height is sufficient for scrolling
+    parent:SetHeight(math.max(yOffset, scrollFrame:GetHeight()))
+    -- Reaffirm width after population in case scrollbar appears
+    parent:SetWidth(scrollFrame:GetWidth() - 8)
+end
+
+-- --------------------------------------------------------------
+-- Initialisation
+-- --------------------------------------------------------------
+local function InitialiseUI()
+    local frame = SL.frame or CreateMainFrame()
+    SL.frame = frame
+
+    Utils.C_Timer.After(0.1, function()
+        populateLootList(frame.scrollChild, frame.scrollFrame)
+        lastZone = GetZoneText() or ""
+        if frame.title then
+            frame.title:SetText(lastZone)
+        end
+    end)
+
+    return frame
+end
+
+-- Slash command to toggle
+SLASH_SYNASTRIA2 = "/synastrialoot"
+SlashCmdList["SYNASTRIA"] = function()
+    if not SL.frame then
+        InitialiseUI()
+        return
+    end
+    if SL.frame:IsShown() then
+        SL.frame:Hide()
+    else
+        SL.frame:Show()
+    end
+end
+
+-- Event bootstrap
+local listener = CreateFrame("Frame")
+listener:RegisterEvent("ADDON_LOADED")
+listener:RegisterEvent("PLAYER_ENTERING_WORLD")
+listener:RegisterEvent("ZONE_CHANGED")
+listener:RegisterEvent("ZONE_CHANGED_INDOORS")
+listener:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+listener:SetScript("OnEvent", function(_, evt, name)
+    if evt == "ADDON_LOADED" and name == addonName then
+        InitialiseUI()
+    elseif evt == "PLAYER_ENTERING_WORLD" or evt == "ZONE_CHANGED" or evt == "ZONE_CHANGED_INDOORS" or evt == "ZONE_CHANGED_NEW_AREA" then
+        local zone = GetZoneText() or ""
+        if zone ~= lastZone then
+            lastZone = zone
+            if SL.frame and SL.frame.scrollChild then
+                SL.ReloadList()
+                if SL.frame.title then
+                    SL.frame.title:SetText(zone)
+                end
+            end
+        end
+    end
+end)
+
+-- Public helper to refresh list on demand
+function SL.ReloadList()
+    if SL.frame and SL.frame.scrollChild then
+        populateLootList(SL.frame.scrollChild, SL.frame.scrollFrame)
+    end
+end
