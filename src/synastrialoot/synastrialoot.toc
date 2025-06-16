@@ -4,14 +4,19 @@
 ## Version: 1.0.0
 ## Notes: Displays loot information for the current zone
 ## SavedVariables:
-## OptionalDeps: 
+## OptionalDeps: LibDataBroker-1.1, LibDBIcon-1.0 
 ## DefaultState: enabled
 ## LoadOnDemand: 0
 ## X-Category: Interface Enhancements
 ## X-Website: 
 ## X-Feedback: 
 
-# Core Lua files (alphabetical order)
+# Libraries
+libs\LibStub\LibStub.lua
+libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
+libs\LibDBIcon-1.0\LibDBIcon-1.0.lua
+
+# Core Lua files
 utils.lua
 core.lua
 SLFrame_ItemHeader.lua
