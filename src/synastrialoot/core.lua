@@ -119,10 +119,10 @@ local function CreateMainFrame()
 		end
 	end)
 
-	-- Title displays current zone name
+	-- Title displays current zone name and attune count (value will be set later)
 	local title = frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 	title:SetPoint("TOP", 0, -8)
-	title:SetText(GetZoneText() or "SynastriaLoot2")
+	title:SetText((GetZoneText() or "SynastriaLoot2"))
 	frame.title = title
 
 	-- Close button
@@ -202,6 +202,9 @@ populateLootList = function(parent, scrollFrame)
 		Utils.PerfTracker.EndTimer("ItemLocGetAllItems")
 	end
 
+	-- Count items left to attune while iterating
+	SL.attuneLeft = 0
+
 	-- Prepare grouping tables
 	local grouped = {}
 	local ungrouped = {}
@@ -215,6 +218,8 @@ populateLootList = function(parent, scrollFrame)
 		local stats = GetItemAttuneStats and GetItemAttuneStats(itemID)
 		if stats and stats.AttuneProgress and (stats.AttuneProgress >= 1 or stats.AttuneProgress >= 100) then
 			skip = true
+		else
+			SL.attuneLeft = SL.attuneLeft + 1
 		end
 
 		-- Determine if item matches current filter
@@ -363,6 +368,12 @@ populateLootList = function(parent, scrollFrame)
 	parent:SetHeight(math.max(yOffset, scrollFrame:GetHeight()))
 	-- Reaffirm width after population in case scrollbar appears
 	parent:SetWidth(scrollFrame:GetWidth() - 8)
+
+	-- Update the title with the cached attune count
+	if SL.frame and SL.frame.title then
+		local zoneName = GetZoneText() or "SynastriaLoot2"
+		SL.frame.title:SetText(string.format("%s (%d left to attune)", zoneName, SL.attuneLeft or 0))
+	end
 	
 	-- Initialize centralized bag update system if not already done
 	InitBagUpdateSystem()
@@ -387,9 +398,7 @@ local function InitialiseUI()
 	Utils.C_Timer.After(0.1, function()
 		populateLootList(frame.scrollChild, frame.scrollFrame)
 		lastZone = GetZoneText() or ""
-		if frame.title then
-			frame.title:SetText(lastZone)
-		end
+		-- title is now updated in populateLootList
 	end)
 
 	return frame
@@ -494,9 +503,7 @@ listener:SetScript("OnEvent", function(_, evt, name)
 			lastZone = zone
 			if SL.frame and SL.frame.scrollChild then
 				SL.ReloadList()
-				if SL.frame.title then
-					SL.frame.title:SetText(zone)
-				end
+				-- title is now updated in populateLootList
 			end
 		end
 	end
