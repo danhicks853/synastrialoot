@@ -145,7 +145,7 @@ populateLootList = function(parent, scrollFrame)
 	-- Prepare grouping tables
 	local grouped = {}
 	local ungrouped = {}
-	local craftingItems = {}
+
 
 	for _, itemID in ipairs(items) do
 		local srcCount = ItemLocGetSourceCount and ItemLocGetSourceCount(itemID) or 0
@@ -162,7 +162,7 @@ populateLootList = function(parent, scrollFrame)
 
 		if (not skip) and include then
 			-- Check for crafting source
-			local isCraft = false
+
 			if srcCount > 0 and ns.ItemLocAPI and ns.ItemLocAPI.GetSourceAt then
 				local PROF_TYPE = ns.ItemLocAPI.SOURCE_TYPES and ns.ItemLocAPI.SOURCE_TYPES.PROFESSION or 7
 				for s = 1, srcCount do
@@ -172,34 +172,19 @@ populateLootList = function(parent, scrollFrame)
 						srcType, _, _, _, _, srcName = ItemLocGetSourceAt(itemID, s)
 					end
 					-- SourceType == PROFESSION / CRAFTING
-					if srcType == PROF_TYPE then
-						isCraft = true
-						break
-					end
+
 					-- Fallback textual detection
-					if srcName and string.find(srcName, "Craft", 1, true) then
-						isCraft = true
-						break
-					end
+
 				end
 			elseif srcCount > 0 then
 				-- Fallback loop using global API directly
 				for s = 1, srcCount do
 					local srcType, _, _, _, _, srcName = ItemLocGetSourceAt(itemID, s)
-					if srcType == 7 then -- PROFESSION
-						isCraft = true
-						break
-					end
-					if srcName and string.find(srcName, "Craft", 1, true) then
-						isCraft = true
-						break
-					end
+
 				end
 			end
 
-			if isCraft then
-				table.insert(craftingItems, itemID)
-			elseif srcCount == 1 then
+			if srcCount == 1 then
 				local _, _, _, _, _, objName = ItemLocGetSourceAt(itemID, 1)
 				objName = objName or "Unknown"
 				grouped[objName] = grouped[objName] or {}
@@ -295,19 +280,6 @@ populateLootList = function(parent, scrollFrame)
 		end
 	end
 
-	-- Crafting header
-	if #craftingItems > 0 then
-		yOffset = yOffset + addHeader("Crafting", yOffset)
-		if not SL.headerStates["Crafting"] then
-			for _, itemID in ipairs(craftingItems) do
-				local row = ns.ItemRow:Create(parent, itemID)
-				row:SetPoint("TOPLEFT", parent, "TOPLEFT", 4, -yOffset)
-				row:SetPoint("RIGHT", parent, "RIGHT", -4, 0)
-				row:SetHeight(ROW_HEIGHT)
-				yOffset = yOffset + ROW_HEIGHT + 2
-			end
-		end
-	end
 
 	-- Header for multi-source or remaining items
 	if #ungrouped > 0 and (filterMode == 1 or filterMode == 3) then
