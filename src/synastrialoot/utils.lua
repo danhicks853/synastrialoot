@@ -1,6 +1,100 @@
 local MAJOR, MINOR = "SynastriaLoot2-Utils", 1
 local Utils = LibStub:NewLibrary(MAJOR, MINOR)
 if not Utils then return end
+
+-- Performance tracking system
+Utils.PerfTracker = {}
+local perfData = {}
+local DEBUG_PERF = true  -- Set to false to disable performance logging
+
+function Utils.PerfTracker.StartTimer(key)
+    if not DEBUG_PERF then return end
+    perfData[key] = {
+        startTime = GetTime(),
+        count = (perfData[key] and perfData[key].count or 0) + 1
+    }
+end
+
+function Utils.PerfTracker.EndTimer(key)
+    if not DEBUG_PERF or not perfData[key] then return end
+    
+    local elapsed = GetTime() - perfData[key].startTime
+    perfData[key].totalTime = (perfData[key].totalTime or 0) + elapsed
+    perfData[key].lastTime = elapsed
+    
+    -- Log slow operations (>50ms)
+    if elapsed > 0.05 then
+        print(string.format("|cffff9900[SL Perf]|r %s took %.3fs", key, elapsed))
+    end
+end
+
+function Utils.PerfTracker.GetStats(key)
+    if not perfData[key] then return nil end
+    return {
+        count = perfData[key].count,
+        totalTime = perfData[key].totalTime or 0,
+        averageTime = (perfData[key].totalTime or 0) / perfData[key].count,
+        lastTime = perfData[key].lastTime or 0
+    }
+end
+
+function Utils.PerfTracker.PrintAllStats()
+    print("|cff00ff00[SL Performance Stats]|r")
+    for key, data in pairs(perfData) do
+        if data.totalTime then
+            local avg = data.totalTime / data.count
+            print(string.format("  %s: %d calls, %.3fs total, %.3fs avg, %.3fs last", 
+                key, data.count, data.totalTime, avg, data.lastTime or 0))
+        end
+    end
+end
+
+function Utils.PerfTracker.Reset()
+    perfData = {}
+    print("|cff00ff00[SL Perf]|r Performance data reset")
+end
+
+-- Bag update throttling system
+Utils.BagUpdateManager = {}
+local bagUpdateCallbacks = {}
+local bagUpdateThrottle = nil
+local THROTTLE_DELAY = 0.1  -- 100ms throttle
+
+function Utils.BagUpdateManager.RegisterCallback(key, callback)
+    bagUpdateCallbacks[key] = callback
+end
+
+function Utils.BagUpdateManager.UnregisterCallback(key)
+    bagUpdateCallbacks[key] = nil
+end
+
+function Utils.BagUpdateManager.TriggerBagUpdate()
+    if bagUpdateThrottle then
+        return  -- Already scheduled
+    end
+    
+    bagUpdateThrottle = Utils.C_Timer.After(THROTTLE_DELAY, function()
+        Utils.PerfTracker.StartTimer("BagUpdate_Batch")
+        
+        local callbackCount = 0
+        for key, callback in pairs(bagUpdateCallbacks) do
+            if callback then
+                Utils.PerfTracker.StartTimer("BagUpdate_" .. key)
+                callback()
+                Utils.PerfTracker.EndTimer("BagUpdate_" .. key)
+                callbackCount = callbackCount + 1
+            end
+        end
+        
+        Utils.PerfTracker.EndTimer("BagUpdate_Batch")
+        bagUpdateThrottle = nil
+        
+        if DEBUG_PERF and callbackCount > 5 then
+            print(string.format("|cffff9900[SL Perf]|r Processed %d bag update callbacks", callbackCount))
+        end
+    end)
+end
+
 Utils.C_Timer = {}
 function Utils.CreateBasicFrame(name, width, height, title, movable, parent)
     parent = parent or UIParent

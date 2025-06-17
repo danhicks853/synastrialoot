@@ -14,8 +14,56 @@ local lastZone = nil
 local filterMode = 1
 local FILTER_LABELS = { "All", "1 Src", "Multi" }
 
+-- Central bag update management
+local bagUpdateFrame = nil
+local itemRows = {}  -- Track all item rows for centralized updates
+
 -- Forward declaration so inner closures can reference it before definition
 local populateLootList
+
+-- Centralized bag update handler
+local function HandleBagUpdate()
+	if Utils and Utils.PerfTracker then
+		Utils.PerfTracker.StartTimer("CentralBagUpdate")
+	end
+	
+	local updatedRows = 0
+	for _, row in ipairs(itemRows) do
+		if row and row.RefreshObtained and row:IsVisible() then
+			row:RefreshObtained()
+			row:RefreshAttune()
+			updatedRows = updatedRows + 1
+		end
+	end
+	
+	if Utils and Utils.PerfTracker then
+		Utils.PerfTracker.EndTimer("CentralBagUpdate")
+		if updatedRows > 10 then
+			print(string.format("|cffff9900[SL Perf]|r Updated %d item rows", updatedRows))
+		end
+	end
+end
+
+-- Initialize centralized bag update system
+local function InitBagUpdateSystem()
+	if bagUpdateFrame then return end
+	
+	bagUpdateFrame = CreateFrame("Frame")
+	bagUpdateFrame:RegisterEvent("BAG_UPDATE")
+	bagUpdateFrame:SetScript("OnEvent", function()
+		if Utils and Utils.BagUpdateManager then
+			Utils.BagUpdateManager.TriggerBagUpdate()
+		else
+			-- Fallback if utils not loaded
+			HandleBagUpdate()
+		end
+	end)
+	
+	-- Register with the centralized system if available
+	if Utils and Utils.BagUpdateManager then
+		Utils.BagUpdateManager.RegisterCallback("SynastriaLoot_Main", HandleBagUpdate)
+	end
+end
 
 -- --------------------------------------------------------------
 -- Main frame creator
@@ -135,12 +183,24 @@ local function clearLootList(parent)
 end
 
 populateLootList = function(parent, scrollFrame)
+	if Utils and Utils.PerfTracker then
+		Utils.PerfTracker.StartTimer("PopulateLootList")
+	end
+	
 	clearLootList(parent)
+	-- Clear the itemRows tracking table
+	itemRows = {}
 
 	-- Ensure the scroll child has the same width as the scroll frame minus padding
 	parent:SetWidth(scrollFrame:GetWidth() - 8)
 
+	if Utils and Utils.PerfTracker then
+		Utils.PerfTracker.StartTimer("ItemLocGetAllItems")
+	end
 	local items = ItemLocGetAllItemsInZone(-1, 1, 0, 0, 1) or {}
+	if Utils and Utils.PerfTracker then
+		Utils.PerfTracker.EndTimer("ItemLocGetAllItems")
+	end
 
 	-- Prepare grouping tables
 	local grouped = {}
@@ -275,6 +335,8 @@ populateLootList = function(parent, scrollFrame)
 				row:SetPoint("TOPLEFT", parent, "TOPLEFT", 4, -yOffset)
 				row:SetPoint("RIGHT", parent, "RIGHT", -4, 0)
 				row:SetHeight(ROW_HEIGHT)
+				-- Register row for centralized bag updates
+				table.insert(itemRows, row)
 				yOffset = yOffset + ROW_HEIGHT + 2
 			end
 		end
@@ -290,6 +352,8 @@ populateLootList = function(parent, scrollFrame)
 				row:SetPoint("TOPLEFT", parent, "TOPLEFT", 4, -yOffset)
 				row:SetPoint("RIGHT", parent, "RIGHT", -4, 0)
 				row:SetHeight(ROW_HEIGHT)
+				-- Register row for centralized bag updates
+				table.insert(itemRows, row)
 				yOffset = yOffset + ROW_HEIGHT + 2
 			end
 		end
@@ -299,6 +363,18 @@ populateLootList = function(parent, scrollFrame)
 	parent:SetHeight(math.max(yOffset, scrollFrame:GetHeight()))
 	-- Reaffirm width after population in case scrollbar appears
 	parent:SetWidth(scrollFrame:GetWidth() - 8)
+	
+	-- Initialize centralized bag update system if not already done
+	InitBagUpdateSystem()
+	
+	if Utils and Utils.PerfTracker then
+		Utils.PerfTracker.EndTimer("PopulateLootList")
+		local stats = Utils.PerfTracker.GetStats("PopulateLootList")
+		if stats and stats.lastTime > 0.1 then
+			print(string.format("|cffff9900[SL Perf]|r PopulateLootList took %.3fs, created %d rows", 
+				stats.lastTime, #itemRows))
+		end
+	end
 end
 
 -- --------------------------------------------------------------
@@ -413,17 +489,41 @@ local function CreateMinimapButton()
 	SL.minimapBtn = btn
 end
 
--- Slash command to toggle
+-- Slash commands
+SLASH_SYNASTRIA1 = "/sl"
 SLASH_SYNASTRIA2 = "/synastrialoot"
-SlashCmdList["SYNASTRIA"] = function()
-	if not SL.frame then
-		InitialiseUI()
-		return
-	end
-	if SL.frame:IsShown() then
-		SL.frame:Hide()
+SlashCmdList["SYNASTRIA"] = function(msg)
+	local command = string.lower(msg or "")
+	
+	if command == "perf" or command == "performance" then
+		if Utils and Utils.PerfTracker then
+			Utils.PerfTracker.PrintAllStats()
+		else
+			print("|cffff0000[SL]|r Performance tracking not available")
+		end
+	elseif command == "reset" then
+		if Utils and Utils.PerfTracker then
+			Utils.PerfTracker.Reset()
+		else
+			print("|cffff0000[SL]|r Performance tracking not available")
+		end
+	elseif command == "help" then
+		print("|cff00ff00[SL Commands]|r")
+		print("  /sl - Toggle main window")
+		print("  /sl perf - Show performance statistics")
+		print("  /sl reset - Reset performance statistics")
+		print("  /sl help - Show this help")
 	else
-		SL.frame:Show()
+		-- Default behavior: toggle window
+		if not SL.frame then
+			InitialiseUI()
+			return
+		end
+		if SL.frame:IsShown() then
+			SL.frame:Hide()
+		else
+			SL.frame:Show()
+		end
 	end
 end
 
@@ -438,6 +538,10 @@ listener:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 listener:SetScript("OnEvent", function(_, evt, name)
 	if evt == "ADDON_LOADED" and name == addonName then
 		InitialiseUI()
+		-- Check for optional attunement system
+		if not GetItemLinkAttuneProgress then
+			print("|cffff9900[SL]|r Attunement system not detected - percentage tracking disabled")
+		end
 	elseif evt == "PLAYER_LOGIN" then
 		CreateMinimapButton()
 	elseif

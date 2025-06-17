@@ -3,14 +3,42 @@ local addonName, ns = ...
 local reloadQueued = false
 -- cache GetItemLinkAttuneProgress results to avoid expensive repeat calls
 local attuneCache = {}
+-- cache item counts to reduce redundant API calls
+local itemCountCache = {}
+local itemCountCacheTime = 0
+local CACHE_DURATION = 0.5  -- Cache for 500ms
+
 -- helper to retrieve attunement progress with simple cache
 local function GetCachedAttune(link)
+	-- Check if the attunement function exists
+	if not GetItemLinkAttuneProgress then
+		-- Function not available, return nil (no attunement system)
+		return nil
+	end
+	
 	local val = attuneCache[link]
 	if val == nil then
 		val = GetItemLinkAttuneProgress(link)
 		attuneCache[link] = val
 	end
 	return val
+end
+
+-- helper to retrieve item count with cache
+local function GetCachedItemCount(itemID)
+	local currentTime = GetTime()
+	if currentTime - itemCountCacheTime > CACHE_DURATION then
+		-- Cache expired, clear it
+		itemCountCache = {}
+		itemCountCacheTime = currentTime
+	end
+	
+	local count = itemCountCache[itemID]
+	if count == nil then
+		count = GetItemCount(itemID)
+		itemCountCache[itemID] = count
+	end
+	return count
 end
 local ItemRow = {}
 ns.ItemRow = ItemRow
@@ -41,7 +69,12 @@ function ItemRow:Create(parent, itemID)
 
 	-- Function to refresh obtained state
 	function row:RefreshObtained()
-		local count = GetItemCount(self.itemID or 0)
+		local Utils = ns.Utils
+		if Utils and Utils.PerfTracker then
+			Utils.PerfTracker.StartTimer("RefreshObtained_" .. (self.itemID or 0))
+		end
+		
+		local count = GetCachedItemCount(self.itemID or 0)
 
 		-- Apply green background when owned
 		if count and count > 0 then
@@ -53,7 +86,14 @@ function ItemRow:Create(parent, itemID)
 		-- If item is fully attuned, remove it from the list immediately
 		local prog
 		local link = self.itemLink or ("item:" .. self.itemID)
-		prog = GetItemLinkAttuneProgress(link)
+		if Utils and Utils.PerfTracker then
+			Utils.PerfTracker.StartTimer("GetItemLinkAttuneProgress")
+		end
+		prog = GetCachedAttune(link)
+		if Utils and Utils.PerfTracker then
+			Utils.PerfTracker.EndTimer("GetItemLinkAttuneProgress")
+		end
+		
 		if prog and (prog == 1 or prog >= 100) then
 			-- Hide this row and trigger a list reload to reflow layout
 			self:Hide()
@@ -66,6 +106,10 @@ function ItemRow:Create(parent, itemID)
 					end)
 				end
 			end
+		end
+		
+		if Utils and Utils.PerfTracker then
+			Utils.PerfTracker.EndTimer("RefreshObtained_" .. (self.itemID or 0))
 		end
 	end
 
@@ -97,8 +141,13 @@ function ItemRow:Create(parent, itemID)
 
 	-- Helper to refresh attunement percentage
 	function row:RefreshAttune()
+		local Utils = ns.Utils
+		if Utils and Utils.PerfTracker then
+			Utils.PerfTracker.StartTimer("RefreshAttune_" .. (self.itemID or 0))
+		end
+		
 		local link = self.itemLink or ("item:" .. self.itemID)
-		local prog = GetItemLinkAttuneProgress(link)
+		local prog = GetCachedAttune(link)
 		if prog then
 			if prog == 0 then
 				pct:SetText("0%")
@@ -111,6 +160,10 @@ function ItemRow:Create(parent, itemID)
 			end
 		else
 			pct:SetText("")
+		end
+		
+		if Utils and Utils.PerfTracker then
+			Utils.PerfTracker.EndTimer("RefreshAttune_" .. (self.itemID or 0))
 		end
 	end
 
@@ -174,19 +227,19 @@ function ItemRow:Create(parent, itemID)
 		self:SetWidth(width)
 	end)
 
-	-- Listen for immediate events to refresh obtained state dynamically
-	row:RegisterEvent("BAG_UPDATE") -- fires for each bag slot change
+	-- Listen for non-bag events to refresh obtained state dynamically
+	-- BAG_UPDATE is now handled centrally for better performance
 	-- row:RegisterEvent("CHAT_MSG_LOOT") -- fires when loot is received
 
 	-- Also update attune on PLAYER_EQUIPMENT_CHANGED and ATTUNE_UPDATE if exists
 	if _G.ItemAttuneUpdateEvent then
 		row:RegisterEvent(_G.ItemAttuneUpdateEvent)
+		row:SetScript("OnEvent", function(self, event)
+			if event == _G.ItemAttuneUpdateEvent then
+				self:RefreshAttune()
+			end
+		end)
 	end
-
-	row:SetScript("OnEvent", function(self, event)
-		self:RefreshObtained()
-		self:RefreshAttune()
-	end)
 
 	return row
 end
