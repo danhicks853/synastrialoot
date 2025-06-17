@@ -73,7 +73,7 @@ local function CreateMainFrame()
 	local frame = CreateFrame("Frame", "SLFrameMain", UIParent)
 	frame:SetSize(350, 500)
 	frame:SetPoint("CENTER")
-	frame:SetFrameStrata("HIGH")
+	frame:SetFrameStrata("MEDIUM")
 	frame:SetBackdrop({
 		bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
 		edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
