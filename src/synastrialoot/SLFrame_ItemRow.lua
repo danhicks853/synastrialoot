@@ -176,7 +176,7 @@ function ItemRow:Create(parent, itemID)
 
 	-- Listen for immediate events to refresh obtained state dynamically
 	row:RegisterEvent("BAG_UPDATE") -- fires for each bag slot change
-	row:RegisterEvent("CHAT_MSG_LOOT") -- fires when loot is received
+	-- row:RegisterEvent("CHAT_MSG_LOOT") -- fires when loot is received
 
 	-- Also update attune on PLAYER_EQUIPMENT_CHANGED and ATTUNE_UPDATE if exists
 	if _G.ItemAttuneUpdateEvent then
