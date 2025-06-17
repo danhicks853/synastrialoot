@@ -219,6 +219,8 @@ function ItemRow:Create(parent, itemID)
 			if editBox then
 				editBox:Insert(link)
 			end
+		else
+			OpenLootDb(row.itemID)
 		end
 	end)
 
