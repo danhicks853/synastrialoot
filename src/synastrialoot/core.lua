@@ -36,12 +36,12 @@ local function HandleBagUpdate()
 		end
 	end
 	
-	if Utils and Utils.PerfTracker then
-		Utils.PerfTracker.EndTimer("CentralBagUpdate")
-		if updatedRows > 10 then
-			print(string.format("|cffff9900[SL Perf]|r Updated %d item rows", updatedRows))
-		end
-	end
+	-- if Utils and Utils.PerfTracker then
+	-- 	Utils.PerfTracker.EndTimer("CentralBagUpdate")
+	-- 	if updatedRows > 10 then
+	-- 		print(string.format("|cffff9900[SL Perf]|r Updated %d item rows", updatedRows))
+	-- 	end
+	-- end
 end
 
 -- Initialize centralized bag update system

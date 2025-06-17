@@ -5,7 +5,7 @@ if not Utils then return end
 -- Performance tracking system
 Utils.PerfTracker = {}
 local perfData = {}
-local DEBUG_PERF = true  -- Set to false to disable performance logging
+local DEBUG_PERF = false  -- Set to false to disable performance logging
 
 function Utils.PerfTracker.StartTimer(key)
     if not DEBUG_PERF then return end
