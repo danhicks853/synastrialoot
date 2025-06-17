@@ -406,7 +406,10 @@ local function CreateMinimapButton()
 	local LDB    = LibStub and LibStub:GetLibrary("LibDataBroker-1.1", true)
 
 	if DBIcon and LDB then
-		SL.iconDB = SL.iconDB or {}
+		-- Use minimaplocation as the SavedVariable for minimap icon persistence
+		-- This table is declared in the TOC as SavedVariables: minimaplocation
+		if type(minimaplocation) ~= "table" then minimaplocation = {} end
+		SL.iconDB = minimaplocation  -- for compatibility, but minimaplocation is the real storer {}
 		local dataObj = LDB:NewDataObject("SynastriaLoot", {
 			type = "launcher",
 			icon = "Interface\\Icons\\INV_Misc_Map_01",
@@ -419,74 +422,10 @@ local function CreateMinimapButton()
 				tooltip:AddLine("Click to toggle window", 0.9, 0.9, 0.9)
 			end,
 		})
-		DBIcon:Register("SynastriaLoot", dataObj, SL.iconDB)
+		-- Persist minimap position in minimaplocation SavedVariable
+		DBIcon:Register("SynastriaLoot", dataObj, minimaplocation)
 		SL.minimapIconRegistered = true
-		return -- success, no need for fallback button
 	end
-
-	-- Fallback: manual minimap button if libs missing
-	if SL.minimapBtn then return end
-	local btn = CreateFrame("Button", "SynastriaLootMiniMapButton", Minimap)
-	btn:SetSize(24, 24)
-
-	btn:SetNormalTexture("Interface\\Icons\\INV_Misc_Map_01")
-	btn:GetNormalTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
-
-	btn:SetPushedTexture("Interface\\Icons\\INV_Misc_Map_01")
-	btn:GetPushedTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
-
-	btn:SetHighlightTexture("Interface\\Buttons\\ButtonHilight-Square")
-	btn:GetHighlightTexture():SetTexCoord(0.1, 0.9, 0.1, 0.9)
-
-	-- Round border overlay
-	local border = btn:CreateTexture(nil, "OVERLAY")
-	border:SetTexture("Interface\\Minimap\\MiniMap-TrackingBorder")
-	border:SetSize(52, 52)
-	border:SetPoint("CENTER")
-
-	-- Initial anchor
-	btn:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 6, -6)
-	-- Drag to reposition around minimap
-	local function UpdateDragPosition(self)
-		local mx, my = GetCursorPosition()
-		local scale = UIParent:GetScale()
-		mx, my = mx / scale, my / scale
-		local cx, cy = Minimap:GetCenter()
-		local angle = math.atan2(my - cy, mx - cx)
-		local radius = (Minimap:GetWidth() / 2) - 8
-		self:SetPoint("CENTER", Minimap, "CENTER", math.cos(angle) * radius, math.sin(angle) * radius)
-	end
-
-	btn:SetScript("OnMouseDown", function(self, button)
-		if button == "LeftButton" then
-			self:SetScript("OnUpdate", UpdateDragPosition)
-			UpdateDragPosition(self)
-		end
-	end)
-	btn:SetScript("OnMouseUp", function(self)
-		self:SetScript("OnUpdate", nil)
-	end)
-
-	btn:SetScript("OnClick", function()
-		if not SL.frame then
-			InitialiseUI()
-		end
-		if SL.frame:IsShown() then
-			SL.frame:Hide()
-		else
-			SL.frame:Show()
-		end
-	end)
-
-	btn:SetScript("OnEnter", function(self)
-		GameTooltip:SetOwner(self, "ANCHOR_LEFT")
-		GameTooltip:SetText("SynastriaLoot", 1, 1, 1)
-		GameTooltip:AddLine("Left-click to toggle window", 0.9, 0.9, 0.9)
-		GameTooltip:Show()
-	end)
-	btn:SetScript("OnLeave", GameTooltip_Hide)
-
-	SL.minimapBtn = btn
 end
 
 -- Slash commands

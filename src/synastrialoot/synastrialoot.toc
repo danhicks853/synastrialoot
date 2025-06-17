@@ -3,7 +3,7 @@
 ## Author: Dromkal
 ## Version: 1.0.0
 ## Notes: Displays loot information for the current zone
-## SavedVariables:
+## SavedVariables: minimaplocation
 ## OptionalDeps: LibDataBroker-1.1, LibDBIcon-1.0 
 ## DefaultState: enabled
 ## LoadOnDemand: 0
