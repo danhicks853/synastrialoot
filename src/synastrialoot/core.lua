@@ -31,7 +31,6 @@ local function HandleBagUpdate()
 	for _, row in ipairs(itemRows) do
 		if row and row.RefreshObtained and row:IsVisible() then
 			row:RefreshObtained()
-			row:RefreshAttune()
 			updatedRows = updatedRows + 1
 		end
 	end
@@ -76,11 +75,8 @@ local function CreateMainFrame()
 	frame:SetFrameStrata("MEDIUM")
 	frame:SetBackdrop({
 		bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
-		edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
 		tile = true,
 		tileSize = 16,
-		edgeSize = 16,
-		insets = { left = 4, right = 4, top = 4, bottom = 4 },
 	})
 	frame:SetBackdropColor(0, 0, 0, 0.85)
 
@@ -119,20 +115,10 @@ local function CreateMainFrame()
 		end
 	end)
 
-	-- Title displays current zone name and attune count (value will be set later)
-	local title = frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-	title:SetPoint("TOP", 0, -8)
-	title:SetText((GetZoneText() or "SynastriaLoot2"))
-	frame.title = title
-
-	-- Close button
-	local closeBtn = CreateFrame("Button", nil, frame, "UIPanelCloseButton")
-	closeBtn:SetPoint("TOPRIGHT", 0, 0)
-
-	-- Filter toggle button
+	-- Filter toggle button at the very top
 	local filterBtn = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
 	filterBtn:SetSize(60, 18)
-	filterBtn:SetPoint("TOPLEFT", frame, "TOPLEFT", 6, -24)
+	filterBtn:SetPoint("TOPLEFT", frame, "TOPLEFT", 6, -8)
 	filterBtn:SetText(FILTER_LABELS[filterMode])
 
 	filterBtn:SetScript("OnClick", function()
@@ -143,13 +129,22 @@ local function CreateMainFrame()
 			frame.scrollFrame:SetVerticalScroll(0) -- jump to top so change is visible immediately
 		end
 	end)
-
 	frame.filterButton = filterBtn
+
+	-- Title displays current zone name
+	local title = frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+	title:SetPoint("TOP", 0, -8)
+	title:SetText((GetZoneText() or "SynastriaLoot2"))
+	frame.title = title
+
+	-- Close button
+	local closeBtn = CreateFrame("Button", nil, frame, "UIPanelCloseButton")
+	closeBtn:SetPoint("TOPRIGHT", 0, 0)
 
 	-- Scroll frame + child
 	local sf = CreateFrame("ScrollFrame", "SLScrollFrame", frame, "UIPanelScrollFrameTemplate")
-	sf:SetPoint("TOPLEFT", 10, -50)
-	sf:SetPoint("BOTTOMRIGHT", -30, 10)
+	sf:SetPoint("TOPLEFT", 10, -30)
+	sf:SetPoint("BOTTOMRIGHT", -25, 20)
 
 	local sc = CreateFrame("Frame", "SLScrollChild", sf)
 	sc:SetPoint("TOPLEFT")
@@ -202,30 +197,17 @@ populateLootList = function(parent, scrollFrame)
 		Utils.PerfTracker.EndTimer("ItemLocGetAllItems")
 	end
 
-	-- Count items left to attune while iterating
-	SL.attuneLeft = 0
-
 	-- Prepare grouping tables
 	local grouped = {}
 	local ungrouped = {}
 
-
 	for _, itemID in ipairs(items) do
 		local srcCount = ItemLocGetSourceCount and ItemLocGetSourceCount(itemID) or 0
-
-		-- Determine if item should be skipped (fully attuned)
-		local skip = false
-		local stats = GetItemAttuneStats and GetItemAttuneStats(itemID)
-		if stats and stats.AttuneProgress and (stats.AttuneProgress >= 1 or stats.AttuneProgress >= 100) then
-			skip = true
-		else
-			SL.attuneLeft = SL.attuneLeft + 1
-		end
 
 		-- Determine if item matches current filter
 		local include = (filterMode == 1) or (filterMode == 2 and srcCount == 1) or (filterMode == 3 and srcCount > 1)
 
-		if (not skip) and include then
+		if include then
 			-- Check for crafting source
 
 			if srcCount > 0 and ns.ItemLocAPI and ns.ItemLocAPI.GetSourceAt then
@@ -322,7 +304,7 @@ populateLootList = function(parent, scrollFrame)
 		return HEADER_HEIGHT + 2
 	end
 
-	local yOffset = 0
+	local yOffset = 0  -- No offset for least space below title
 
 	-- Sorted headers
 	local headers = {}
@@ -338,7 +320,7 @@ populateLootList = function(parent, scrollFrame)
 			for _, itemID in ipairs(grouped[name]) do
 				local row = ns.ItemRow:Create(parent, itemID)
 				row:SetPoint("TOPLEFT", parent, "TOPLEFT", 4, -yOffset)
-				row:SetPoint("RIGHT", parent, "RIGHT", -4, 0)
+				row:SetPoint("RIGHT", parent, "RIGHT", 0, 0)
 				row:SetHeight(ROW_HEIGHT)
 				-- Register row for centralized bag updates
 				table.insert(itemRows, row)
@@ -355,7 +337,7 @@ populateLootList = function(parent, scrollFrame)
 			for _, itemID in ipairs(ungrouped) do
 				local row = ns.ItemRow:Create(parent, itemID)
 				row:SetPoint("TOPLEFT", parent, "TOPLEFT", 4, -yOffset)
-				row:SetPoint("RIGHT", parent, "RIGHT", -4, 0)
+				row:SetPoint("RIGHT", parent, "RIGHT", 0, 0)
 				row:SetHeight(ROW_HEIGHT)
 				-- Register row for centralized bag updates
 				table.insert(itemRows, row)
@@ -369,10 +351,10 @@ populateLootList = function(parent, scrollFrame)
 	-- Reaffirm width after population in case scrollbar appears
 	parent:SetWidth(scrollFrame:GetWidth() - 8)
 
-	-- Update the title with the cached attune count
+	-- Update the title with the zone name only
 	if SL.frame and SL.frame.title then
 		local zoneName = GetZoneText() or "SynastriaLoot2"
-		SL.frame.title:SetText(string.format("%s (%d left to attune)", zoneName, SL.attuneLeft or 0))
+		SL.frame.title:SetText(zoneName)
 	end
 	
 	-- Initialize centralized bag update system if not already done

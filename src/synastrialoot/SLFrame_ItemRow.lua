@@ -1,28 +1,11 @@
 local addonName, ns = ...
 -- throttle table-wide reloads to avoid recursive spikes
 local reloadQueued = false
--- cache GetItemLinkAttuneProgress results to avoid expensive repeat calls
-local attuneCache = {}
 -- cache item counts to reduce redundant API calls
 local itemCountCache = {}
 local itemCountCacheTime = 0
 local CACHE_DURATION = 0.5  -- Cache for 500ms
 
--- helper to retrieve attunement progress with simple cache
-local function GetCachedAttune(link)
-	-- Check if the attunement function exists
-	if not GetItemLinkAttuneProgress then
-		-- Function not available, return nil (no attunement system)
-		return nil
-	end
-	
-	local val = attuneCache[link]
-	if val == nil then
-		val = GetItemLinkAttuneProgress(link)
-		attuneCache[link] = val
-	end
-	return val
-end
 
 -- helper to retrieve item count with cache
 local function GetCachedItemCount(itemID)
@@ -76,38 +59,14 @@ function ItemRow:Create(parent, itemID)
 		
 		local count = GetCachedItemCount(self.itemID or 0)
 
-		-- Apply green background when owned
+		-- Apply strong green background when owned
 		if count and count > 0 then
-			self.Background:SetTexture(0, 0.35, 0, 0.7)
+			self.Background:SetTexture(0.10, 0.6, 0.10, 0.85)
 		else
-			self.Background:SetTexture(0.15, 0.15, 0.15, 0.7)
+			self.Background:SetTexture(0.08, 0.08, 0.08, 0.85)
 		end
 
-		-- If item is fully attuned, remove it from the list immediately
-		local prog
-		local link = self.itemLink or ("item:" .. self.itemID)
-		if Utils and Utils.PerfTracker then
-			Utils.PerfTracker.StartTimer("GetItemLinkAttuneProgress")
-		end
-		prog = GetCachedAttune(link)
-		if Utils and Utils.PerfTracker then
-			Utils.PerfTracker.EndTimer("GetItemLinkAttuneProgress")
-		end
-		
-		if prog and (prog == 1 or prog >= 100) then
-			-- Hide this row and trigger a list reload to reflow layout
-			self:Hide()
-			if _G[addonName] and _G[addonName].ReloadList then
-				if not reloadQueued then
-					reloadQueued = true
-					C_Timer.After(0.5, function()
-						reloadQueued = false
-						_G[addonName].ReloadList()
-					end)
-				end
-			end
-		end
-		
+
 		if Utils and Utils.PerfTracker then
 			Utils.PerfTracker.EndTimer("RefreshObtained_" .. (self.itemID or 0))
 		end
@@ -117,55 +76,24 @@ function ItemRow:Create(parent, itemID)
 	local icon = row:CreateTexture(nil, "ARTWORK")
 	icon:SetSize(18, 18)
 	icon:SetPoint("LEFT", 4, 0)
+	icon:SetTexCoord(0.07, 0.93, 0.07, 0.93)
 	row.Icon = icon
 
 	-- Create item name text (left)
-	local text = row:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
+	local text = row:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
 	text:SetPoint("LEFT", icon, "RIGHT", 4, 0)
-	-- right anchor updated after pct is created
 	text:SetJustifyH("LEFT")
 	text:SetText("Loading...")
+	-- Set font size explicitly for better readability
+	local font, fontHeight, fontFlags = text:GetFont()
+	text:SetFont(font, 14, fontFlags)
 	row.Text = text
 
-	-- Create attunement percentage text (right)
-	local pct = row:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
-	pct:SetSize(32, 14)
-	pct:SetPoint("RIGHT", -6, 0)
-	pct:SetJustifyH("RIGHT")
-	pct:SetText("")
-	row.PctText = pct
-	-- Re-anchor item name now that pct exists
+	-- Anchor item name text fully left-to-right
 	text:ClearAllPoints()
 	text:SetPoint("LEFT", icon, "RIGHT", 4, 0)
-	text:SetPoint("RIGHT", pct, "LEFT", -4, 0)
+	text:SetPoint("RIGHT", row, "RIGHT", -6, 0)
 
-	-- Helper to refresh attunement percentage
-	function row:RefreshAttune()
-		local Utils = ns.Utils
-		if Utils and Utils.PerfTracker then
-			Utils.PerfTracker.StartTimer("RefreshAttune_" .. (self.itemID or 0))
-		end
-		
-		local link = self.itemLink or ("item:" .. self.itemID)
-		local prog = GetCachedAttune(link)
-		if prog then
-			if prog == 0 then
-				pct:SetText("0%")
-			elseif prog > 0 and prog < 1 then
-				pct:SetFormattedText("%d%%", math.floor(prog*100+0.5))
-			elseif prog >=1 and prog < 100 then
-				pct:SetFormattedText("%d%%", math.floor(prog+0.5))
-			elseif prog >= 100 then
-				pct:SetText("100%")
-			end
-		else
-			pct:SetText("")
-		end
-		
-		if Utils and Utils.PerfTracker then
-			Utils.PerfTracker.EndTimer("RefreshAttune_" .. (self.itemID or 0))
-		end
-	end
 
 	-- Helper: populate row when item info becomes available
 	local attempts = 0
@@ -190,7 +118,6 @@ function ItemRow:Create(parent, itemID)
 				text:SetTextColor(1, 1, 1)
 			end
 			row:RefreshObtained()
-			row:RefreshAttune()
 		elseif attempts < 10 then
 			attempts = attempts + 1
 			C_Timer.After(0.5, TryPopulate)
@@ -238,7 +165,7 @@ function ItemRow:Create(parent, itemID)
 		row:RegisterEvent(_G.ItemAttuneUpdateEvent)
 		row:SetScript("OnEvent", function(self, event)
 			if event == _G.ItemAttuneUpdateEvent then
-				self:RefreshAttune()
+				
 			end
 		end)
 	end
@@ -264,7 +191,6 @@ function ItemRow:Update(row, itemID)
 			row.Text:SetTextColor(1, 1, 1)
 		end
 		row:RefreshObtained()
-		row:RefreshAttune()
 	else
 		local itemInfoCallback = function()
 			local name, link, rarity = GetItemInfo(itemID)
@@ -279,7 +205,7 @@ function ItemRow:Update(row, itemID)
 					row.Text:SetTextColor(1, 1, 1)
 				end
 				row:RefreshObtained()
-				row:RefreshAttune()
+				
 			end
 		end
 		C_Timer.After(0.1, itemInfoCallback)
