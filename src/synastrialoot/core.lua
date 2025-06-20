@@ -351,10 +351,17 @@ populateLootList = function(parent, scrollFrame)
 	-- Reaffirm width after population in case scrollbar appears
 	parent:SetWidth(scrollFrame:GetWidth() - 8)
 
-	-- Update the title with the zone name only
+	-- Count total items in the list
+	local totalItems = 0
+	for _, group in pairs(grouped) do
+		totalItems = totalItems + #group
+	end
+	totalItems = totalItems + #ungrouped
+
+	-- Update the title with the zone name and item count
 	if SL.frame and SL.frame.title then
 		local zoneName = GetZoneText() or "SynastriaLoot2"
-		SL.frame.title:SetText(zoneName)
+		SL.frame.title:SetText(string.format("%s (%d items)", zoneName, totalItems))
 	end
 	
 	-- Initialize centralized bag update system if not already done
