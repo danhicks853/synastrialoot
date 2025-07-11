@@ -1,0 +1,45 @@
+src/synastrialoot/API/Addon Example - PizzaSlices/img/borderhi.png
+src/synastrialoot/API/Addon Example - PizzaSlices/img/borderhi.tga
+src/synastrialoot/API/Addon Example - PizzaSlices/img/borderlo.png
+src/synastrialoot/API/Addon Example - PizzaSlices/img/borderlo.tga
+src/synastrialoot/API/Addon Example - PizzaSlices/img/checkboxcheck.tga
+src/synastrialoot/API/Addon Example - PizzaSlices/img/circle.tga
+src/synastrialoot/API/Addon Example - PizzaSlices/img/clear.tga
+src/synastrialoot/API/Addon Example - PizzaSlices/img/click.tga
+src/synastrialoot/API/Addon Example - PizzaSlices/img/close.tga
+src/synastrialoot/API/Addon Example - PizzaSlices/img/cross.tga
+src/synastrialoot/API/Addon Example - PizzaSlices/img/diamond.tga
+src/synastrialoot/API/Addon Example - PizzaSlices/img/dragndrop.tga
+src/synastrialoot/API/Addon Example - PizzaSlices/img/glow.tga
+src/synastrialoot/API/Addon Example - PizzaSlices/img/iglow.tga
+src/synastrialoot/API/Addon Example - PizzaSlices/img/moon.tga
+src/synastrialoot/API/Addon Example - PizzaSlices/img/nipple.tga
+src/synastrialoot/API/Addon Example - PizzaSlices/img/oglow.tga
+src/synastrialoot/API/Addon Example - PizzaSlices/img/pointer.tga
+src/synastrialoot/API/Addon Example - PizzaSlices/img/skull.tga
+src/synastrialoot/API/Addon Example - PizzaSlices/img/square.tga
+src/synastrialoot/API/Addon Example - PizzaSlices/img/star.tga
+src/synastrialoot/API/Addon Example - PizzaSlices/img/trash.tga
+src/synastrialoot/API/Addon Example - PizzaSlices/img/triangle.tga
+src/synastrialoot/API/Addon Example - PizzaSlices/src/channel.lua
+src/synastrialoot/API/Addon Example - PizzaSlices/src/commands.lua
+src/synastrialoot/API/Addon Example - PizzaSlices/src/config.lua
+src/synastrialoot/API/Addon Example - PizzaSlices/src/frame.lua
+src/synastrialoot/API/Addon Example - PizzaSlices/src/macro.lua
+src/synastrialoot/API/Addon Example - PizzaSlices/src/main.lua
+src/synastrialoot/API/Addon Example - PizzaSlices/src/rings.lua
+src/synastrialoot/API/Addon Example - PizzaSlices/src/scanner.lua
+src/synastrialoot/API/Addon Example - PizzaSlices/src/settings.lua
+src/synastrialoot/API/Addon Example - PizzaSlices/src/slices.lua
+src/synastrialoot/API/Addon Example - PizzaSlices/src/utils.lua
+src/synastrialoot/API/API.md
+src/synastrialoot/API/Extended Lua API/.obsidian/app.json
+src/synastrialoot/API/Extended Lua API/.obsidian/appearance.json
+src/synastrialoot/API/Extended Lua API/.obsidian/core-plugins.json
+src/synastrialoot/API/Extended Lua API/.obsidian/workspace.json
+src/synastrialoot/API/Extended Lua API/Custom Game Data API.md
+src/synastrialoot/API/Extended Lua API/Item Attunement API.md
+src/synastrialoot/API/Extended Lua API/Item Forge API.md
+src/synastrialoot/API/Extended Lua API/QoL Functions.md
+src/synastrialoot/API/Extended Lua API/Untitled.md
+src/synastrialoot/API/Extended Lua API/Warp API.md
